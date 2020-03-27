@@ -237,7 +237,7 @@ pre .javascript .function {
   color: #c9c;
 }
 .post-readmore {
-  border: 2px solid #4caf50;
+  border: 1px solid #4caf50;
 }
 .post-readmore:hover {
   background-color: #4caf50;
