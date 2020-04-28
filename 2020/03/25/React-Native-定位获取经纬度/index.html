@@ -200,7 +200,7 @@
     </span>
     <span>
       <span class="iconfont icon-calendar-check"></span>
-      更新于:&nbsp;2020-03-25
+      更新于:&nbsp;2020-04-28
     </span>
     <span>
       <span class="iconfont icon-folder"></span>
@@ -256,7 +256,45 @@
   
   
   <div class="mdui-card-content mdui-typo mdui-p-x-4">
-    
+    <h3 id="1-使用内置-navigator-对象获取经纬度"><a href="#1-使用内置-navigator-对象获取经纬度" class="headerlink" title="1. 使用内置 navigator 对象获取经纬度"></a>1. 使用内置 navigator 对象获取经纬度</h3><p>RN 文档上的定位功能需要谷歌框架支持，无疑带来了一些麻烦。github 上也有一些开源库，react-native-geolocation-service等。但是这里还有一个更简便的位置获取 API。</p>
+<p>使用内置对象navigator:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">navigator.geolocation.getCurrentPosition(</span><br><span class="line">    res &#x3D;&gt; &#123;</span><br><span class="line">      &#x2F;&#x2F; console.log(res)</span><br><span class="line">      this.setState(&#123;</span><br><span class="line">        location: res.coords</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;, err &#x3D;&gt; &#123;</span><br><span class="line">    &#125;, &#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+
+<p>第一个参数是成功回调，第二是失败回调，第三个是参数 options，可传空对象。</p>
+<p>成功回调中 res.coords 具有 longitude,atitude 经纬度信息。如果还需要对经纬度信息处理成地理位置，行政区域信息还需要用到第三方 api. </p>
+<h3 id="2-使用逆地址解析服务将经纬度解析成地址信息"><a href="#2-使用逆地址解析服务将经纬度解析成地址信息" class="headerlink" title="2. 使用逆地址解析服务将经纬度解析成地址信息"></a>2. 使用逆地址解析服务将经纬度解析成地址信息</h3><br>
+这里可以通过[百度地图](http://lbsyun.baidu.com/apiconsole/key)或者[腾讯位置服务](http://lbs.qq.com/webservice_v1/guide-gcoder.html)的逆地址解析服务来完成，流程如下：
+
+<ol>
+<li>注册成为开发者</li>
+<li>创建自己的应用</li>
+<li>然后获取key或认证</li>
+<li>加上经纬度等参数来发起请求</li>
+</ol>
+<p>例如百度地图的请求方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;api.map.baidu.com&#x2F;geocoder&#x2F;v2&#x2F;?output&#x3D;json&amp;ak&#x3D;9a9a9a9a9a9a9a9a9a9a9a9a9a&amp;location&#x3D;39.206526,116.909158</span><br></pre></td></tr></table></figure>
+<p>（9a9a…就是你申请的ak认证，对应在你创建的应用中）</p>
+<p>通过Postman 测试请求的效果如下：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMjI1MTMyMzE2NDEy" alt="这里写图片描述"></p>
+<p>这里需要将 location 经纬度参数替换为自己通过 getCurrentPosition 方法获取到的经纬度。也就是先获取到经纬度，再通过逆地址解析获取到城市等地址信息。将这个操作再封装成一个方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">getCityLocation() &#123;</span><br><span class="line"></span><br><span class="line">       return new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line"></span><br><span class="line">           getLongitudeAndLatitude()</span><br><span class="line">           &#x2F;&#x2F;获取经纬度的方法返回的是经纬度组成的数组</span><br><span class="line">               .then((locationArr) &#x3D;&gt; &#123;</span><br><span class="line"></span><br><span class="line">                     &#x2F;&#x2F; Alert.alert(&quot;&quot;, &quot;&quot; + locationArr[1]);</span><br><span class="line">                   let longitude &#x3D; locationArr[0];</span><br><span class="line">                   let latitude &#x3D; locationArr[1];</span><br><span class="line"></span><br><span class="line">                   this.getNetData(BaiduMap_URL + latitude + &quot;,&quot; + longitude)</span><br><span class="line">                       .then((data) &#x3D;&gt; &#123;</span><br><span class="line">                           if (data.status &#x3D;&#x3D; 0) &#123;</span><br><span class="line">                               resolve(data);</span><br><span class="line">                           &#125; else &#123;</span><br><span class="line">                               reject(ErrorDeal.getError(data.code));</span><br><span class="line">                           &#125;</span><br><span class="line">                       &#125;).catch((data) &#x3D;&gt; &#123;</span><br><span class="line">                       reject(ErrorDeal.getError(data.code));</span><br><span class="line">                   &#125;)</span><br><span class="line"></span><br><span class="line">               &#125;).catch((data) &#x3D;&gt; &#123;</span><br><span class="line">               reject(ErrorDeal.getError(data.code));</span><br><span class="line">           &#125;)</span><br><span class="line"></span><br><span class="line">       &#125;)</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>getLongitudeAndLatitude 就是上面的获取经纬度的方法，this.getNetData是一个fetch 请求的封装。拼接请求 Url，fetch请求，此时 resolve 的数据就是 Postman 解析的 json 数据了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;获取网络数据</span><br><span class="line">  getNetData(url) &#123;</span><br><span class="line">      return new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">          fetch(url).then((response) &#x3D;&gt; response.json())</span><br><span class="line">              .then((responseData) &#x3D;&gt; &#123;</span><br><span class="line">                  resolve(responseData);</span><br><span class="line">              &#125;)</span><br><span class="line">              .catch((error) &#x3D;&gt; &#123;</span><br><span class="line">                  reject(ErrorDeal.getError(NetWork_Error))</span><br><span class="line">              &#125;)</span><br><span class="line">              .done()</span><br><span class="line">      &#125;)</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<br>
+
+<h3 id="3-获取信息并处理"><a href="#3-获取信息并处理" class="headerlink" title="3. 获取信息并处理"></a>3. 获取信息并处理</h3><p>上面 getCityLocation 返回的 Promise 中 resolve 传递的 data 就是 json 数据了，就已经可以因自身需求进行数据处理显示的操作了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">this.getCityLocation()</span><br><span class="line">           .then((data) &#x3D;&gt; &#123;</span><br><span class="line">               &#x2F;&#x2F; Alert.alert(&quot;位置？&quot;, &quot;&quot; + JSON.stringify(data));</span><br><span class="line">               this._confirmCity(data);</span><br><span class="line"></span><br><span class="line">           &#125;)</span><br><span class="line">           .catch((error) &#x3D;&gt; &#123;</span><br><span class="line">               &#x2F;&#x2F;ToastAndroid.show(&quot;失败&quot; + JSON.stringify(error), ToastAndroid.SHORT);</span><br><span class="line">           &#125;);</span><br></pre></td></tr></table></figure>
+<p>调用 getCityLocation，再 then 方法处理处理 data ，此时的 data 是一个 json 对象。</p>
+<p>例如我的处理是调用 _confirmCity 方法弹出一个城市切换的确认框：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;弹出定位框</span><br><span class="line">  _confirmCity(data) &#123;</span><br><span class="line">  </span><br><span class="line">      let address &#x3D; data.result.addressComponent;</span><br><span class="line">      </span><br><span class="line">      if (address!&#x3D;&quot;&quot;) &#123;</span><br><span class="line"></span><br><span class="line">          Alert.alert(&quot;城市定位&quot;, &quot;\n当前城市为&quot; + address.province + address.city + &quot;\n \n 是否设为当前城市？\n&quot;,</span><br><span class="line">              [</span><br><span class="line">                  &#123;</span><br><span class="line">                      text: &quot;设为当前城市&quot;, onPress: () &#x3D;&gt; &#123;</span><br><span class="line">                          this.setCurrentCity(address.city)</span><br><span class="line">                      &#125;</span><br><span class="line">                  &#125;,</span><br><span class="line">                  &#123;text: &quot;取消&quot;&#125;</span><br><span class="line">              ]</span><br><span class="line">          )</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>效果图：</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMjI1MTM1MjE3NDMy" width=300>
+
+<!-- ![这里写图片描述](https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMjI1MTM1MjE3NDMy) -->
+
+<p>这里就已经完成了经纬度的获取，城市地址信息的获取功能。</p>
+
   </div>
   <!--文末结束语-->
   
@@ -285,7 +323,7 @@
     <ul class="mdui-menu" id="toc">
       <li class="mdui-menu-item">
         <a href="/blog/2020/03/25/React-Native-%E5%AE%9A%E4%BD%8D%E8%8E%B7%E5%8F%96%E7%BB%8F%E7%BA%AC%E5%BA%A6/" id="toc-header" class="mdui-ripple">文章目录</a>
-        
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-使用内置-navigator-对象获取经纬度"><span class="toc-number">1.</span> <span class="toc-text">1. 使用内置 navigator 对象获取经纬度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-使用逆地址解析服务将经纬度解析成地址信息"><span class="toc-number">2.</span> <span class="toc-text">2. 使用逆地址解析服务将经纬度解析成地址信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-获取信息并处理"><span class="toc-number">3.</span> <span class="toc-text">3. 获取信息并处理</span></a></li></ol>
       </li>
     </ul>
   </div>
