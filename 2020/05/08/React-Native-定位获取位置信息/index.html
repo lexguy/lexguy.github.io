@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          [Hexo] Theme BeanTech - undefined
+          React Native 定位获取位置信息 - undefined
         
     </title>
 
-    <link rel="canonical" href="http://yoursite-url/2017/03/18/hexo-theme-beantech/">
+    <link rel="canonical" href="http://yoursite-url/2020/05/08/React-Native-定位获取位置信息/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -69,7 +69,7 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('Demo.png')
+            background-image: url('null')
             /*post*/
         
     }
@@ -86,16 +86,12 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#Hexo" title="Hexo">Hexo</a>
-                            
-                              <a class="tag" href="/tags/#Blog" title="Blog">Blog</a>
-                            
                         </div>
-                        <h1>[Hexo] Theme BeanTech</h1>
-                        <h2 class="subheading">This is hexo theme Demo.</h2>
+                        <h1>React Native 定位获取位置信息</h1>
+                        <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by xuwei on
-                            2017-03-18
+                            2020-05-08
                         </span>
                     </div>
                 
@@ -212,60 +208,41 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <blockquote>
-<p>Ported Theme of <a href="https://github.com/Huxpro/huxpro.github.io" target="_blank" rel="noopener">Hux Blog</a>, Thank <a href="https://github.com/Huxpro" target="_blank" rel="noopener">Huxpro</a> for designing such a flawless theme.</p>
-<p>This BeanTech theme created by <a href="http://beantech.org" target="_blank" rel="noopener">YuHsuan</a> modified from the original Porter <a href="http://kaijun.rocks/hexo-theme-huxblog/" target="_blank" rel="noopener">Kaijun</a></p>
-</blockquote>
-<h1><span id="live-demo"></span></h1>
-<hr>
-<p><img src="http://beantech.org/img/beantech-desktop.png" alt="BeanTech Desktop"></p>
-<h1><span id="usage">Usage</span></h1>
-<hr>
-<p>I publish the whole project for your convenience, so you can just follow the instruction down below, then you can easily customiz your own blog!</p>
-<p>Let’s begin!!!</p>
-<h2><span id="init">Init</span></h2>
-<hr>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/YenYuHsuan/hexo-theme-beantech.git ./hexo-beantech</span><br><span class="line"><span class="built_in">cd</span> hexo-beantech</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-<h2><span id="modify">Modify</span></h2>
-<hr>
-<p>Modify <code>_config.yml</code> file with your own info.<br>
-Especially the section:</p>
-<h3><span id="deployment">Deployment</span></h3>
-<p>Replace to your own repo!</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/&lt;yourAccount&gt;/&lt;repo&gt;</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">&lt;your-branch&gt;</span></span><br></pre></td></tr></table></figure>
-<h3><span id="sidebar-settings">Sidebar settings</span></h3>
-<p>Copy your avatar image to <code>&lt;root&gt;/img/</code> and modify the <code>_config.yml</code>:</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">sidebar:</span> <span class="literal">true</span>    <span class="comment"># whether or not using Sidebar.</span></span><br><span class="line"><span class="attr">sidebar-about-description:</span> <span class="string">"&lt;your description&gt;"</span></span><br><span class="line"><span class="attr">sidebar-avatar:</span> <span class="string">img/&lt;your</span> <span class="string">avatar</span> <span class="string">path&gt;</span></span><br></pre></td></tr></table></figure>
-<p>and activate your personal widget you like</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">widgets:</span>         <span class="comment"># here are widget you can use, you can comment out</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">featured-tags</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">short-about</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">recent-posts</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">friends-blog</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">archive</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">category</span></span><br></pre></td></tr></table></figure>
-<p>if you want to add sidebar widget, please add at <code>layout/_widget</code>.</p>
-<h3><span id="signature-setup">Signature Setup</span></h3>
-<p>Copy your signature image to <code>&lt;root&gt;/img/signature</code> and modify the <code>_config.yml</code>:</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">signature:</span> <span class="literal">true</span>   <span class="comment"># show signature</span></span><br><span class="line"><span class="attr">signature-img:</span> <span class="string">img/signature/&lt;your-signature-ID&gt;</span></span><br></pre></td></tr></table></figure>
-<h3><span id="go-to-top-icon-setup">Go to top icon Setup</span></h3>
-<p>My icon is using iron man, you can change to your own icon at <code>css/image</code>.</p>
-<h3><span id="post-tag">Post tag</span></h3>
-<p>You can decide to show post tags or not.</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">home_posts_tag:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p><img src="home_posts_tag-true.png" alt="home_posts_tag-true"></p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">home_posts_tag:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
-<p><img src="home_posts_tag-false.png" alt="home_posts_tag-false"></p>
-<h3><span id="markdown-render">Markdown render</span></h3>
-<p>My markdown render engine plugin is <a href="https://github.com/celsomiranda/hexo-renderer-markdown-it" target="_blank" rel="noopener">hexo-renderer-markdown-it</a>.</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Markdown-it config</span></span><br><span class="line"><span class="comment">## Docs: https://github.com/celsomiranda/hexo-renderer-markdown-it/wiki</span></span><br><span class="line"><span class="attr">markdown:</span></span><br><span class="line">  <span class="attr">render:</span></span><br><span class="line">    <span class="attr">html:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">xhtmlOut:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">breaks:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">linkify:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">typographer:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">quotes:</span> <span class="string">'“”‘’'</span></span><br></pre></td></tr></table></figure>
-<p>and if you want to change the header anchor ‘ℬ’, you can go to <code>layout/post.ejs</code> to change it.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span>(<span class="string">"https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        anchors.options = &#123;</span><br><span class="line">          visible: <span class="string">'hover'</span>,</span><br><span class="line">          placement: <span class="string">'left'</span>,</span><br><span class="line">          icon: ℬ <span class="comment">// this is the header anchor "unicode" icon</span></span><br><span class="line">        &#125;;</span><br></pre></td></tr></table></figure>
-<h2><span id="hexo-basics">Hexo Basics</span></h2>
-<hr>
-<p>Some hexo command:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo new post <span class="string">"&lt;post name&gt;"</span> <span class="comment"># you can change post to another layout if you want</span></span><br><span class="line">hexo clean &amp;&amp; hexo generate <span class="comment"># generate the static file</span></span><br><span class="line">hexo server <span class="comment"># run hexo in local environment</span></span><br><span class="line">hexo deploy <span class="comment"># hexo will push the static files automatically into the specific branch(gh-pages) of your repo!</span></span><br></pre></td></tr></table></figure>
-<h1><span id="have-fun-_">Have fun ^_^</span></h1>
-<hr>
-<!-- Place this tag in your head or just before your close body tag. -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-<!-- Place this tag where you want the button to render. -->
-<p>Please <a class="github-button" href="https://github.com/YenYuHsuan/hexo-theme-beantech" data-icon="octicon-star" aria-label="Star YenYuHsuan/hexo-theme-beantech on GitHub" target="_blank" rel="noopener">Star</a> this Project if you like it! <a class="github-button" href="https://github.com/YenYuHsuan" aria-label="Follow @YenYuHsuan on GitHub" target="_blank" rel="noopener">Follow</a> would also be appreciated!<br>
-Peace!</p>
+                <p>RN 文档上的定位功能需要谷歌框架支持，无疑带来了一些麻烦。github 上也有一些开源库，react-native-geolocation-service 等。但是这里还有一个更简便的位置获取 API。</p>
+<h3><span id="使用内置对象-navigator">使用内置对象 navigator:</span></h3>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">navigator</span><span class="selector-class">.geolocation</span><span class="selector-class">.getCurrentPosition</span>(</span><br><span class="line">    res =&gt; &#123;</span><br><span class="line">      <span class="comment">// console.log(res)</span></span><br><span class="line">      <span class="selector-tag">this</span><span class="selector-class">.setState</span>(&#123;</span><br><span class="line">        <span class="attribute">location</span>: res.coords</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;, err =&gt; &#123;</span><br><span class="line">    &#125;, &#123;&#125;)</span><br></pre></td></tr></table></figure>
+<p>第一个参数是成功回调，第二是失败回调，第三个是参数 options，可传空对象。</p>
+<p>成功回调中 res.coords 具有经纬度信息。对经纬度信息处理成地理位置，行政区域信息还需要用到第三方 api 。</p>
+<h3><span id="使用逆地址解析服务将经纬度解析成地址信息">使用逆地址解析服务将经纬度解析成地址信息</span></h3>
+<br>
+这里可以通过[百度地图](http://lbsyun.baidu.com/apiconsole/key)或者[腾讯位置服务](http://lbs.qq.com/webservice_v1/guide-gcoder.html)的逆地址解析服务来完成，流程如下：
+<ol>
+<li>注册成为开发者</li>
+<li>创建自己的应用</li>
+<li>然后获取 key 或认证</li>
+<li>加上经纬度等参数来发起请求</li>
+</ol>
+<p>例如百度地图的请求方式：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http<span class="variable">s:</span>//api.<span class="keyword">map</span>.baidu.<span class="keyword">com</span>/geocoder/v2/?output=json&amp;ak=<span class="number">9</span>a9a9a9a9a9a9a9a9a9a9a9a9a&amp;location=<span class="number">39.206526</span>,<span class="number">116.909158</span></span><br></pre></td></tr></table></figure>
+<p>（9a9a…就是你申请的 ak 认证，对应在你创建的应用中）</p>
+<p>通过 Postman 测试请求的效果如下：</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMjI1MTMyMzE2NDEy" width="800">
+<!-- ![这里写图片描述]() -->
+<p>这里需要将 location 经纬度参数替换为自己通过 getCurrentPosition 方法获取到的经纬度。也就是先获取到经纬度，再通过逆地址解析获取到城市等地址信息。将这个操作再封装成一个方法：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"> getCityLocation() &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> Promise(<span class="function"><span class="params">(resolve, reject)</span> =&gt;</span> &#123;</span><br><span class="line">    getLongitudeAndLatitude()</span><br><span class="line">    <span class="regexp">//</span>获取经纬度的方法返回的是经纬度组成的数组</span><br><span class="line">        .<span class="keyword">then</span>(<span class="function"><span class="params">(locationArr)</span> =&gt;</span> &#123;</span><br><span class="line">              <span class="regexp">//</span> Alert.alert(<span class="string">""</span>, <span class="string">""</span> + locationArr[<span class="number">1</span>]);</span><br><span class="line">          let longitude = locationArr[<span class="number">0</span>];</span><br><span class="line">          let latitude = locationArr[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">          <span class="keyword">this</span>.getNetData(BaiduMap_URL + latitude + <span class="string">","</span> + longitude)</span><br><span class="line">            .<span class="keyword">then</span>(<span class="function"><span class="params">(data)</span> =&gt;</span> &#123;</span><br><span class="line">              <span class="keyword">if</span> (data.status == <span class="number">0</span>) &#123;</span><br><span class="line">                resolve(data);</span><br><span class="line">              &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                reject(ErrorDeal.getError(data.code));</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;).<span class="keyword">catch</span>(<span class="function"><span class="params">(data)</span> =&gt;</span> &#123;</span><br><span class="line">            reject(ErrorDeal.getError(data.code));</span><br><span class="line">          &#125;)</span><br><span class="line"></span><br><span class="line">        &#125;).<span class="keyword">catch</span>(<span class="function"><span class="params">(data)</span> =&gt;</span> &#123;</span><br><span class="line">        reject(ErrorDeal.getError(data.code));</span><br><span class="line">      &#125;)</span><br><span class="line"></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>getLongitudeAndLatitude 就是上面的获取经纬度的方法，this.getNetData 是一个 fetch 请求的封装。拼接请求 Url，fetch 请求，此时 resolve 的数据就是 Postman 解析的 json 数据了。</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span>获取网络数据</span><br><span class="line">  getNetData(url) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Promise(<span class="function"><span class="params">(resolve, reject)</span> =&gt;</span> &#123;</span><br><span class="line">      fetch(url).<span class="keyword">then</span>(<span class="function"><span class="params">(response)</span> =&gt;</span> response.json())</span><br><span class="line">        .<span class="keyword">then</span>(<span class="function"><span class="params">(responseData)</span> =&gt;</span> &#123;</span><br><span class="line">          resolve(responseData);</span><br><span class="line">        &#125;)</span><br><span class="line">        .<span class="keyword">catch</span>(<span class="function"><span class="params">(error)</span> =&gt;</span> &#123;</span><br><span class="line">          reject(ErrorDeal.getError(NetWork_Error))</span><br><span class="line">        &#125;)</span><br><span class="line">        .done()</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<br>
+<h4><span id="对已获取信息处理">对已获取信息处理</span></h4>
+<p>上面 getCityLocation 返回的 Promise 中 resolve 传递的 data 就是 json 数据了，就已经可以因自身需求进行数据处理显示的操作了。</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.getCityLocation()</span><br><span class="line">   .<span class="keyword">then</span>(<span class="function"><span class="params">(data)</span> =&gt;</span> &#123;</span><br><span class="line">     <span class="regexp">//</span> Alert.alert(<span class="string">"位置？"</span>, <span class="string">""</span> + JSON.stringify(data));</span><br><span class="line">     <span class="keyword">this</span>._confirmCity(data);</span><br><span class="line">   &#125;)</span><br><span class="line">   .<span class="keyword">catch</span>(<span class="function"><span class="params">(error)</span> =&gt;</span> &#123;</span><br><span class="line">     //ToastAndroid.show(<span class="string">"失败"</span> + JSON.stringify(error), ToastAndroid.SHORT);</span><br><span class="line">   &#125;);</span><br></pre></td></tr></table></figure>
+<p>调用 getCityLocation，再 then 方法处理处理 data ，此时的 data 是一个 json 对象。</p>
+<p>例如我的处理是调用 _confirmCity 方法弹出一个城市切换的确认框：</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">//弹出定位框</span><br><span class="line">  _confirmCity(<span class="meta">data</span>) &#123;</span><br><span class="line"></span><br><span class="line">    let <span class="keyword">address </span>= <span class="meta">data</span>.result.<span class="keyword">addressComponent;</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword"> </span>   <span class="meta">if</span> (<span class="keyword">address!="") </span>&#123;</span><br><span class="line"></span><br><span class="line">      Alert.alert(<span class="string">"城市定位"</span>, <span class="string">"\n当前城市为"</span> + <span class="keyword">address.province </span>+ <span class="keyword">address.city </span>+ <span class="string">"\n \n 是否设为当前城市？\n"</span>,</span><br><span class="line">          [</span><br><span class="line">            &#123;</span><br><span class="line"><span class="symbol">              text:</span> <span class="string">"设为当前城市"</span>,</span><br><span class="line"><span class="symbol">              onPress:</span> () =&gt; &#123;</span><br><span class="line">                this.setCurrentCity(<span class="keyword">address.city)</span></span><br><span class="line"><span class="keyword"> </span>             &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;text: <span class="string">"取消"</span>&#125;</span><br><span class="line">          ]</span><br><span class="line">      )</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>效果图：</p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMjI1MTM1MjE3NDMy" width="400">
+<!-- ![这里写图片描述](https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMjI1MTM1MjE3NDMy) -->
+<p>这里就已经完成了经纬度的获取，城市地址信息的获取功能。</p>
 
                 
 
@@ -273,10 +250,10 @@ Peace!</p>
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2020/05/08/React-Native-定位获取位置信息/" data-toggle="tooltip" data-placement="top" title="React Native 定位获取位置信息">&larr; Previous Post</a>
-                        </li>
                     
+                        <li class="next">
+                            <a href="/2017/03/18/hexo-theme-beantech/" data-toggle="tooltip" data-placement="top" title="[Hexo] Theme BeanTech">Next Post &rarr;</a>
+                        </li>
                     
                 </ul>
 
@@ -305,7 +282,7 @@ Peace!</p>
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text"></span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Usage</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Init</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Modify</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.2.1.</span> <span class="toc-nav-text">Deployment</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.2.2.</span> <span class="toc-nav-text">Sidebar settings</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.2.3.</span> <span class="toc-nav-text">Signature Setup</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.2.4.</span> <span class="toc-nav-text">Go to top icon Setup</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.2.5.</span> <span class="toc-nav-text">Post tag</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.2.6.</span> <span class="toc-nav-text">Markdown render</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">Hexo Basics</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Have fun ^_^</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">使用内置对象 navigator:</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">使用逆地址解析服务将经纬度解析成地址信息</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">对已获取信息处理</span></a></li></ol></li></ol>
         
         </div>
       </aside>
@@ -325,10 +302,6 @@ Peace!</p>
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#Hexo" title="Hexo">Hexo</a>
-                        
-                          <a class="tag" href="/tags/#Blog" title="Blog">Blog</a>
-                        
                     </div>
                 </section>
                 
@@ -362,8 +335,8 @@ Peace!</p>
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "your-disqus-ID";
-    var disqus_identifier = "http://yoursite-url/2017/03/18/hexo-theme-beantech/";
-    var disqus_url = "http://yoursite-url/2017/03/18/hexo-theme-beantech/";
+    var disqus_identifier = "http://yoursite-url/2020/05/08/React-Native-定位获取位置信息/";
+    var disqus_url = "http://yoursite-url/2020/05/08/React-Native-定位获取位置信息/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
