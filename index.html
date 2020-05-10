@@ -14,7 +14,7 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          undefined
+          Xuwei&#39;s blog
         
     </title>
 
@@ -64,127 +64,132 @@
 
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="">
-	<!-- Modified by Yu-Hsuan Yen -->
+	<!--
+ * @Author: xuwei
+ * @Date: 2020-05-07 00:57:50
+ * @LastEditTime: 2020-05-10 21:41:15
+ * @LastEditors: xuwei
+ * @Description: 
+ -->
+<!-- Modified by Yu-Hsuan Yen -->
 <!-- Post Header -->
 <style type="text/css">
-    header.intro-header{
-        
-            background-image: url('/img/header_img/home-bg-2-dark.png')
-            /*config*/
-        
-    }
-    
+  header.intro-header{
+      
+          background-image: url('/img/header_img/fog.png')
+          /*config*/
+      
+  }
+  
 </style>
 
-<header class="intro-header" >
-    <!-- Signature -->
-    <div id="signature">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                
-                    <div class="site-heading">
-<!--                       <h1>Xuwei</h1>-->
-                        <!--<hr class="small">-->
-<!--                        <span class="subheading">xuwei&#39;s space</span>-->
-                    </div>
-                
-
-
-                </div>
-            </div>
+<header class="intro-header">
+  <!-- Signature -->
+  <div id="signature">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          
+          <div class="site-heading">
+            <!--                       <h1>Xuwei 的个人空间</h1>-->
+            <!--<hr class="small">-->
+            <!--                        <span class="subheading">xuwei&#39;s space</span>-->
+          </div>
+          
         </div>
+      </div>
     </div>
+  </div>
 </header>
 
 	
     <!-- Navigation -->
 <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Xuwei</a>
-        </div>
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header page-scroll">
+      <button type="button" class="navbar-toggle">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <!-- 标题不再是点击回到主页，而是一个文本 -->
+      <span class="navbar-brand" href="/"
+        >Xuwei 的个人空间</span
+      >
+    </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- Known Issue, found by Hux:
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <!-- Known Issue, found by Hux:
             <nav>'s height woule be hold on by its content.
             so, when navbar scale out, the <nav> will cover tags.
             also mask any touch event of tags, unfortunately.
         -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
+    <div id="huxblog_navbar">
+      <div class="navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <!--            <a href="/">Home</a>-->
+            <a href="/">主页</a>
+          </li>
 
-                    
-
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-                    
-                </ul>
-            </div>
-        </div>
-        <!-- /.navbar-collapse -->
+             
+          <li>
+            <a
+              href="/tags/"
+              >标签
+            </a>
+          </li>
+            
+          <li>
+            <a
+              href="/about/"
+              >关于
+            </a>
+          </li>
+            
+          <li>
+            <a
+              href="/archive/"
+              >时间轴
+            </a>
+          </li>
+           
+        </ul>
+      </div>
     </div>
-    <!-- /.container -->
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container -->
 </nav>
 <script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
+  // Drop Bootstarp low-performance Navbar
+  // Use customize navbar with high-quality material design animation
+  // in high-perf jank-free CSS3 implementation
+  var $body = document.body;
+  var $toggle = document.querySelector(".navbar-toggle");
+  var $navbar = document.querySelector("#huxblog_navbar");
+  var $collapse = document.querySelector(".navbar-collapse");
 
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        // CLOSE
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        // OPEN
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
+  $toggle.addEventListener("click", handleMagic);
+  function handleMagic(e) {
+    if ($navbar.className.indexOf("in") > 0) {
+      // CLOSE
+      $navbar.className = " ";
+      // wait until animation end.
+      setTimeout(function () {
+        // prevent frequently toggle
+        if ($navbar.className.indexOf("in") < 0) {
+          $collapse.style.height = "0px";
         }
+      }, 400);
+    } else {
+      // OPEN
+      $collapse.style.height = "auto";
+      $navbar.className += " in";
     }
+  }
 </script>
 
 
@@ -204,48 +209,45 @@
                 post-container
             ">
             
-                <!-- Main Content -->
+                
+<!-- Main Content -->
 
 
 <div class="post-preview">
-
-    <a href="/2020/05/08/React-Native-定位获取位置信息/">
-        <h2 class="post-title">
-            React Native 定位获取位置信息
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            RN 文档上的定位功能需要谷歌框架支持，无疑带来了一些麻烦。github 上也有一些开源库，react-native-geolocation-service 等。但是这里还有一个更简便的位置获取 API。
+  <a href="/2020/05/08/React-Native-定位获取位置信息/">
+    <h2 class="post-title">
+      React Native 定位获取位置信息
+    </h2>
+    <h3 class="post-subtitle">
+      
+    </h3>
+    <div class="post-content-preview">
+      RN 文档上的定位功能需要谷歌框架支持，无疑带来了一些麻烦。github 上也有一些开源库，react-native-geolocation-service 等。但是这里还有一个更简便的位置获取 API。
 使用内置对象 navigator:
 12345678navigator.geolocation.getCurrentPosition(    res =&gt; &#123;      /......
-        </div>
-    </a>
+    </div>
+  </a>
+  
+  <p class="post-meta" style="margin: 10px 0;">
+    Posted by xuwei on 2020-05-08
+  </p>
+  <div class="tags">
     
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by xuwei on
-            2020-05-08
-        </p>
-        <div class="tags">
-            
-        </div>
-    
-
+  </div>
+  
 </div>
-<hr>
+<hr />
 
 <div class="post-preview">
-
-    <a href="/2017/03/18/hexo-theme-beantech/">
-        <h2 class="post-title">
-            [Hexo] Theme BeanTech
-        </h2>
-        <h3 class="post-subtitle">
-            This is hexo theme Demo.
-        </h3>
-        <div class="post-content-preview">
-            
+  <a href="/2017/03/18/hexo-theme-beantech/">
+    <h2 class="post-title">
+      [Hexo] Theme BeanTech
+    </h2>
+    <h3 class="post-subtitle">
+      This is hexo theme Demo.
+    </h3>
+    <div class="post-content-preview">
+      
 Ported Theme of Hux Blog, Thank Huxpro for designing such a flawless theme.
 This BeanTech theme created by YuHsuan modified from the original Porter Kaijun
 
@@ -255,34 +257,33 @@ This BeanTech theme created by YuHsuan modified from the original Porter Kaijun
 Usage
 
 I publish the whole project f......
-        </div>
-    </a>
+    </div>
+  </a>
+  
+  <p class="post-meta" style="margin: 10px 0;">
+    Posted by xuwei on 2017-03-18
+  </p>
+  <div class="tags">
     
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by xuwei on
-            2017-03-18
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Hexo" title="Hexo">Hexo</a>
-            
-              <a href="/tags/#Blog" title="Blog">Blog</a>
-            
-        </div>
+    <a href="/tags/#Hexo" title="Hexo"
+      >Hexo</a
+    >
     
-
+    <a href="/tags/#Blog" title="Blog"
+      >Blog</a
+    >
+    
+  </div>
+  
 </div>
-<hr>
-
+<hr />
 
 
 <!-- Pager -->
 
 <ul class="pager">
-    
-    
+   
 </ul>
-
 
 
                 <!-- 如果开启评论功能 -->
