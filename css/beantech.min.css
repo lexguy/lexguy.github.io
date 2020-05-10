@@ -16,16 +16,21 @@
   font-size: 14px;
 }
 .sidebar-container h5 {
-  color: gray;
+  /* color: gray; */
+  color: #667;
+
   padding-bottom: 1em;
   text-transform: uppercase;
 }
 .sidebar-container h5 a {
-  color: #808080 !important;
+  /* color: #808080 !important; */
+  color: #667 !important;
+
   text-decoration: none;
 }
 .sidebar-container a {
-  color: #bfbfbf !important;
+  /* color: #bfbfbf !important; */
+  color: #777 !important;
 }
 .sidebar-container a:hover,
 .sidebar-container a:active {
@@ -579,7 +584,7 @@ pre code {
 }
 footer {
   font-size: 20px;
-  padding: 50px 0 65px;
+  padding: 60px 0 20px;
 }
 footer .list-inline {
   margin: 0;

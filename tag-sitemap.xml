@@ -3,6 +3,13 @@
 
 
     <url>
+        <loc>http://yoursite-url/tags/React-Native/</loc>
+        <lastmod>2020-05-10T16:21:45.748Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://yoursite-url/tags/Blog/</loc>
         <lastmod>2020-05-06T16:57:50.966Z</lastmod>
         <changefreq>weekly</changefreq>
