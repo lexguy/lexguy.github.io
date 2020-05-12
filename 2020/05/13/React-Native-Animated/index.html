@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          [Hexo] Theme BeanTech - Xuwei&#39;s blog
+          React Native Animated - Xuwei&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="http://yoursite-url/2017/03/18/hexo-theme-beantech/">
+    <link rel="canonical" href="http://yoursite-url/2020/05/13/React-Native-Animated/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -76,7 +76,7 @@
 <style type="text/css">
   header.intro-header{
       
-          background-image: url('Demo.png')
+          background-image: url('null')
           /*post*/
       
   }
@@ -95,23 +95,23 @@
               
               <a
                 class="tag"
-                href="/tags/#Hexo"
-                title="Hexo"
-                >Hexo</a
+                href="/tags/#React Native"
+                title="React Native"
+                >React Native</a
               >
               
               <a
                 class="tag"
-                href="/tags/#Blog"
-                title="Blog"
-                >Blog</a
+                href="/tags/#动画"
+                title="动画"
+                >动画</a
               >
               
             </div>
-            <h1>[Hexo] Theme BeanTech</h1>
-            <h2 class="subheading">This is hexo theme Demo.</h2>
+            <h1>React Native Animated</h1>
+            <h2 class="subheading"></h2>
             <span class="meta">
-              Posted by xuwei on 2017-03-18
+              Posted by xuwei on 2020-05-13
             </span>
           </div>
           
@@ -226,60 +226,211 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <blockquote>
-<p>Ported Theme of <a href="https://github.com/Huxpro/huxpro.github.io" target="_blank" rel="noopener">Hux Blog</a>, Thank <a href="https://github.com/Huxpro" target="_blank" rel="noopener">Huxpro</a> for designing such a flawless theme.</p>
-<p>This BeanTech theme created by <a href="http://beantech.org" target="_blank" rel="noopener">YuHsuan</a> modified from the original Porter <a href="http://kaijun.rocks/hexo-theme-huxblog/" target="_blank" rel="noopener">Kaijun</a></p>
-</blockquote>
-<h1><span id="live-demo"></span></h1>
-<hr>
-<p><img src="http://beantech.org/img/beantech-desktop.png" alt="BeanTech Desktop"></p>
-<h1><span id="usage">Usage</span></h1>
-<hr>
-<p>I publish the whole project for your convenience, so you can just follow the instruction down below, then you can easily customiz your own blog!</p>
-<p>Let’s begin!!!</p>
-<h2><span id="init">Init</span></h2>
-<hr>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/YenYuHsuan/hexo-theme-beantech.git ./hexo-beantech</span><br><span class="line"><span class="built_in">cd</span> hexo-beantech</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-<h2><span id="modify">Modify</span></h2>
-<hr>
-<p>Modify <code>_config.yml</code> file with your own info.<br>
-Especially the section:</p>
-<h3><span id="deployment">Deployment</span></h3>
-<p>Replace to your own repo!</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/&lt;yourAccount&gt;/&lt;repo&gt;</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">&lt;your-branch&gt;</span></span><br></pre></td></tr></table></figure>
-<h3><span id="sidebar-settings">Sidebar settings</span></h3>
-<p>Copy your avatar image to <code>&lt;root&gt;/img/</code> and modify the <code>_config.yml</code>:</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">sidebar:</span> <span class="literal">true</span>    <span class="comment"># whether or not using Sidebar.</span></span><br><span class="line"><span class="attr">sidebar-about-description:</span> <span class="string">"&lt;your description&gt;"</span></span><br><span class="line"><span class="attr">sidebar-avatar:</span> <span class="string">img/&lt;your</span> <span class="string">avatar</span> <span class="string">path&gt;</span></span><br></pre></td></tr></table></figure>
-<p>and activate your personal widget you like</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">widgets:</span>         <span class="comment"># here are widget you can use, you can comment out</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">featured-tags</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">short-about</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">recent-posts</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">friends-blog</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">archive</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">category</span></span><br></pre></td></tr></table></figure>
-<p>if you want to add sidebar widget, please add at <code>layout/_widget</code>.</p>
-<h3><span id="signature-setup">Signature Setup</span></h3>
-<p>Copy your signature image to <code>&lt;root&gt;/img/signature</code> and modify the <code>_config.yml</code>:</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">signature:</span> <span class="literal">true</span>   <span class="comment"># show signature</span></span><br><span class="line"><span class="attr">signature-img:</span> <span class="string">img/signature/&lt;your-signature-ID&gt;</span></span><br></pre></td></tr></table></figure>
-<h3><span id="go-to-top-icon-setup">Go to top icon Setup</span></h3>
-<p>My icon is using iron man, you can change to your own icon at <code>css/image</code>.</p>
-<h3><span id="post-tag">Post tag</span></h3>
-<p>You can decide to show post tags or not.</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">home_posts_tag:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p><img src="home_posts_tag-true.png" alt="home_posts_tag-true"></p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">home_posts_tag:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
-<p><img src="home_posts_tag-false.png" alt="home_posts_tag-false"></p>
-<h3><span id="markdown-render">Markdown render</span></h3>
-<p>My markdown render engine plugin is <a href="https://github.com/celsomiranda/hexo-renderer-markdown-it" target="_blank" rel="noopener">hexo-renderer-markdown-it</a>.</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Markdown-it config</span></span><br><span class="line"><span class="comment">## Docs: https://github.com/celsomiranda/hexo-renderer-markdown-it/wiki</span></span><br><span class="line"><span class="attr">markdown:</span></span><br><span class="line">  <span class="attr">render:</span></span><br><span class="line">    <span class="attr">html:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">xhtmlOut:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">breaks:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">linkify:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">typographer:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">quotes:</span> <span class="string">'“”‘’'</span></span><br></pre></td></tr></table></figure>
-<p>and if you want to change the header anchor ‘ℬ’, you can go to <code>layout/post.ejs</code> to change it.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span>(<span class="string">"https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        anchors.options = &#123;</span><br><span class="line">          visible: <span class="string">'hover'</span>,</span><br><span class="line">          placement: <span class="string">'left'</span>,</span><br><span class="line">          icon: ℬ <span class="comment">// this is the header anchor "unicode" icon</span></span><br><span class="line">        &#125;;</span><br></pre></td></tr></table></figure>
-<h2><span id="hexo-basics">Hexo Basics</span></h2>
-<hr>
-<p>Some hexo command:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo new post <span class="string">"&lt;post name&gt;"</span> <span class="comment"># you can change post to another layout if you want</span></span><br><span class="line">hexo clean &amp;&amp; hexo generate <span class="comment"># generate the static file</span></span><br><span class="line">hexo server <span class="comment"># run hexo in local environment</span></span><br><span class="line">hexo deploy <span class="comment"># hexo will push the static files automatically into the specific branch(gh-pages) of your repo!</span></span><br></pre></td></tr></table></figure>
-<h1><span id="have-fun-_">Have fun ^_^</span></h1>
-<hr>
-<!-- Place this tag in your head or just before your close body tag. -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-<!-- Place this tag where you want the button to render. -->
-<p>Please <a class="github-button" href="https://github.com/YenYuHsuan/hexo-theme-beantech" data-icon="octicon-star" aria-label="Star YenYuHsuan/hexo-theme-beantech on GitHub" target="_blank" rel="noopener">Star</a> this Project if you like it! <a class="github-button" href="https://github.com/YenYuHsuan" aria-label="Follow @YenYuHsuan on GitHub" target="_blank" rel="noopener">Follow</a> would also be appreciated!<br>
-Peace!</p>
+                <p>如果要在一个 React Native 应用中添加动画效果，首先考虑的就是官方提供的 Animated 。通过定义输入和输出的动画状态值，调用 start/stop 方法就可以执行起来，使用上可以说是非常友好方便。</p>
+<h4><span id="animated-动画组件"><em>Animated 动画组件</em></span></h4>
+<p>如果让某个界面元素拥有动画效果，那它应该使用如下的动画组件：</p>
+<ul>
+<li>Animated.View</li>
+<li>Animated.Text</li>
+<li>Animated.Image</li>
+<li>Animated.ScrollView</li>
+<li>Animated.FlatList</li>
+<li>Animated.SectionList</li>
+</ul>
+<h4><span id="动画类型"><em>动画类型</em></span></h4>
+<p>Animated 　可以创建三种动画类型，直接调用就能创建一个动画对象，如 Animated.timing(…) ，动画对象可以调用 start() 启动。</p>
+<ul>
+<li>timing 　先加速至全速，再逐渐减速渐停 (使用最多)</li>
+<li>spring 　执行动画时会超出最终值然后弹回，适用于弹性的动态效果</li>
+<li>decay 　以一定的初始速度开始变化，然后变化速度越来越慢直至停下</li>
+</ul>
+<p>例如：</p>
+<pre><code>// 创建并启动一个 spring 类型的动画
+Aimated.spring(this.state.value,{...动画配置}).start();
+</code></pre>
+<h4><span id="动画值"><em>动画值</em></span></h4>
+<p>动画执行过程中的变量不是普通的变量，只能是动画值，有两种类型：</p>
+<ul>
+<li>Animated.Value()　表示单个值</li>
+<li>Animated.ValueXY()　表示向量(矢量)值. （可用于改变 x,y 向的坐标）</li>
+</ul>
+<p>实例：</p>
+<pre><code>this.state={
+	dynamicHeight:new Animated.Value(0)  //初始化
+}
+
+this.state.dynamicHeight.setValue(10);  //重新设定动画值
+</code></pre>
+<h4><span id="计算动画值"><em>计算动画值</em></span></h4>
+<p>一些时候所用的动画值并不是可以直接设定的，或者多个动画值存在一定关系，转换后使用更加方便，也就是在使用之前需要进行计算，这时就需要用到一些常用计算方法。</p>
+<p>例如: 一个长宽比为 3：2 的图片，要实现放大动画，为保持变化过程中的长宽比不变，这时就可以用一个公因数， 则 宽度 = 公因数 乘以 2 ，长度 = 公因数 乘以 3 ，在 state 中变化的动画值就是这个公因数，实际使用的动画值就是通过乘法 Animated.multiply() 得到的动画值。</p>
+<pre><code>// - 宽度计算 -
+// factor 是 state 中的变量 ，乘以 2 得到真实动画值后再将真实动画值设置到属性或样式上
+const realAnimatedWidth = Animated.multiply(this.state.factor,new Animated.Value(2));
+</code></pre>
+<p>可用的计算方法：</p>
+<ul>
+<li>Animated.add() 　加</li>
+<li>Animated.subtract()　减</li>
+<li>Animated.multiply()　乘</li>
+<li>Animated.divide()　除</li>
+<li>Animated.modulo()　模（取余）</li>
+</ul>
+<h4><span id="组合类型"><em>组合类型</em></span></h4>
+<p>当多个动画需要需要以一定规律进行（多个动画值变动）的时候，就需要用到组合动画，Animated 提供了几种方法将动画按照一定方式组合：</p>
+<ul>
+<li>Animated.delay(time) 　按照给定延迟后执行动画</li>
+<li>Animated.parallel(animations, config?)　同时执行多个动画</li>
+<li>Animated.sequence(animations)　顺序执行，一个动画结束后开始执行下一个</li>
+<li>Animated.stagger(time, animations)　按照给定延迟顺序启动多个动画，可能并行重叠。</li>
+<li>loop(animation, config?) 　无限循环一个指定动画</li>
+</ul>
+<p>举例：</p>
+<pre><code>//并行两个动画   同时进行一个 timing 动画和一个 spring 动画
+Animated.parallel([
+	Animated.timing(...),
+	Animated.spring(...)
+]).start()
+</code></pre>
+<h4><span id="插值"><em>插值</em></span></h4>
+<p>根据一个动画值的变化范围，获取另一个动画值的范围，需要使用插值。 插值函数 interpolate 可以将输入范围映射到输出范围，一般是使用线性插值，但也可以指定 easing 函数 [<a href="https://reactnative.cn/docs/animations/" title="Easing 介绍" target="_blank" rel="noopener">查看 Easing 介绍</a>]。</p>
+<p>对于一些属性值是字符串的变量，比如 rotate ，从 ‘0deg’ 到 ‘180deg’ ，也应该使用插值来获取变化范围。</p>
+<ul>
+<li>AnimatdValue.interpolate(config)</li>
+</ul>
+<p>例如：</p>
+<pre><code>	// Y 轴上的偏移量根据 fadeAnim 的值变化
+	// fadeAnim -&gt; [0,1] translateY -&gt; [150,0]
+	style={{
+    		opacity: this.state.fadeAnim, // Binds directly
+    		transform: [{
+    			translateY: this.state.fadeAnim.interpolate({
+    				inputRange: [0, 1],
+    				outputRange: [150, 0]  // 0 : 150, 0.5 : 75, 1 : 0
+    			}),
+    		}],
+    	}}
+</code></pre>
+<br>
+<h4><span id="一个完整的简单动画的实现"><em>一个完整的简单动画的实现</em></span></h4>
+<br>
+<p>一个完整的简单动画可以分如下几步实现</p>
+<ol>
+<li>
+<p>定义动画值变量并初始化</p>
+</li>
+<li>
+<p>定义动画配置和执行方法</p>
+</li>
+<li>
+<p>将动画值绑定到组件上，用于改变属性或样式</p>
+</li>
+<li>
+<p>触发动画执行的事件或操作</p>
+</li>
+</ol>
+<p>对应于下面的例子来看，会更容易理解上述每一步。</p>
+<h5><span id="案例1">案例1</span></h5>
+<p><strong>[ 动画 1 -动画值控制高度]</strong> 点击展开视图的动画，效果如下：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/11/8/16e4a94286ce0ddf?w=350&amp;h=216&amp;f=gif&amp;s=74437" alt="点击展开-动画效果"></p>
+<p>通过将 Animated.View 的高度设置成动画值实现。 以上三步均在代码中标出</p>
+<pre><code>export default class AnimatedView extends PureComponent {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      dynamicHeight: new Animated.Value(0),  //1 - 构造方法中定义 dynamicHeight 动画变量
+    }
+  }
+
+  startViewAnimation = () =&gt; {   //2 - 配置动画和定义执行方法
+    let targetHeight = 80;
+    if (this.state.dynamicHeight._value === 80) {     //根据高度判断是否已展开
+      targetHeight = 0;			//已展开的话，则需要将 View 收起，高度回到初始值 0
+    }
+    Animated.spring(			//定义弹性动画
+      this.state.dynamicHeight, //改变的动画变量
+      {
+        toValue: targetHeight,  //目标值，也就是动画值变化后的最终值
+        duration: 300,			//动画持续时长
+      }
+    ).start();
+  }
+
+  render() {
+    return (
+      &lt;View style={{flex: 1}}&gt;
+        &lt;View style={{width: 200, position: 'absolute', top: 30}}&gt;
+          &lt;View&gt;
+            &lt;TouchableOpacity
+              onPress={this.startViewAnimation}		// 4 - 触发动画执行的点击事件
+              style={styles.button}&gt;
+              &lt;Text&gt;点击展开&lt;/Text&gt;
+            &lt;/TouchableOpacity&gt;
+          &lt;/View&gt;
+
+          &lt;Animated.View
+            style={{backgroundColor: '#eee', justifyContent: 'space-around',
+    			height: this.state.dynamicHeight}}	  //3 - 将高度是设为动画值，即用动画值改变 style （height）
+          &gt;
+          &lt;/Animated.View&gt;
+        &lt;/View&gt;
+      &lt;/View&gt;
+    );
+  }
+}
+</code></pre>
+<h5><span id="案例2">案例2</span></h5>
+<p><strong>[ 动画 2 - 动画值插值转换]</strong> 点击跳动的心形图：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/11/8/16e4a94287034a61?w=286&amp;h=115&amp;f=gif&amp;s=49714" alt="跳动效果"></p>
+<p>动画值 imageSize 从 0 到 1，映射成对应的实际图片大小，再设置到 Animated.Image 的宽高样式上。</p>
+<pre><code>export default class HeartView extends PureComponent {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      imageSize: new Animated.Value(0), //动画初始值为 0，目标值为 1 。会经过插值转换后应用到 Animated.Image上
+    }
+  }
+
+  startImageAnimation = () =&gt; {
+
+	//动画开始前先将初始值设为0，否则第一次执行后this.state.imageSize的动画值一直是 1, 不再有效果
+
+    this.state.imageSize.setValue(0)
+    Animated.spring(
+      this.state.imageSize,
+      {
+        toValue: 1,
+        duration: 2000,
+      }
+    ).start();
+  }
+
+  render() {
+
+	//动画值从0-1，对其进行插值转换 ，映射成实际的图片大小
+	//再将实际的图片大小设置给 Animated.Image 的样式
+
+    const imageSize = this.state.imageSize.interpolate({
+      inputRange: [0, 0.5, 1],
+      outputRange: [30, 40, 30]
+    });
+    return (
+      &lt;View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}&gt;
+        &lt;TouchableOpacity
+          onPress={this.startImageAnimation}
+        &gt;
+          &lt;Animated.Image source={ICON_HEART}
+						  style={{width: imageSize, height: imageSize,  //应用到 Animated.Image 上
+    					          tintColor: '#dc3132'}}/&gt;
+        &lt;/TouchableOpacity&gt;
+      &lt;/View&gt;
+    );
+  }
+}
+</code></pre>
+<p>这些都是动画 Animated 的基础使用，另外动画部分还有关于 setNativeProps 和 LayoutAnimation 的部分另做总结。</p>
 
                 
 
@@ -287,10 +438,10 @@ Peace!</p>
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2020/05/08/React-Native-定位获取位置信息/" data-toggle="tooltip" data-placement="top" title="React Native 定位获取位置信息">&larr; Previous Post</a>
-                        </li>
                     
+                        <li class="next">
+                            <a href="/2020/05/08/React-Native-定位获取位置信息/" data-toggle="tooltip" data-placement="top" title="React Native 定位获取位置信息">Next Post &rarr;</a>
+                        </li>
                     
                 </ul>
 
@@ -319,7 +470,7 @@ Peace!</p>
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text"></span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Usage</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Init</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Modify</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.2.1.</span> <span class="toc-nav-text">Deployment</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.2.2.</span> <span class="toc-nav-text">Sidebar settings</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.2.3.</span> <span class="toc-nav-text">Signature Setup</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.2.4.</span> <span class="toc-nav-text">Go to top icon Setup</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.2.5.</span> <span class="toc-nav-text">Post tag</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.2.6.</span> <span class="toc-nav-text">Markdown render</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">Hexo Basics</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Have fun ^_^</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Animated 动画组件</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">动画类型</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">动画值</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">计算动画值</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">组合类型</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">插值</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">一个完整的简单动画的实现</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">7.1.</span> <span class="toc-nav-text">案例1</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">7.2.</span> <span class="toc-nav-text">案例2</span></a></li></ol></li></ol>
         
         </div>
       </aside>
@@ -339,9 +490,9 @@ Peace!</p>
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#Hexo" title="Hexo">Hexo</a>
+                          <a class="tag" href="/tags/#React Native" title="React Native">React Native</a>
                         
-                          <a class="tag" href="/tags/#Blog" title="Blog">Blog</a>
+                          <a class="tag" href="/tags/#动画" title="动画">动画</a>
                         
                     </div>
                 </section>
@@ -376,8 +527,8 @@ Peace!</p>
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "your-disqus-ID";
-    var disqus_identifier = "http://yoursite-url/2017/03/18/hexo-theme-beantech/";
-    var disqus_url = "http://yoursite-url/2017/03/18/hexo-theme-beantech/";
+    var disqus_identifier = "http://yoursite-url/2020/05/13/React-Native-Animated/";
+    var disqus_url = "http://yoursite-url/2020/05/13/React-Native-Animated/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
