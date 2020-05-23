@@ -4,14 +4,14 @@
 
     <url>
         <loc>http://yoursite-url/tags/%E5%8A%A8%E7%94%BB/</loc>
-        <lastmod>2020-05-12T16:30:49.181Z</lastmod>
+        <lastmod>2020-05-23T04:52:37.952Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://yoursite-url/tags/React-Native/</loc>
-        <lastmod>2020-05-12T16:30:49.181Z</lastmod>
+        <lastmod>2020-05-23T04:52:37.952Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

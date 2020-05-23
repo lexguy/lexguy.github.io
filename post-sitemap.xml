@@ -8,6 +8,14 @@
     </url>
 
     <url>
+        <loc>http://yoursite-url/2020/05/23/LayoutAnimation_setNativeProps/</loc>
+        <lastmod>2020-05-23T04:52:37.952Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://yoursite-url/2020/05/13/React-Native-Animated/</loc>
         <lastmod>2020-05-12T16:30:49.181Z</lastmod>
         <changefreq>weekly</changefreq>
