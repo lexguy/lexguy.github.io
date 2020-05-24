@@ -137,15 +137,15 @@
              
           <li>
             <a
-              href="/about/"
-              >关于
+              href="/archive/"
+              >时间轴
             </a>
           </li>
             
           <li>
             <a
-              href="/archive/"
-              >时间轴
+              href="/about/"
+              >关于
             </a>
           </li>
             
@@ -226,6 +226,21 @@
                     <span class="tag-text">2020</span>
                 </span>
                 <ul>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li >
+                    05-23
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2020/05/23/React Native 构建的仿豆瓣应用/" style="color: #0085a1">
+                        <span>
+                            React Native 构建的仿豆瓣应用
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
                 
                   <!-- <li class="listing-item">
                   <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
@@ -402,6 +417,10 @@
 
   <div class="widget">
     <ul>
+      
+        <li>
+          <a href="/2020/05/23/React Native 构建的仿豆瓣应用/">React Native 构建的仿豆瓣应用</a>
+        </li>
       
         <li>
           <a href="/2020/05/23/LayoutAnimation_setNativeProps/">React Native LayoutAnimatd 和 setNativeProps</a>
