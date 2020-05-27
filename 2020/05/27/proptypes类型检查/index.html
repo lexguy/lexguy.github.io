@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          React Native 定位获取位置信息 - Xuwei&#39;s blog
+          React proptypes 类型检查 - Xuwei&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="http://yoursite-url/2020/05/08/React-Native-定位获取位置信息/">
+    <link rel="canonical" href="http://yoursite-url/2020/05/27/proptypes类型检查/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -100,11 +100,18 @@
                 >React Native</a
               >
               
+              <a
+                class="tag"
+                href="/tags/#React"
+                title="React"
+                >React</a
+              >
+              
             </div>
-            <h1>React Native 定位获取位置信息</h1>
+            <h1>React proptypes 类型检查</h1>
             <h2 class="subheading"></h2>
             <span class="meta">
-              Posted by xuwei on 2020-05-08
+              Posted by xuwei on 2020-05-27
             </span>
           </div>
           
@@ -219,41 +226,51 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>RN 文档上的定位功能需要谷歌框架支持，无疑带来了一些麻烦。github 上也有一些开源库，react-native-geolocation-service 等。但是这里还有一个更简便的位置获取 API。</p>
-<h3><span id="使用内置对象-navigator">使用内置对象 navigator:</span></h3>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">navigator</span><span class="selector-class">.geolocation</span><span class="selector-class">.getCurrentPosition</span>(</span><br><span class="line">    res =&gt; &#123;</span><br><span class="line">      <span class="comment">// console.log(res)</span></span><br><span class="line">      <span class="selector-tag">this</span><span class="selector-class">.setState</span>(&#123;</span><br><span class="line">        <span class="attribute">location</span>: res.coords</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;, err =&gt; &#123;</span><br><span class="line">    &#125;, &#123;&#125;)</span><br></pre></td></tr></table></figure>
-<p>第一个参数是成功回调，第二是失败回调，第三个是参数 options，可传空对象。</p>
-<p>成功回调中 res.coords 具有经纬度信息。对经纬度信息处理成地理位置，行政区域信息还需要用到第三方 api 。</p>
-<h3><span id="使用逆地址解析服务将经纬度解析成地址信息">使用逆地址解析服务将经纬度解析成地址信息</span></h3>
-<br>
-这里可以通过[百度地图](http://lbsyun.baidu.com/apiconsole/key)或者[腾讯位置服务](http://lbs.qq.com/webservice_v1/guide-gcoder.html)的逆地址解析服务来完成，流程如下：
-<ol>
-<li>注册成为开发者</li>
-<li>创建自己的应用</li>
-<li>然后获取 key 或认证</li>
-<li>加上经纬度等参数来发起请求</li>
-</ol>
-<p>例如百度地图的请求方式：</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http<span class="variable">s:</span>//api.<span class="keyword">map</span>.baidu.<span class="keyword">com</span>/geocoder/v2/?output=json&amp;ak=<span class="number">9</span>a9a9a9a9a9a9a9a9a9a9a9a9a&amp;location=<span class="number">39.206526</span>,<span class="number">116.909158</span></span><br></pre></td></tr></table></figure>
-<p>（9a9a…就是你申请的 ak 认证，对应在你创建的应用中）</p>
-<p>通过 Postman 测试请求的效果如下：</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMjI1MTMyMzE2NDEy" width="800">
-<!-- ![这里写图片描述]() -->
-<p>这里需要将 location 经纬度参数替换为自己通过 getCurrentPosition 方法获取到的经纬度。也就是先获取到经纬度，再通过逆地址解析获取到城市等地址信息。将这个操作再封装成一个方法：</p>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"> getCityLocation() &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> Promise(<span class="function"><span class="params">(resolve, reject)</span> =&gt;</span> &#123;</span><br><span class="line">    getLongitudeAndLatitude()</span><br><span class="line">    <span class="regexp">//</span>获取经纬度的方法返回的是经纬度组成的数组</span><br><span class="line">        .<span class="keyword">then</span>(<span class="function"><span class="params">(locationArr)</span> =&gt;</span> &#123;</span><br><span class="line">              <span class="regexp">//</span> Alert.alert(<span class="string">""</span>, <span class="string">""</span> + locationArr[<span class="number">1</span>]);</span><br><span class="line">          let longitude = locationArr[<span class="number">0</span>];</span><br><span class="line">          let latitude = locationArr[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">          <span class="keyword">this</span>.getNetData(BaiduMap_URL + latitude + <span class="string">","</span> + longitude)</span><br><span class="line">            .<span class="keyword">then</span>(<span class="function"><span class="params">(data)</span> =&gt;</span> &#123;</span><br><span class="line">              <span class="keyword">if</span> (data.status == <span class="number">0</span>) &#123;</span><br><span class="line">                resolve(data);</span><br><span class="line">              &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                reject(ErrorDeal.getError(data.code));</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;).<span class="keyword">catch</span>(<span class="function"><span class="params">(data)</span> =&gt;</span> &#123;</span><br><span class="line">            reject(ErrorDeal.getError(data.code));</span><br><span class="line">          &#125;)</span><br><span class="line"></span><br><span class="line">        &#125;).<span class="keyword">catch</span>(<span class="function"><span class="params">(data)</span> =&gt;</span> &#123;</span><br><span class="line">        reject(ErrorDeal.getError(data.code));</span><br><span class="line">      &#125;)</span><br><span class="line"></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>getLongitudeAndLatitude 就是上面的获取经纬度的方法，this.getNetData 是一个 fetch 请求的封装。拼接请求 Url，fetch 请求，此时 resolve 的数据就是 Postman 解析的 json 数据了。</p>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span>获取网络数据</span><br><span class="line">  getNetData(url) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Promise(<span class="function"><span class="params">(resolve, reject)</span> =&gt;</span> &#123;</span><br><span class="line">      fetch(url).<span class="keyword">then</span>(<span class="function"><span class="params">(response)</span> =&gt;</span> response.json())</span><br><span class="line">        .<span class="keyword">then</span>(<span class="function"><span class="params">(responseData)</span> =&gt;</span> &#123;</span><br><span class="line">          resolve(responseData);</span><br><span class="line">        &#125;)</span><br><span class="line">        .<span class="keyword">catch</span>(<span class="function"><span class="params">(error)</span> =&gt;</span> &#123;</span><br><span class="line">          reject(ErrorDeal.getError(NetWork_Error))</span><br><span class="line">        &#125;)</span><br><span class="line">        .done()</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<br>
-<h4><span id="对已获取信息处理">对已获取信息处理</span></h4>
-<p>上面 getCityLocation 返回的 Promise 中 resolve 传递的 data 就是 json 数据了，就已经可以因自身需求进行数据处理显示的操作了。</p>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.getCityLocation()</span><br><span class="line">   .<span class="keyword">then</span>(<span class="function"><span class="params">(data)</span> =&gt;</span> &#123;</span><br><span class="line">     <span class="regexp">//</span> Alert.alert(<span class="string">"位置？"</span>, <span class="string">""</span> + JSON.stringify(data));</span><br><span class="line">     <span class="keyword">this</span>._confirmCity(data);</span><br><span class="line">   &#125;)</span><br><span class="line">   .<span class="keyword">catch</span>(<span class="function"><span class="params">(error)</span> =&gt;</span> &#123;</span><br><span class="line">     //ToastAndroid.show(<span class="string">"失败"</span> + JSON.stringify(error), ToastAndroid.SHORT);</span><br><span class="line">   &#125;);</span><br></pre></td></tr></table></figure>
-<p>调用 getCityLocation，再 then 方法处理处理 data ，此时的 data 是一个 json 对象。</p>
-<p>例如我的处理是调用 _confirmCity 方法弹出一个城市切换的确认框：</p>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">//弹出定位框</span><br><span class="line">  _confirmCity(<span class="meta">data</span>) &#123;</span><br><span class="line"></span><br><span class="line">    let <span class="keyword">address </span>= <span class="meta">data</span>.result.<span class="keyword">addressComponent;</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword"> </span>   <span class="meta">if</span> (<span class="keyword">address!="") </span>&#123;</span><br><span class="line"></span><br><span class="line">      Alert.alert(<span class="string">"城市定位"</span>, <span class="string">"\n当前城市为"</span> + <span class="keyword">address.province </span>+ <span class="keyword">address.city </span>+ <span class="string">"\n \n 是否设为当前城市？\n"</span>,</span><br><span class="line">          [</span><br><span class="line">            &#123;</span><br><span class="line"><span class="symbol">              text:</span> <span class="string">"设为当前城市"</span>,</span><br><span class="line"><span class="symbol">              onPress:</span> () =&gt; &#123;</span><br><span class="line">                this.setCurrentCity(<span class="keyword">address.city)</span></span><br><span class="line"><span class="keyword"> </span>             &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;text: <span class="string">"取消"</span>&#125;</span><br><span class="line">          ]</span><br><span class="line">      )</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<p>效果图：</p>
-<img src="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMjI1MTM1MjE3NDMy" width="400">
-<!-- ![这里写图片描述](https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMjI1MTM1MjE3NDMy) -->
-<p>这里就已经完成了经纬度的获取，城市地址信息的获取功能。</p>
+                <!-- 【React · React Native】组件 prop 类型检查 -->
+<p>React Native 的 JavaScript 层都是 React 的语法，故父子组件的传值也是一样的遵循的 React 的 props 传值的规则。这里介绍的类型检查方式适用于 React 和 React Native。当我们在自定义一个相对复杂的子组件时，会需要传入较多的 props ，这些传入的 props 可能是固定类型的变量，也可能是函数。为了保证代码的健壮性，以及方便查错，我们可以引入 props-types 来进行类型检查。</p>
+<p>如果使用 WebStorm 等编辑器配置了 JSX，还会出现 prop 的提示：</p>
+<img src="https://pic2.superbed.cn/item/5dfa493c76085c3289a13168.png" width="400px">
+<p>例子，在做一个自定义的文本按钮的时候，需要传入按钮的字符串和点击事件两个 props，那我们可以这样定义，组件内静态变量：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">export <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">MyButton</span> <span class="keyword">extends</span> <span class="title">PureComponent</span> </span>&#123;</span><br><span class="line">  static propTypes = &#123;</span><br><span class="line">    text: <span class="type">PropTypes</span>.string,</span><br><span class="line">    onButtonPress: <span class="type">PropTypes</span>.func.isRequired,</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">&#123;</span><br></pre></td></tr></table></figure>
+<p>或者在组件外部定义：</p>
+<figure class="highlight roboconf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">MyButton.propTypes= &#123;</span><br><span class="line">  <span class="attribute">text</span>: PropTypes<span class="variable">.string</span>,</span><br><span class="line">  onButtonPress: PropTypes<span class="variable">.func</span><span class="variable">.isRequired</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在指定的类型后面加上 .isRequired 表示该属性是必须传入值的，当没有传入的时候会出现报错。如果你的编辑器配置了 JSX 语法，自动检测也会提示出来，避免出现未传值导致的错误。</p>
+<h3><span id="proptypes-类型验证">PropTypes 类型验证</span></h3>
+<p>支持的可选的 prop 的类型有很多，基本类型的验证都是支持的：</p>
+<ul>
+<li><strong>array</strong></li>
+<li><strong>bool</strong></li>
+<li><strong>func</strong></li>
+<li><strong>number</strong></li>
+<li><strong>object</strong></li>
+<li><strong>string</strong></li>
+<li><strong>symbol</strong></li>
+</ul>
+<p>其中 symbol 是 ES6 新增的数据类型，可以参见 <a href="http://es6.ruanyifeng.com/#docs/symbol" target="_blank" rel="noopener">[阮一峰 ES6 · Symbol]</a>.</p>
+<p>也可以是 React 中的类型：</p>
+<ul>
+<li><strong>node —— 表示任何可以被渲染的元素，数字，字符串，元素，数组或者 Fragment 等</strong></li>
+<li><strong>element —— React 元素</strong></li>
+<li><strong>elementType ——React 元素类型</strong></li>
+</ul>
+<p>如果需要确保传入的子组件是单个元素，可以使用 element ：</p>
+<figure class="highlight roboconf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">static propTypes = &#123;</span><br><span class="line">  <span class="attribute">children</span>: PropTypes<span class="variable">.element</span><span class="variable">.isRequired</span>,</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">render() &#123;</span><br><span class="line">  return (</span><br><span class="line">    &lt;View&gt;</span><br><span class="line">      &#123;this<span class="variable">.props</span><span class="variable">.children</span>&#125;</span><br><span class="line">    &lt;/View&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>还可以是指定某一些规则的 prop :</p>
+<ul>
+<li><strong>instanceOf(Message) ——指定为某一 class 的实例</strong></li>
+<li><strong>oneOfType([…]) —— prop 可以是给定多个类型中的一个</strong></li>
+<li><strong>arrayOf() —— 某一元素类型的数组，如 arrayOf(PropTypes.number)即表示元素为数字的数组</strong></li>
+<li><strong>shape({…}) —— 指定由特定对象，由指定的类型值组成</strong></li>
+</ul>
+<p>例如，我们可以定义传入按钮的样式，是需要包含了 width 和 height 属性的：</p>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> propTypes = &#123;</span><br><span class="line">    ...</span><br><span class="line">    style: PropTypes.<span class="built_in">shape</span>(&#123;</span><br><span class="line">    <span class="built_in">width</span>: PropTypes.number,</span><br><span class="line">    <span class="built_in">height</span>: PropTypes.number</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>除了这些已经提供的可选项，你还可以自定义匹配的规则，当不满足的时候返回一个错误（这里验证函数中不能使用 console.warn(), 只能是 return new Error(…)）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> propTypes = &#123;</span><br><span class="line">  extraData: <span class="function"><span class="keyword">function</span> (<span class="params">props, propName, componentName</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (props[propName] !== <span class="string">'...?(自定义规则)'</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'...错误信息'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样一来，当传入 prop 值不满足你定义的条件的时候，便可以获得错误，便于 debug。</p>
+<h3><span id="默认-prop-值">默认 prop 值</span></h3>
+<p>上面已经提到，在组件必须传入某个 prop 值的时候，可以加上 .isRequired 标记成必须传值的 prop。但是有时候可能组件的该 prop 在使用时多半是固定值，只有个别情况需要传入不同值，那么就应该设定一个默认值，对个别情况再传值，避免大量相同的传值代码。此时就应该使用 defaultPorps 来设定默认值。</p>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> defaultProps = &#123;</span><br><span class="line">  <span class="built_in">text</span>:<span class="string">'确认'</span>,</span><br><span class="line">  style: &#123;</span><br><span class="line">    <span class="built_in">width</span>: <span class="number">70</span>,</span><br><span class="line">    <span class="built_in">height</span>: <span class="number">50</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>比如上面的 MyButton，指定 text 这个 prop 的默认值就是 ‘确认’。那么就算它是 isRequired 的，我们不传值也不会出现错误，因为 propTypes 类型检查发生在 defaultProps 赋值之后，有了默认值，就不再报错。所以对于很多地方需要 text 都是 ‘确认’ 的情况，我们便省去了逐个传值的操作。而对于 text 不是 ‘确认’ 的地方，我们再传值，就可以覆盖掉默认值，使组件传值正常使用。</p>
 
                 
 
@@ -261,13 +278,9 @@
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2020/05/13/React-Native-Animated/" data-toggle="tooltip" data-placement="top" title="React Native Animated">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2017/03/18/hexo-theme-beantech/" data-toggle="tooltip" data-placement="top" title="[Hexo] Theme BeanTech">Next Post &rarr;</a>
+                            <a href="/2020/05/24/React Native 构建的仿豆瓣应用/" data-toggle="tooltip" data-placement="top" title="React Native 构建的仿豆瓣应用">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -297,7 +310,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">使用内置对象 navigator:</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">使用逆地址解析服务将经纬度解析成地址信息</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">对已获取信息处理</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">PropTypes 类型验证</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">默认 prop 值</span></a></li></ol>
         
         </div>
       </aside>
@@ -318,6 +331,8 @@
                     <div class="tags">
                        
                           <a class="tag" href="/tags/#React Native" title="React Native">React Native</a>
+                        
+                          <a class="tag" href="/tags/#React" title="React">React</a>
                         
                     </div>
                 </section>
@@ -352,8 +367,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "your-disqus-ID";
-    var disqus_identifier = "http://yoursite-url/2020/05/08/React-Native-定位获取位置信息/";
-    var disqus_url = "http://yoursite-url/2020/05/08/React-Native-定位获取位置信息/";
+    var disqus_identifier = "http://yoursite-url/2020/05/27/proptypes类型检查/";
+    var disqus_url = "http://yoursite-url/2020/05/27/proptypes类型检查/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

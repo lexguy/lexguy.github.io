@@ -8,8 +8,16 @@
     </url>
 
     <url>
-        <loc>http://yoursite-url/2020/05/23/React%20Native%20%E6%9E%84%E5%BB%BA%E7%9A%84%E4%BB%BF%E8%B1%86%E7%93%A3%E5%BA%94%E7%94%A8/</loc>
-        <lastmod>2020-05-24T15:49:04.746Z</lastmod>
+        <loc>http://yoursite-url/2020/05/27/proptypes%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%9F%A5/</loc>
+        <lastmod>2020-05-27T15:39:06.157Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://yoursite-url/2020/05/24/React%20Native%20%E6%9E%84%E5%BB%BA%E7%9A%84%E4%BB%BF%E8%B1%86%E7%93%A3%E5%BA%94%E7%94%A8/</loc>
+        <lastmod>2020-05-24T15:53:16.088Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
