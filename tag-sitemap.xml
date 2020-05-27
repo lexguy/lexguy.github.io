@@ -3,6 +3,13 @@
 
 
     <url>
+        <loc>http://yoursite-url/tags/ES6-%E5%A4%A7%E4%BD%9C%E6%88%98/</loc>
+        <lastmod>2020-05-27T16:28:39.925Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://yoursite-url/tags/React/</loc>
         <lastmod>2020-05-27T15:39:06.157Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -26,20 +33,6 @@
     <url>
         <loc>http://yoursite-url/tags/%E5%8A%A8%E7%94%BB/</loc>
         <lastmod>2020-05-23T04:52:37.952Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://yoursite-url/tags/Blog/</loc>
-        <lastmod>2020-05-06T16:57:50.966Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://yoursite-url/tags/Hexo/</loc>
-        <lastmod>2020-05-06T16:57:50.966Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

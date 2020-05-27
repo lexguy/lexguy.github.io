@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content>
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          ES6 Symbol 认识和基本使用 - Xuwei&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://yoursite-url/2020/05/28/ES6-Symbol-认识和基本使用/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!--
+ * @Author: xuwei
+ * @Date: 2020-05-07 00:57:50
+ * @LastEditTime: 2020-05-10 21:41:15
+ * @LastEditors: xuwei
+ * @Description: 
+ -->
+<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+  header.intro-header{
+      
+          background-image: url('null')
+          /*post*/
+      
+  }
+  
+</style>
+
+<header class="intro-header">
+  <!-- Signature -->
+  <div id="signature">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          
+          <div class="post-heading">
+            <div class="tags">
+              
+              <a
+                class="tag"
+                href="/tags/#ES6 大作战"
+                title="ES6 大作战"
+                >ES6 大作战</a
+              >
+              
+            </div>
+            <h1>ES6 Symbol 认识和基本使用</h1>
+            <h2 class="subheading"></h2>
+            <span class="meta">
+              Posted by xuwei on 2020-05-28
+            </span>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header page-scroll">
+      <button type="button" class="navbar-toggle">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <!-- 标题不再是点击回到主页，而是一个文本 -->
+      <span class="navbar-brand" href="/"
+        >Xuwei 的个人空间</span
+      >
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+    <div id="huxblog_navbar">
+      <div class="navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <!--            <a href="/">Home</a>-->
+            <a href="/">主页</a>
+          </li>
+
+             
+          <li>
+            <a
+              href="/about/"
+              >关于
+            </a>
+          </li>
+            
+          <li>
+            <a
+              href="/archive/"
+              >时间轴
+            </a>
+          </li>
+            
+          <li>
+            <a
+              href="/tags/"
+              >标签
+            </a>
+          </li>
+           
+        </ul>
+      </div>
+    </div>
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container -->
+</nav>
+<script>
+  // Drop Bootstarp low-performance Navbar
+  // Use customize navbar with high-quality material design animation
+  // in high-perf jank-free CSS3 implementation
+  var $body = document.body;
+  var $toggle = document.querySelector(".navbar-toggle");
+  var $navbar = document.querySelector("#huxblog_navbar");
+  var $collapse = document.querySelector(".navbar-collapse");
+
+  $toggle.addEventListener("click", handleMagic);
+  function handleMagic(e) {
+    if ($navbar.className.indexOf("in") > 0) {
+      // CLOSE
+      $navbar.className = " ";
+      // wait until animation end.
+      setTimeout(function () {
+        // prevent frequently toggle
+        if ($navbar.className.indexOf("in") < 0) {
+          $collapse.style.height = "0px";
+        }
+      }, 400);
+    } else {
+      // OPEN
+      $collapse.style.height = "auto";
+      $navbar.className += " in";
+    }
+  }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>Symbol 是 ES6 引入的新的原始数据类型，也是 JavaScript 语言的除了 undefined , null , boolean , String , Number 和 Object 之外的第七种数据类型。创建一个 Symbol 变量，使用 typeof 来获取类型的时候，会得到 symbol 。 区别于其他类型，Symbol 用于表示独一无二的值。</p>
+<h4><span id="通过-symbol-创建-symbol-类型变量">通过 Symbol() 创建 symbol 类型变量</span></h4>
+<p>Symbol 是一个函数，返回的是一个原始类型的值，并不是对象，一些特性接近于字符串，我们需要 symbol 类型的值就要通过调用 Symbol 函数来产生。调用该函数可以传值，可以传入数值，布尔，字符串，对象等类型的值，但是作用也只能是作为一个描述，用于调试输出时区分这些 Symbol 变量，因为不管你是否传值，创建的 Symbol 变量都不会相等，并不能用做比较等其他用途。值得一提的是，如果创建 Symbol 值时传入的是对象，那么会先调用对象的 toString 方法得到一个字符串，再将结果字符串作为参数生成一个 Symbol 值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  a: <span class="string">"a"</span>,</span><br><span class="line">  b: <span class="string">"b"</span>,</span><br><span class="line">  toString() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"xx"</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.info(<span class="built_in">Symbol</span>(obj)); <span class="comment">// Symbol(xx)</span></span><br></pre></td></tr></table></figure>
+<p>如果传入的对象没有定义 toString 方法，那么上面的结果便是：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Symbol</span>([object <span class="built_in">Object</span>])</span><br></pre></td></tr></table></figure>
+<h4><span id="symbol-值不等于除了自身外的任何值">Symbol 值不等于除了自身外的任何值</span></h4>
+<p>Symbol 值是唯一的，这是 Symbol 变量最大的特点。 通过同样的方式创建的两个变量，即使参数也一样，这两个 Symbol 变量也是不相等的（ == 和严格 === 都是 false ）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> x = <span class="built_in">Symbol</span>();</span><br><span class="line"><span class="keyword">let</span> y = <span class="built_in">Symbol</span>();</span><br><span class="line"><span class="built_in">console</span>.info(<span class="string">"x"</span>, <span class="keyword">typeof</span> x); <span class="comment">// symbol</span></span><br><span class="line"><span class="built_in">console</span>.info(x === x); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.info(x === y); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<p>依靠这个特点，我们就可以向一个不明内部结构的「黑盒」对象中添加属性而无需担心属性冲突，或是覆盖掉它的原有属性。这正是 Symbol 值的用处。</p>
+<h4><span id="symbol-值不能直接计算但可转换">Symbol 值不能直接计算但可转换</span></h4>
+<p>Symbol 值并不能直接用于和数值型以及字符串的变量进行计算。否则会报出 TypeError, 长这样：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sum = <span class="built_in">Symbol</span>(<span class="string">"a"</span>) + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// TypeError: Cannot convert a Symbol value to a number</span></span><br></pre></td></tr></table></figure>
+<p>Symbol 值不能计算，但是可以通过 String() , toString , Boolean() 转换成字符串和布尔值。不能通过 Number() 转为数值型。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> s1 = <span class="built_in">Symbol</span>(<span class="string">"xx"</span>);</span><br><span class="line"><span class="keyword">const</span> b = <span class="string">"hi "</span> + s1.toString();</span><br><span class="line"><span class="keyword">const</span> c = <span class="string">"hi "</span> + <span class="built_in">String</span>(s1);</span><br><span class="line"><span class="built_in">console</span>.info(b); <span class="comment">// hi Symbol(xx)</span></span><br><span class="line"><span class="built_in">console</span>.info(c); <span class="comment">// hi Symbol(xx)</span></span><br></pre></td></tr></table></figure>
+<p>可以直接作为用于条件判断，也可以通过 Boolean() 转为布尔值:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="built_in">Symbol</span>();</span><br><span class="line"><span class="keyword">if</span> (a) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"a true"</span>); <span class="comment">// 得到输出  a true</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.info(<span class="built_in">Boolean</span>(a)); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h4><span id="symbolprototypedescription">Symbol.prototype.description</span></h4>
+<p>Symbol 值在创建时是可以添加描述的，传入的参数便是 Symbol.prototype.description。我们可以通过 String() 以及 toString 获取 Sym bol 值对应的字符串，但是结果都是 “Symbol(xx)” 这样的值（其中的 xx 是描述），如果需要直接拿到描述内容 xx ，就不是那么方便。</p>
+<blockquote>
+<p>根据<a href="https://es6.ruanyifeng.com/" target="_blank" rel="noopener">阮一峰老师的文章</a>：</p>
+<p>ES2019 中的提供了一个方法可以直接获取到 Symbol 变量的描述<br>
+<br><br>
+const sym = Symbol(“foo”);<br>
+sym.description; // “foo”</p>
+</blockquote>
+<h4><span id="symbol-值应用">Symbol 值应用</span></h4>
+<h5><span id="作为属性名">作为属性名</span></h5>
+<p>使用 Symbol 变量作为对象的属性可以避免该属性被覆盖或改写。使用 Symbol 类型的值作为属性名有三种写法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> symValue = <span class="built_in">Symbol</span>(<span class="string">"a"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过 [] 添加 symbol 值属性</span></span><br><span class="line"><span class="keyword">let</span> obj1 = &#123;&#125;;</span><br><span class="line">obj[symValue] = <span class="string">"Hi"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义含有该 属性 的对象</span></span><br><span class="line"><span class="keyword">let</span> obj2 = &#123;</span><br><span class="line">  [symValue]: <span class="string">"Hi"</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过 defineProperty 添加该 symbol 属性</span></span><br><span class="line"><span class="keyword">let</span> obj3 = &#123;&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj3, symValue, &#123; <span class="attr">value</span>: <span class="string">"Hi"</span> &#125;);</span><br></pre></td></tr></table></figure>
+<p>​ 第一种写法中先创建对象，再添加 Symbol 值属性名的时候，只能使用 <strong>[ ]</strong> 来添加，并不能像添加其他属性名一样用点运算符 (如果试图用点运算符添加 Symbol 类型属性名，会和普通属性一样，是一个字符串类型)。使用 Symbol 值作为属性名的时候，该属性是公开的。</p>
+<h5><span id="定义多个不相等的变量">定义多个不相等的变量</span></h5>
+<p>实际开发中经常会有需要定义多个变量的需要，比如一些常量字符串，是极不推荐直接写在代码中的，这时就需要提取出来单独定义再使用。 switch case 中的字符串匹配就是这样一个场景，只需要匹配相等，具体是什么值并不重要，那么这些变量就可以使用 Symbol 值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> type1 = <span class="built_in">Symbol</span>();</span><br><span class="line"><span class="keyword">const</span> type2 = <span class="built_in">Symbol</span>();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deal</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span> (data) &#123;</span><br><span class="line">    <span class="keyword">case</span> type1:</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> type2:</span><br><span class="line">      <span class="comment">//....</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4><span id="symbol-变量相关特性">Symbol 变量相关特性</span></h4>
+<h5><span id="symbol-值的属性名难以被遍历">Symbol 值的属性名难以被遍历</span></h5>
+<p>通常遍历对象，会有 for…in , for…of 循环 (for of 需要对象实现 Iterator )， Object.keys() ， Object.getOwnPropertyNames() 这些方法， 但是，这些方法都不能获取到对象的 Symbol 值的属性名。那是不是在外部就没有办法获取 Symbol 值的属性名了呢？</p>
+<p>办法当然还是有的，**Object.getOwnPropertySymbols() ** 就可以返回对象中的所有类型为 Symbol 值的属性名，得到一个元素类型为 symbol 的数组。除此之外，还有一个方法 <strong>Reflect.ownKeys()</strong> 可以返回包含 Symbol 属性名的所有属性名。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  a: <span class="number">1</span>,</span><br><span class="line">  [<span class="built_in">Symbol</span>()]: <span class="number">2</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.info(<span class="string">"obj"</span>, <span class="built_in">Object</span>.getOwnPropertyNames(obj)); <span class="comment">//  [ 'a' ]</span></span><br><span class="line"><span class="built_in">console</span>.info(<span class="string">"obj"</span>, <span class="built_in">Object</span>.getOwnPropertySymbols(obj)); <span class="comment">//  [ Symbol() ]</span></span><br><span class="line"><span class="built_in">console</span>.info(<span class="string">"obj"</span>, <span class="built_in">Reflect</span>.ownKeys(obj)); <span class="comment">//  [ 'a', Symbol() ]</span></span><br></pre></td></tr></table></figure>
+<h5><span id="两个-symbol-变量也可以相等">两个 Symbol 变量也可以“相等”</span></h5>
+<p>Symbol 类型的变量除了自身，不会等于其他任何变量，但是依然存在特例。</p>
+<p>区别于通过 Symbol() 函数创建 Symbol 变量，我们还可以通过 <strong>Symbol.for()</strong> 方法来创建 Symbol 变量，该方法可以传入参数，而且在传入参数相同的时候，创建的 Symbol 也是相等的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="built_in">Symbol</span>.for(<span class="string">"aa"</span>);</span><br><span class="line"><span class="keyword">const</span> b = <span class="built_in">Symbol</span>.for(<span class="string">"aa"</span>);</span><br><span class="line"><span class="built_in">console</span>.info(<span class="string">"a===b"</span>, a === b); <span class="comment">// a===b true</span></span><br><span class="line"><span class="built_in">console</span>.info(<span class="string">"type"</span>, <span class="keyword">typeof</span> a); <span class="comment">// type symbol</span></span><br></pre></td></tr></table></figure>
+<p>Symbol 类型的 a 和 b , 通过 === 运算可以得到 true 。 这是为什么呢？</p>
+<p>因为 Symbol.for() 其实是带有类似重用机制的，具体的说，就是通过 Symbol.for() 创建变量时，传入的参数 ( 假设为 x ) 会作为 Symbol 变量的 key ，然后到全局中搜索，是否已经有相同 key 的 Symbol 变量，如果存在，则直接返回这个 Symbol 变量。如果没有，才会创建一个 key 为传入参数 x 的 Symbol 变量 ，并将这个变量写到全局，供下次创建时被搜索。</p>
+<p>通过 Symbol.for() 创建的 Symbol 变量，传入的参数是否相等决定得到的 Symbol 变量是否相等。</p>
+<p>分析上面的代码，通过 Symbol.for(“aa”) 创建变量并赋值给 a 的时候，会在全局检索是否有 key 为 ‘aa’ 的 Symbol 变量，这里显然是没有的，所有得到一个全新的 Symbol 变量，其带有的 key 是 ‘aa’ ，并且变量被写到全局。然后执行 <em>const b = Symbol.for(“aa”);</em> 时，Symbol.for(‘aa’) 会找到之前的 key 为 ‘aa’ 的 Symbol 变量，并赋值给 b , 所以，a 和 b 实际上是同一个 Symbol 变量。 此时 Symbol.for(“aa”) 不管执行多少次，得到的都是同一个 Symbol 变量。</p>
+<p>既然通过 Symbol.for() 创建的 Symbol 变量的 key 这么重要，那我们怎么获取到这个 key 呢，那就要 <strong>Symbol.keyFor()</strong> 方法了，该函数会返回一个已经写到全局的 Symbol 变量的 key 值。这样获取到 Symbol 变量的 key, 就可以创建一个和原 Symbol 变量相等的变量了。</p>
+<h5><span id="可建立模块对象不可更改的单例模式">可建立模块对象不可更改的单例模式</span></h5>
+<p>如果我们需要在每次 require 模块文件的时候，得到的都是同一个实例对象，也就是单例模式，那我们可以通过将该对象作为顶层对象 global 的一个属性来，并通过导出 export global.属性 来实现。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// person.js</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = <span class="string">"Lee"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!global.lee) &#123;</span><br><span class="line">  global.lee = <span class="keyword">new</span> Person();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = global.lee;</span><br></pre></td></tr></table></figure>
+<p>如此，每次通过 <em>require(’./person.js’);</em> 的时候，得到的都是同一个 Person 的实例对象。</p>
+<p>这个实例对象是挂在 global 的一个属性上的，是全局都可以被修改的，也就是说在任何地方通过 <em>global.lee={};</em> 都可以将这个单例对象修改为空对象，这是很危险的。</p>
+<p>为了保证该实例对象不被覆盖或修改，可以将上面的 <em>lee</em> 变量改成 Symbol 类型，这样实例对象在 global 中的对应的属性名就是唯一的，外部获取不到这个属性名的，也就无法改写。如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> symlee = <span class="built_in">Symbol</span>();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = <span class="string">"Lee"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!global[symlee]) &#123;</span><br><span class="line">  global[symlee] = <span class="keyword">new</span> Person();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = global[symlee];</span><br></pre></td></tr></table></figure>
+<p>但是，这样需要避免重复多次执行创建 <em>symlee</em> 的语句，否则得到的 <em>symlee</em> 变量不一样，获取到的对象也就不是同一个实例了，破坏了单例。</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2020/05/27/proptypes类型检查/" data-toggle="tooltip" data-placement="top" title="React proptypes 类型检查">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">通过 Symbol() 创建 symbol 类型变量</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Symbol 值不等于除了自身外的任何值</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Symbol 值不能直接计算但可转换</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Symbol.prototype.description</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">Symbol 值应用</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">作为属性名</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">5.2.</span> <span class="toc-nav-text">定义多个不相等的变量</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">Symbol 变量相关特性</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">6.1.</span> <span class="toc-nav-text">Symbol 值的属性名难以被遍历</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">6.2.</span> <span class="toc-nav-text">两个 Symbol 变量也可以“相等”</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">6.3.</span> <span class="toc-nav-text">可建立模块对象不可更改的单例模式</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#ES6 大作战" title="ES6 大作战">ES6 大作战</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">It Helps SEO</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "your-disqus-ID";
+    var disqus_identifier = "http://yoursite-url/2020/05/28/ES6-Symbol-认识和基本使用/";
+    var disqus_url = "http://yoursite-url/2020/05/28/ES6-Symbol-认识和基本使用/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center">
+               
+          <!-- 暂时不在底部显示GitHub -->
+          <!-- <li>
+            <a
+              target="_blank"
+              href="https://github.com/lexguy"
+            >
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li> -->
+           
+        </ul>
+        <p class="copyright text-muted">
+          <span style="text-decoration: underline;">
+            Copyright &copy; xuwei 2020
+          </span>
+          <!-- <span style="margin-left: 30px; font-style: italic;">
+            starkcoder@sina.com</span
+          > -->
+          <br />
+
+          <!-- Theme by <a href="http://huangxuan.me">Hux</a> -->
+          <!-- <span style="display: inline-block; margin: 0 5px;">
+            <i class="fa fa-heart"></i>
+          </span> -->
+          <!-- re-Ported by <a href="http://beantech.org">BeanTech</a> | -->
+          <!-- <iframe
+            style="margin-left: 2px; margin-bottom: -5px;"
+            frameborder="0"
+            scrolling="0"
+            width="91px"
+            height="20px"
+            src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true"
+          >
+          </iframe> -->
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+<!-- async load function -->
+<script>
+  function async(u, c) {
+    var d = document,
+      t = "script",
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+      o.addEventListener(
+        "load",
+        function (e) {
+          c(null, e);
+        },
+        false
+      );
+    }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+<!-- jquery.tagcloud.js -->
+<script>
+  // only load tagcloud.js in tag.html
+  if ($("#tag_cloud").length !== 0) {
+    async(
+      "http://yoursite-url/js/jquery.tagcloud.js",
+      function () {
+        $.fn.tagcloud.defaults = {
+          //size: {start: 1, end: 1, unit: 'em'},
+          color: { start: "#bbbbee", end: "#0085a1" },
+        };
+        $("#tag_cloud a").tagcloud();
+      }
+    );
+  }
+</script>
+
+<!--fastClick.js -->
+<script>
+  async(
+    "https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js",
+    function () {
+      var $nav = document.querySelector("nav");
+      if ($nav) FastClick.attach($nav);
+    }
+  );
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+  // dynamic User by Hux
+  var _gaId = "UA-XXXXXXXX-X";
+  var _gaDomain = "yoursite";
+
+  // Originial
+  (function (i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    (i[r] =
+      i[r] ||
+      function () {
+        (i[r].q = i[r].q || []).push(arguments);
+      }),
+      (i[r].l = 1 * new Date());
+    (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(
+    window,
+    document,
+    "script",
+    "//www.google-analytics.com/analytics.js",
+    "ga"
+  );
+
+  ga("create", _gaId, _gaDomain);
+  ga("send", "pageview");
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://yoursite-url/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
