@@ -4,8 +4,8 @@
   overflow: auto;
   margin: 15px 0;
   padding: 5px;
-  font-size: 13px;
-  color: #444;
+  font-size: 14px;
+  color: #222;
   background: #f8f8f8;
   line-height: $line-height-code-block;
 }
@@ -23,7 +23,7 @@
 }*/
 .post-container pre code {
   padding: 0;
-  color: #444;
+  color: #222;
   background: none;
   text-shadow: none;
 }
@@ -44,7 +44,7 @@
 .post-container .highlight figcaption {
   zoom: 1;
   font-size: 1em;
-  color: #444;
+  color: #222;
   line-height: 1em;
   margin-bottom: 1em;
 }
@@ -58,10 +58,10 @@
 }
 .post-container .highlight figcaption a {
   float: right;
-  color: #444;
+  color: #222;
 }
 .post-container .highlight figcaption a:hover {
-  border-bottom-color: #444;
+  border-bottom-color: #222;
 }
 .post-container .highlight .gutter pre {
   color: #666;
@@ -101,7 +101,7 @@
 .post-container pre .params,
 .post-container pre .constant,
 .post-container pre .command {
-  color: #dc636e;
+  color: #4f94cd;
 }
 .post-container pre .ruby .class .title,
 .post-container pre .css .rules .attribute,
@@ -118,7 +118,7 @@
 }
 .post-container pre .title,
 .post-container pre .css .hexcolor {
-  color: #008080;
+  color: #cd661d;
 }
 .post-container pre .function,
 .post-container pre .python .decorator,
@@ -128,7 +128,7 @@
 .post-container pre .perl .sub,
 .post-container pre .javascript .title,
 .post-container pre .coffeescript .title {
-  color: #87cefa;
+  color: #525252;
 }
 .post-container pre .keyword,
 .post-container pre .javascript .function {

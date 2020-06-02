@@ -137,15 +137,15 @@
              
           <li>
             <a
-              href="/about/"
-              >关于
+              href="/archive/"
+              >时间轴
             </a>
           </li>
             
           <li>
             <a
-              href="/archive/"
-              >时间轴
+              href="/about/"
+              >关于
             </a>
           </li>
             
@@ -212,6 +212,34 @@
                 
 <!-- Main Content -->
 
+
+<div class="post-preview">
+  <a href="/2020/06/02/React-memo-优化函数式组件渲染/">
+    <h2 class="post-title">
+      React.memo 优化函数式组件渲染
+    </h2>
+    <h3 class="post-subtitle">
+      
+    </h3>
+    <div class="post-content-preview">
+      记录一个由 setState 导致动画“抖动”，引发的对函数式组件重新渲染的思考和处理。
+setState 引发的动画“抖动”
+今天写一个不规则跳动的动画组件用于录入音频时展示。写完测试的时候，本来动画表现正常，但是当点击一个其他按钮的时候，动画却很不自然的抖动了一下，每次点击都会产生抖动，如下：
+
+多次测试发现，抖动之后的动画都是只在点击按钮的时候发生，而且是带有 setState 操作的......
+    </div>
+  </a>
+  
+  <p class="post-meta" style="margin: 10px 0;">
+<!--    Posted by xuwei on-->
+    2020-06-02
+  </p>
+  <div class="tags">
+    
+  </div>
+  
+</div>
+<hr />
 
 <div class="post-preview">
   <a href="/2020/05/28/ES6-Symbol-认识和基本使用/">
@@ -485,11 +513,11 @@ Animated.Image
         
             <a href="/tags/#React Native" title="React Native" rel="5">React Native</a>
         
-            <a href="/tags/#动画" title="动画" rel="2">动画</a>
+            <a href="/tags/#应用" title="应用" rel="1">应用</a>
         
             <a href="/tags/#ES6 大作战" title="ES6 大作战" rel="1">ES6 大作战</a>
         
-            <a href="/tags/#应用" title="应用" rel="1">应用</a>
+            <a href="/tags/#动画" title="动画" rel="2">动画</a>
         
             <a href="/tags/#React" title="React" rel="1">React</a>
         
@@ -499,11 +527,11 @@ Animated.Image
 <!--        -->
 <!--            <a href="#React Native" title="React Native" rel="5">React Native</a>-->
 <!--        -->
-<!--            <a href="#动画" title="动画" rel="2">动画</a>-->
+<!--            <a href="#应用" title="应用" rel="1">应用</a>-->
 <!--        -->
 <!--            <a href="#ES6 大作战" title="ES6 大作战" rel="1">ES6 大作战</a>-->
 <!--        -->
-<!--            <a href="#应用" title="应用" rel="1">应用</a>-->
+<!--            <a href="#动画" title="动画" rel="2">动画</a>-->
 <!--        -->
 <!--            <a href="#React" title="React" rel="1">React</a>-->
 <!--        -->
@@ -523,6 +551,10 @@ Animated.Image
     <ul>
       
         <li>
+          <a href="/2020/06/02/React-memo-优化函数式组件渲染/">React.memo 优化函数式组件渲染</a>
+        </li>
+      
+        <li>
           <a href="/2020/05/28/ES6-Symbol-认识和基本使用/">ES6 Symbol 认识和基本使用</a>
         </li>
       
@@ -536,10 +568,6 @@ Animated.Image
       
         <li>
           <a href="/2020/05/23/LayoutAnimation_setNativeProps/">React Native LayoutAnimatd 和 setNativeProps</a>
-        </li>
-      
-        <li>
-          <a href="/2020/05/13/React-Native-Animated/">React Native Animated</a>
         </li>
       
     </ul>
