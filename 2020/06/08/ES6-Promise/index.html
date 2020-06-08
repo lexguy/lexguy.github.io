@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          Xuwei&#39;s blog
+          ES6 Promise - Xuwei&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="http://yoursite-url/404.html">
+    <link rel="canonical" href="http://yoursite-url/2020/06/08/ES6-Promise/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -76,8 +76,8 @@
 <style type="text/css">
   header.intro-header{
       
-          background-image: url('/img/404-bg.jpg')
-          /*page*/
+          background-image: url('null')
+          /*post*/
       
   }
   
@@ -90,10 +90,15 @@
       <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
           
-          <div class="site-heading">
-            <!--                       <h1>Xuwei 的个人空间</h1>-->
-            <!--<hr class="small">-->
-            <!--                        <span class="subheading">你来到了没有知识的荒原 :(</span>-->
+          <div class="post-heading">
+            <div class="tags">
+              
+            </div>
+            <h1>ES6 Promise</h1>
+            <h2 class="subheading"></h2>
+            <span class="meta">
+              Posted by xuwei on 2020-06-08
+            </span>
           </div>
           
         </div>
@@ -194,25 +199,186 @@
 
 
     <!-- Main Content -->
-    
-<!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/404-bg.jpg')">
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>404</h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading">你来到了没有知识的荒原 :(</span>
-                </div>
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>ES6 Promise</p>
+<blockquote>
+<p>这里仅分享 ES6 中的 Promise 的特性和用法，只回答<code>是什么</code>和<code>怎么用</code>的问题。 如果需要深入了解原理，请参考另外一篇。</p>
+</blockquote>
+<p>Promise 是什么</p>
+<p>以前，对于 JavaScript 中传统的异步编程，一般会有两种解决方案：回调函数，发送事件。如果流程和数据传递比较复杂，回调可以说是相当冗长繁复了。而 Promise ，就是为了解决异步编程的问题，较之于以前的方案更加强大优雅。</p>
+<p>本质上来说，Promise 是一个对象，持有异步操作的状态，用来表示异步操作的不同结果。遵循两个原则：</p>
+<ul>
+<li>对象只有（如下）三种状态，状态由操作的结果决定，且没有其他方式更改
+<ul>
+<li>pending 进行中</li>
+<li>fulfilled 已完成</li>
+<li>rejected 已失败</li>
+</ul>
+</li>
+<li>状态改变只有两种情况：
+<ul>
+<li>从 pending 变为 fulfilled</li>
+<li>从 pending 变为 rejected</li>
+</ul>
+</li>
+</ul>
+<p>可以简单理解为 Promise 中的异步操作，只能从进行到结束，而且一旦结束，结果就不会再变。不能暂停，不能取消，也不能改变已经产生的结果。</p>
+<p>区别于事件监听机制的错过事件后就得不到结果的特性，如果 Promise 异步操作已经结束，状态已经改变，那在此之后的任何时候依然是可以通过对 Promise 添加回调函数获取到这个结果的。</p>
+<p>如果 Promise 异步操作中，状态还处于 pending 未改变时，外部对 Promise 的具体阶段是不可见的，也不能手动取消该该异步操作。</p>
+<p>Pormise 怎么用</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2020/06/02/React-memo-优化函数式组件渲染/" data-toggle="tooltip" data-placement="top" title="React.memo 优化函数式组件渲染">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+ 
+<aside id="sidebar">
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+    <ol class="nav">
+      none
+    </ol>
+    
+  </div>
+</aside>
+ 
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">It Helps SEO</a></li>
+                    
+                </ul>
+                
             </div>
         </div>
     </div>
-</header>
+</article>
 
-<script>
-    document.body.classList.add('page-fullscreen');
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "your-disqus-ID";
+    var disqus_identifier = "http://yoursite-url/2020/06/08/ES6-Promise/";
+    var disqus_url = "http://yoursite-url/2020/06/08/ES6-Promise/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
 </script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
 
 
     <!-- Footer -->
