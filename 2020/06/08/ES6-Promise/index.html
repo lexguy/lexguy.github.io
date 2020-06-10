@@ -93,6 +93,13 @@
           <div class="post-heading">
             <div class="tags">
               
+              <a
+                class="tag"
+                href="/tags/#ES6 大作战"
+                title="ES6 大作战"
+                >ES6 大作战</a
+              >
+              
             </div>
             <h1>ES6 Promise</h1>
             <h2 class="subheading"></h2>
@@ -142,15 +149,15 @@
              
           <li>
             <a
-              href="/archive/"
-              >时间轴
+              href="/about/"
+              >关于
             </a>
           </li>
             
           <li>
             <a
-              href="/about/"
-              >关于
+              href="/archive/"
+              >时间轴
             </a>
           </li>
             
@@ -214,30 +221,137 @@
 
                 <p>ES6 Promise</p>
 <blockquote>
-<p>这里仅分享 ES6 中的 Promise 的特性和用法，只回答<code>是什么</code>和<code>怎么用</code>的问题。 如果需要深入了解原理，请参考另外一篇。</p>
+<p>这里仅分享 ES6 中的 Promise 的特性和用法，只浅显回答 <code>是什么</code>和 <code>怎么用</code>的问题。 如果需要深入了解原理，请参考另外一篇。</p>
 </blockquote>
-<p>Promise 是什么</p>
+<h3><span id="promise-是什么">Promise 是什么</span></h3>
 <p>以前，对于 JavaScript 中传统的异步编程，一般会有两种解决方案：回调函数，发送事件。如果流程和数据传递比较复杂，回调可以说是相当冗长繁复了。而 Promise ，就是为了解决异步编程的问题，较之于以前的方案更加强大优雅。</p>
 <p>本质上来说，Promise 是一个对象，持有异步操作的状态，用来表示异步操作的不同结果。遵循两个原则：</p>
 <ul>
-<li>对象只有（如下）三种状态，状态由操作的结果决定，且没有其他方式更改
+<li>
+<p>对象只有（如下）三种状态，状态由操作的结果决定，且没有其他方式更改</p>
+<br>
 <ul>
-<li>pending 进行中</li>
-<li>fulfilled 已完成</li>
-<li>rejected 已失败</li>
+<li><strong><em>pending 进行中</em></strong></li>
+<li><strong><em>fulfilled 已完成</em></strong></li>
+<li><strong><em>rejected 已失败</em></strong></li>
 </ul>
+<br>
 </li>
-<li>状态改变只有两种情况：
+<li>
+<p>状态改变只有两种情况：</p>
+<br>
 <ul>
-<li>从 pending 变为 fulfilled</li>
-<li>从 pending 变为 rejected</li>
+<li>
+<p><strong><em>从 pending 变为 fulfilled</em></strong></p>
+</li>
+<li>
+<p><strong><em>从 pending 变为 rejected</em></strong></p>
+<br>
+</li>
 </ul>
 </li>
 </ul>
 <p>可以简单理解为 Promise 中的异步操作，只能从进行到结束，而且一旦结束，结果就不会再变。不能暂停，不能取消，也不能改变已经产生的结果。</p>
 <p>区别于事件监听机制的错过事件后就得不到结果的特性，如果 Promise 异步操作已经结束，状态已经改变，那在此之后的任何时候依然是可以通过对 Promise 添加回调函数获取到这个结果的。</p>
 <p>如果 Promise 异步操作中，状态还处于 pending 未改变时，外部对 Promise 的具体阶段是不可见的，也不能手动取消该该异步操作。</p>
-<p>Pormise 怎么用</p>
+<h3><span id="promise-怎么用">Promise 怎么用</span></h3>
+<p>知道了 Promise 会有三种状态，处理异步操作，那具体咋用呢？</p>
+<h4><span id="创建-promise-对象进行异步操作">创建 Promise 对象进行异步操作</span></h4>
+<p>Promise 也是一个构造函数，需要使用 new 关键字来创建实例，创建时接受一个函数，且该函数有两个函数类型的参数：</p>
+<ul>
+<li><strong>resolve</strong></li>
+<li><strong>reject</strong></li>
+</ul>
+<p>所以创建 Promise 的操作就是：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;...&#125;)</span><br></pre></td></tr></table></figure>
+<p>resolve 和 reject 两个函数参数决定了当前 Promise 的状态改变以及异步操作的结果如何处理，他们都可以将异步操作的结果传递出去。</p>
+<h4><span id="resolve-reject-传递异步操作结果">resolve reject 传递异步操作结果</span></h4>
+<p>通常来说，resolve 用于传递异步操作成功的结果，而 reject 用于传递失败时候的结果或者出现的异常。当调用 resolve 传递异步操作结果的时候，Promise 的状态就从 pending (进行中) 改变成了 fulfilled (已完成)，对应的，调用 reject 传递结果时，Promise 的状态从 pending (进行中) 变成了 resolved (已失败)。</p>
+<blockquote>
+<p>不过这也只是约定俗成，你仍然可以通过 reject 传递成功的结果而 resolve 传递失败的结果，但是这样会影响到正常取值，错误及异常处理的正常流程</p>
+</blockquote>
+<p>举个栗子 🌰：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//用 getListData() 表示请求网络数据，返回值就是请求结果。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(resolve, (reject) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> res = getListData();</span><br><span class="line">  <span class="comment">//根据状态码判断成功失败，调用 resolve 和 reject</span></span><br><span class="line">  <span class="keyword">if</span> (res &amp;&amp; res.status === <span class="number">200</span>) &#123;</span><br><span class="line">    resolve(res);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    reject(res);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>根据请求的结果判断是成功还是失败，调用 resolve 或 reject 函数，对应当前的 Promise 对象的状态也会改变。但是，此时网络请求（异步操作）的结果在 Promise 内部，如何获取到并进行下一步的操作呢？</p>
+<h4><span id="then-方法指定回调">then() 方法指定回调</span></h4>
+<p>Promise 对象实例生成，执行对应的异步操作获取到结果后，可以用 then 方法指定不同状态的回调。</p>
+<p><strong>then 方法接受两个回调函数作为参数，第一个回调函数处理 resolved 状态，在 Promise 状态变为 resolved 时调用，并接受 resolve 函数传递的值为参数。第二个函数用于处理 rejected 状态，是可选的，在 Promise 对象变为 rejected 时调用，同样可以接受 reject 函数传递的值为参数</strong></p>
+<p>举个栗子 🌰：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个 Promise</span></span><br><span class="line"><span class="comment">// 指定时间后， reject 传递 “exception”</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">timeout</span>(<span class="params">ms</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    setTimeout(reject, ms, <span class="string">"exception"</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">timeout(<span class="number">1000</span>).then(</span><br><span class="line">  (value) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">"value"</span>, value);</span><br><span class="line">  &#125;,</span><br><span class="line">  (err) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">"err"</span>, err);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">err exception</span><br></pre></td></tr></table></figure>
+<p>Promise 中 调用 reject，触发了 then 方法的第二个回调。 如果 setTimeout 中指定的函数是 resolve ，那么运行结果是：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">value exception</span><br></pre></td></tr></table></figure>
+<p>就会触发第一个回调。他们都可以获取到对应 Promise 中调用 resolve reject 时传入的值。</p>
+<p>到目前我们已经可以将一个异步操作写成如下的形式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 异步操作是 getListdata</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> data = getListdata();</span><br><span class="line">  <span class="keyword">if</span> (data) &#123;   <span class="comment">// 定义异步操作结果成功或失败</span></span><br><span class="line">    resolve(data);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    reject(data);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;).then(</span><br><span class="line">  (res) =&gt; &#123;...&#125;,  <span class="comment">// 对成功结果的处理</span></span><br><span class="line">  (err) =&gt;  &#123;...&#125;  <span class="comment">// 对失败结果的处理</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>这里已经可以满足一部分普通的异步操作流程。不过对于常规使用，还有需要注意的地方。</p>
+<h4><span id="两个注意的点">两个注意的点</span></h4>
+<h5><span id="promise-创建时立即执行">Promise 创建时立即执行</span></h5>
+<p>对于如下的代码，输出顺序是怎样的呢？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.info(<span class="string">"start"</span>);</span><br><span class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">"time"</span>);</span><br><span class="line">    resolve(<span class="string">"data"</span>);</span><br><span class="line">  &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;).then(</span><br><span class="line">  (res) =&gt; <span class="built_in">console</span>.info(<span class="string">"then-resolve"</span>),</span><br><span class="line">  (err) =&gt; <span class="built_in">console</span>.info(<span class="string">"then-reject"</span>)</span><br><span class="line">);</span><br><span class="line"><span class="built_in">console</span>.info(<span class="string">"end"</span>);</span><br></pre></td></tr></table></figure>
+<p>用 setTimeout 模拟异步。虽然 “start” 在 Promise 内部，但是并不在 setTimeout 调用函数里面，因为 Promise 创建时立即执行，所以 ”start“ 最先输出的，然后执行异步操作（setTimeout），此时 “end” 会被输出。一秒后调用 setTimeout 的函数，输出 “time”，然后 resolve 被调用，then 方法的第一个回调函数触发，输出 “then-resolve” 。</p>
+<p>所以结果是：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">start;</span><br><span class="line">end;</span><br><span class="line">time;</span><br><span class="line">then - resolve;</span><br></pre></td></tr></table></figure>
+<h5><span id="resolve-和-reject-不会终止-promise-参数函数执行">resolve 和 reject 不会终止 Promise 参数函数执行</span></h5>
+<p>对普通函数，通过 return 输出返回值之后，函数执行也会终止。但是创建 Promise 时提供的回调函数的两个参数 resolve 和 reject 在调用传递值之后并不会终止函数的执行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">"start"</span>);</span><br><span class="line">    resolve(<span class="string">"data"</span>);</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">"end"</span>);</span><br><span class="line">  &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;).then(</span><br><span class="line">  (res) =&gt; <span class="built_in">console</span>.info(<span class="string">"then-resolve"</span>),</span><br><span class="line">  (err) =&gt; <span class="built_in">console</span>.info(<span class="string">"then-reject"</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>上面的输出结果是：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">start;</span><br><span class="line">end;</span><br><span class="line">then - resolve;</span><br></pre></td></tr></table></figure>
+<p>可见在 resolve 后面的 “end” 依然能够被输出，因为 resolve 和 reject 的执行是晚于本轮事件循环的其他同步任务的。</p>
+<p>resolve 和 reject 传递值之后，Promise 异步操作的目的已经达到，其他的操作都应该到 then 方法中进行。所以，最好不要在 resolve 语句后面还有其他操作，也可以在 resolve reject 语句前面加上 return 结束回调函数执行。</p>
+<h3><span id="其他-promise-api-使用">其他 Promise API 使用</span></h3>
+<p>上面是 Promise 的一些基础使用，已经可以进行简单的异步任务的处理，但是如果是多个异步任务或者其他复杂的情形，还需要了解其他 Promise API。</p>
+<h4><span id="then">then()</span></h4>
+<p>Promise 实例的 then 方法是定义在原型对象 Promise.prototype 上的。 上面已经简单介绍过 then 方法的使用，可以指定 Promise 的 resolved 和 rejected 状态的回调函数来处理两种情况。不过如果第一步的异步结果获取到之后还有其他操作 (同步或异步) 呢，要怎么做？</p>
+<p><strong>继续调用 then 方法</strong></p>
+<p>其实 then 方法是会返回一个新的 Promise 对象的，所以也就可以链式调用 then 方法。如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  resolve(<span class="string">"33"</span>);</span><br><span class="line">&#125;)</span><br><span class="line">  .then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"result"</span> + res;</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function">(<span class="params">res</span>) =&gt;</span> <span class="built_in">console</span>.log(res));</span><br></pre></td></tr></table></figure>
+<p>得到的结果是：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result: <span class="number">33</span>;</span><br></pre></td></tr></table></figure>
+<p>then 方法连续调用时，第一个 then 方法的回调函数里 return 的数据会作为后一个 then 方法的回调函数的参数。</p>
+<p>如果第一个 then 方法的回调中依然需要异步操作，那么可以返回另一个 Promise 对象，<strong>区别于 return 普通数据， return Promise 对象的时候，后一个 then 方法的回调函数会等待第一个 then 中返回的 Promise 状态改变时，才会被调用。</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  resolve(<span class="string">"33"</span>);</span><br><span class="line">&#125;)</span><br><span class="line">  .then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">      setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        resolve(<span class="string">"result:"</span> + res);</span><br><span class="line">      &#125;, <span class="number">1000</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function">(<span class="params">res</span>) =&gt;</span> <span class="built_in">console</span>.log(res));</span><br></pre></td></tr></table></figure>
+<p>结果是<strong>一秒后</strong>输出：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result: <span class="number">33</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>总结：</p>
+<p>then 方法可以链式调用。</p>
+<p>前一个 then 方法的回调函数 return 普通数据（非 Promise 对象）时，后一个 then 只会调用第一个回调函数， 且回调函数的参数就是该普通数据。</p>
+<p>前一个 then 方法的回调函数 return 另一个 Promise 对象的时，后一个 then 方法等待该 Promise 对象的状态改变，再执行对应的回调函数（resolved 对应第一个回调，rejected 对应第二个回调）。</p>
+</blockquote>
+<h4><span id="catch">catch()</span></h4>
+<p>catch 可以用来处理异步操作结果失败或者发生出错的情况。你可能发现 reject 也可以用来处理这些情况，其实，catch 本就是一个对 then 中的 reject 回调的补充，但更为简洁。</p>
+<p>对于如下代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> pro = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  reject(<span class="string">"100"</span>);</span><br><span class="line">&#125;);</span><br><span class="line">pro.then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.info(<span class="string">"res"</span>, res);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.info(<span class="string">"end"</span>);</span><br></pre></td></tr></table></figure>
+<p>会引发报错：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">end</span><br><span class="line">(node:<span class="number">2611</span>) UnhandledPromiseRejectionWarning: <span class="number">100</span></span><br><span class="line">(node:<span class="number">2611</span>) UnhandledPromiseRejectionWarning: Unhandled promise rejection......</span><br></pre></td></tr></table></figure>
+<p>因为对于 reject 状态的错误没有处理。 但是程序并不会退出，可以看到后面的 “end” 依然被输出，因为 <strong>Promise 对象抛出的错误不会影响到 Promise 外部的代码</strong> ，外部的程序不会被终止。</p>
+<p>但这个错要被处理，可以有两种解决方法：</p>
+<ul>
+<li><strong><em>1.为 then 方法添加第二个回调函数</em></strong></li>
+<li><strong><em>2.调用 catch 捕获</em></strong></li>
+</ul>
+<p>两种方式实际上是等价的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方法1</span></span><br><span class="line">pro.then(</span><br><span class="line">  (res) =&gt; <span class="built_in">console</span>.info(<span class="string">"res"</span>, res),</span><br><span class="line">  (err) =&gt; <span class="built_in">console</span>.info(<span class="string">"err"</span>, err)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">//方法2</span></span><br><span class="line">pro.then(<span class="function">(<span class="params">res</span>) =&gt;</span> <span class="built_in">console</span>.info(<span class="string">"res"</span>, res)).catch(<span class="function">(<span class="params">e</span>) =&gt;</span> <span class="built_in">console</span>.info(<span class="string">"e"</span>, e));</span><br></pre></td></tr></table></figure>
+<p>经过上面两种方式捕获到错误，信息仍然是相同的，但是此时不会报错，因为错误已经视作被获取处理。</p>
+<p>如果异步操作结果失败，你也可以<strong>在 Promise 中 throw error, 这和 reject 效果一样，会使 Promise 变为 rejected 状态</strong>。抛出的错误可以被 then 方法的第二个回调或者 catch 捕获。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> pro = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"aa"</span>);</span><br><span class="line">&#125;);</span><br><span class="line">pro.then(</span><br><span class="line">  () =&gt; &#123;&#125;,</span><br><span class="line">  (err) =&gt; <span class="built_in">console</span>.info(<span class="string">"err"</span>, err)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>不过如果在 resolve 语句之后抛出错误，是无效的 。可以理解为这都是引起 Promise 状态改变的操作， resolve 之后状态已经改变为 resolved，不能再抛出异常变为 rejected。</p>
+<p><strong><em>Promise 对象的错误如果不被捕获，就是一直向后传递，直到被 then 方法的第二个回调或者 catch 方法捕获到。同时一旦 Promise 错误已经被捕获，再在后面添加 then 方法或者 catch 就捕获不到了</em></strong>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pro</span><br><span class="line">  .then(</span><br><span class="line">    () =&gt; &#123;&#125;,</span><br><span class="line">    (err) =&gt; <span class="built_in">console</span>.info(<span class="string">"err"</span>, err)</span><br><span class="line">  )</span><br><span class="line">  .catch(<span class="function">(<span class="params">e</span>) =&gt;</span> <span class="built_in">console</span>.info(<span class="string">"e"</span>, e));</span><br></pre></td></tr></table></figure>
+<p>上面的 catch 方法是捕获不到错误的，因为错误已经被 then 方法的第二个回调捕获。</p>
+<p>一般来说，使用更多的是用 catch 来捕获错误。相比于 then 方法的第二个回调，<strong>catch 除了可以捕获到 Promise 异步操作的错误，也可以捕获到 then 方法第一个回调的错误</strong>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pro</span><br><span class="line">  .then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//这里的错误也能被捕获</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function">(<span class="params">e</span>) =&gt;</span> <span class="built_in">console</span>.info(<span class="string">"e"</span>, e));</span><br></pre></td></tr></table></figure>
+<p>catch 方法返回的还是一个 Promise 对象，后面可以继续正常调用 then 方法。此时如果 catch 方法没有捕获到错误，则会直接跳过 catch , 执行后面的 then 方法。</p>
+<p>catch 方法还可以继续抛出错误，再由后面的 catch 方法捕获。</p>
+<blockquote>
+<p>总结：</p>
+<p>catch 和 then 方法的第二个回调都可以捕获错误。</p>
+<p>Promise 对象的错误会向后传递直到被捕获，同一个错误一旦被捕获就不能再次被捕获。</p>
+<p>常用的 promise.then().catch() 中， catch 可以捕获对应 then 中的错误，因而更常用。</p>
+<p>catch 方法的返回值依然是 Promise，可以继续链式调用 then 和 catch。</p>
+</blockquote>
 
                 
 
@@ -275,11 +389,7 @@
 <aside id="sidebar">
   <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
-    
-    <ol class="nav">
-      none
-    </ol>
-    
+     <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Promise 是什么</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Promise 怎么用</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">创建 Promise 对象进行异步操作</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">resolve reject 传递异步操作结果</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">then() 方法指定回调</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">两个注意的点</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.4.1.</span> <span class="toc-nav-text">Promise 创建时立即执行</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.4.2.</span> <span class="toc-nav-text">resolve 和 reject 不会终止 Promise 参数函数执行</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">其他 Promise API 使用</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">then()</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">catch()</span></a></li></ol></li></ol> 
   </div>
 </aside>
  
@@ -298,6 +408,8 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
+                          <a class="tag" href="/tags/#ES6 大作战" title="ES6 大作战">ES6 大作战</a>
+                        
                     </div>
                 </section>
                 

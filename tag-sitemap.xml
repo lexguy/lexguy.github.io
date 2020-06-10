@@ -3,6 +3,13 @@
 
 
     <url>
+        <loc>http://yoursite-url/tags/ES6-%E5%A4%A7%E4%BD%9C%E6%88%98/</loc>
+        <lastmod>2020-06-10T15:43:07.604Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://yoursite-url/tags/React-Native/</loc>
         <lastmod>2020-06-04T04:46:52.680Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -12,13 +19,6 @@
     <url>
         <loc>http://yoursite-url/tags/React/</loc>
         <lastmod>2020-06-03T15:51:14.859Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://yoursite-url/tags/ES6-%E5%A4%A7%E4%BD%9C%E6%88%98/</loc>
-        <lastmod>2020-05-29T14:10:06.332Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
