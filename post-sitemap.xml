@@ -8,6 +8,14 @@
     </url>
 
     <url>
+        <loc>http://yoursite-url/2020/06/16/ES6-Set-%E6%95%B0%E6%8D%AE/</loc>
+        <lastmod>2020-06-16T07:38:04.665Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://yoursite-url/2020/06/08/ES6-Promise/</loc>
         <lastmod>2020-06-13T04:01:11.322Z</lastmod>
         <changefreq>weekly</changefreq>
