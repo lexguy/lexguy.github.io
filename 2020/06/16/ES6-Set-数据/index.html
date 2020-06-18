@@ -226,10 +226,14 @@
 <h3><span id="创建-set-数据">创建 Set 数据</span></h3>
 <p>因为 Set 本身是一个构造函数，可以直接使用<code>new</code>命令来创建 Set 数据。创建时可以接受一个字符串，数组或者其他实现了 iterable 接口的可遍历数据。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> data = <span class="keyword">new</span> <span class="built_in">Set</span>([iterable]);</span><br></pre></td></tr></table></figure>
-<p>1.创建空 Set 再通过<code>add</code>方法添加数据</p>
+<ol>
+<li>创建空 Set 再通过<code>add</code>方法添加数据</li>
+</ol>
 <p><code>add</code>方法返回该 Set 对象，可以链式调用。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myset = <span class="keyword">new</span> <span class="built_in">Set</span>();</span><br><span class="line">myset.add(<span class="string">"AA"</span>).add(<span class="string">"BB"</span>);</span><br><span class="line"><span class="built_in">console</span>.info(<span class="string">"myset"</span>, myset); <span class="comment">// 得到 Set &#123; 'AA', 'BB' &#125;</span></span><br></pre></td></tr></table></figure>
-<p>2.传入可遍历数据</p>
+<ol start="2">
+<li>传入可遍历数据</li>
+</ol>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myset = <span class="keyword">new</span> <span class="built_in">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</span><br><span class="line"><span class="built_in">console</span>.info(<span class="string">"myset"</span>, myset);</span><br><span class="line"><span class="built_in">console</span>.info(<span class="string">"myset"</span>, myset); <span class="comment">// 得到 Set &#123; 1, 2, 3 &#125;</span></span><br></pre></td></tr></table></figure>
 <h3><span id="set-中元素唯一">Set 中元素唯一</span></h3>
 <p>当向 Set 中添加多个元素的时候，重复的元素会被去除，不会被添加到同一个 Set 数据中，这包括数组的重复元素和字符串的重复字符。</p>
@@ -269,10 +273,14 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//上面的 myset 变量，直接用 for...of 遍历</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> item <span class="keyword">of</span> myset) &#123;</span><br><span class="line">  <span class="built_in">console</span>.info(item);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3><span id="和数组的转化">和数组的转化</span></h3>
 <p>对于一个数组，可以通过<code>new Set()</code>传入作为参数，得到 Set 结构。如果还要转回来数组呢？使用遍历的方式可行，但更推荐两种简单易行的方式：</p>
-<p>1.扩展运算符</p>
+<ol>
+<li>扩展运算符</li>
+</ol>
 <p>扩展运算符内部使用的是<code>for...of</code>循环，可直接用于 Set 结构。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myset = <span class="keyword">new</span> <span class="built_in">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</span><br><span class="line"><span class="keyword">const</span> arr = [...myset];</span><br><span class="line"><span class="built_in">console</span>.info(<span class="string">"arr"</span>, arr); <span class="comment">// arr [ 1, 2, 3 ]</span></span><br></pre></td></tr></table></figure>
-<p>2.<code>Arrray.from</code>方法</p>
+<ol start="2">
+<li><code>Arrray.from</code>方法</li>
+</ol>
 <p><code>Array.from</code> 可以接受 Set 结构的参数，转化为了一个数组。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myset = <span class="keyword">new</span> <span class="built_in">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</span><br><span class="line"><span class="keyword">const</span> arr = <span class="built_in">Array</span>.from(myset);</span><br><span class="line"><span class="built_in">console</span>.info(<span class="string">"arr"</span>, arr); <span class="comment">// arr [ 1, 2, 3 ]</span></span><br></pre></td></tr></table></figure>
 <h3><span id="应用">应用</span></h3>
