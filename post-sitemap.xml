@@ -8,6 +8,14 @@
     </url>
 
     <url>
+        <loc>http://yoursite-url/2020/07/05/ES6-Maps%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
+        <lastmod>2020-07-05T15:16:28.735Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://yoursite-url/2020/05/28/ES6-Symbol-%E8%AE%A4%E8%AF%86%E5%92%8C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</loc>
         <lastmod>2020-06-30T14:35:03.675Z</lastmod>
         <changefreq>weekly</changefreq>
