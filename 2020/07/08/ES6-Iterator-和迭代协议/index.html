@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content>
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          ES6 Iterator 和迭代协议 - Xuwei&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://yoursite-url/2020/07/08/ES6-Iterator-和迭代协议/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!--
+ * @Author: xuwei
+ * @Date: 2020-05-07 00:57:50
+ * @LastEditTime: 2020-05-10 21:41:15
+ * @LastEditors: xuwei
+ * @Description: 
+ -->
+<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+  header.intro-header{
+      
+          background-image: url('null')
+          /*post*/
+      
+  }
+  
+</style>
+
+<header class="intro-header">
+  <!-- Signature -->
+  <div id="signature">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          
+          <div class="post-heading">
+            <div class="tags">
+              
+              <a
+                class="tag"
+                href="/tags/#ES6 大作战"
+                title="ES6 大作战"
+                >ES6 大作战</a
+              >
+              
+            </div>
+            <h1>ES6 Iterator 和迭代协议</h1>
+            <h2 class="subheading"></h2>
+            <span class="meta">
+              Posted by xuwei on 2020-07-08
+            </span>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header page-scroll">
+      <button type="button" class="navbar-toggle">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <!-- 标题不再是点击回到主页，而是一个文本 -->
+      <span class="navbar-brand" href="/"
+        >Xuwei 的个人空间</span
+      >
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+    <div id="huxblog_navbar">
+      <div class="navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <!--            <a href="/">Home</a>-->
+            <a href="/">主页</a>
+          </li>
+
+             
+          <li>
+            <a
+              href="/about/"
+              >关于
+            </a>
+          </li>
+            
+          <li>
+            <a
+              href="/archive/"
+              >时间轴
+            </a>
+          </li>
+            
+          <li>
+            <a
+              href="/tags/"
+              >标签
+            </a>
+          </li>
+           
+        </ul>
+      </div>
+    </div>
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container -->
+</nav>
+<script>
+  // Drop Bootstarp low-performance Navbar
+  // Use customize navbar with high-quality material design animation
+  // in high-perf jank-free CSS3 implementation
+  var $body = document.body;
+  var $toggle = document.querySelector(".navbar-toggle");
+  var $navbar = document.querySelector("#huxblog_navbar");
+  var $collapse = document.querySelector(".navbar-collapse");
+
+  $toggle.addEventListener("click", handleMagic);
+  function handleMagic(e) {
+    if ($navbar.className.indexOf("in") > 0) {
+      // CLOSE
+      $navbar.className = " ";
+      // wait until animation end.
+      setTimeout(function () {
+        // prevent frequently toggle
+        if ($navbar.className.indexOf("in") < 0) {
+          $collapse.style.height = "0px";
+        }
+      }, 400);
+    } else {
+      // OPEN
+      $collapse.style.height = "auto";
+      $navbar.className += " in";
+    }
+  }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>ES6 Iterator 和迭代协议</p>
+<p>JavaScript 中表示数据集合的结构有四种 : <code>Array</code>，<code>Object</code>，以及 ES6 的<code>Set</code>和<code>Map</code>。而且对于数据集合，经常会有遍历的需要，但是并不是这四种数据结构都可以直接被遍历，当他们数据结构层级复杂（比如<code>Set</code>中包含 Object…）时，就更难被遍历了。为了实现数据集合的统一访问，ES6 引入了<code>Iterator</code>迭代器和<code>迭代协议</code>，主要用于<code>for...of</code>迭代。</p>
+<p>为什么数组能被<code>for...of</code>循环得到每个值？本篇内容将从<code>for...of</code>迭代循环入手探寻迭代机制以及该原理机制的应用。</p>
+<h3><span id="iterator-是什么">Iterator 是什么</span></h3>
+<p>Iterator 迭代器是实现对数据集合统一访问的，使之可遍历的机制。任一数据结构只要实现了 Iterator 接口，就可以对该数据进行遍历操作。</p>
+<p>如何实现？</p>
+<p>当一个对象需要迭代的时候，对象要实现对应的 iterator 方法，也就是该对象或者其原型对象上必须有一个键为<code>[Symbol.iterator]</code>的属性，值是一个函数，返回一个 Iterator 迭代器对象，用于定义对象的迭代行为。</p>
+<blockquote>
+<p>允许 JavaScript 对象定义或重新定制自身的迭代行为的规则，就是<strong>可迭代协议</strong>。部署了 Iterator 接口(实现<code>[Symbol.iterator]</code>对应方法)的对象，才会被视为是可遍历的。</p>
+</blockquote>
+<p>那么<code>[Symbol.iterator]</code>对应的函数要怎么实现呢?首先需要返回一个迭代器，什么是一个迭代器呢?</p>
+<p><strong>实现<code>next()</code>方法，且<code>next()</code>方法返回一个拥有<code>done</code>属性和<code>value</code>属性的对象</strong></p>
+<p>即形如如下<code>[Symbol.iterator]</code>对应的函数返回的对象：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> o = &#123;</span><br><span class="line">  [<span class="built_in">Symbol</span>.iterator]: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      next: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">          value: <span class="string">""</span>,</span><br><span class="line">          done: <span class="literal">true</span>,</span><br><span class="line">        &#125;;</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>done (boolean). 表示迭代器是否还有下一个值，迭代是否完成。<code>false</code>则表示还有值，已迭代完则为<code>true</code>。迭代完时 value 可不提供，或返回默认值。</li>
+<li>value 迭代时返回的 JavaScript 值。</li>
+</ul>
+<p><code>next</code>方法返回不带有<code>done</code>和<code>value</code>属性的对象时，其实相当于<code>value</code>取的<code>undefined</code>。而如果返回的不是对象是其他值时，则会报错，比如返回 true 时：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">TypeError</span>: Iterator result <span class="literal">true</span> is not an object</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>通过定义符合语义的<code>next()</code>函数使一个对象成为迭代器,进而定义了产生一系列值的标准方式。这个规则就是<strong>迭代器协议</strong>。</p>
+</blockquote>
+<h3><span id="迭代过程">迭代过程</span></h3>
+<p>迭代器本身是一个指针对象。指向数据结构初始位置。</p>
+<ol>
+<li>获取到一个数据结构的迭代器，实际上的是得到一个指针对象。</li>
+<li>第一次调用<code>next()</code>方法时，指针会指向数据结构的第一个成员。</li>
+<li>后面调用<code>next()</code>方法，依次指向后一个元素，直到指向数据结构的结束位置。</li>
+</ol>
+<p>以一个数组为例（数组自身实现了<code>Symbol.iterator</code>属性）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> array = [<span class="string">"AA"</span>, <span class="string">"BB"</span>, <span class="string">"CC"</span>];</span><br><span class="line"><span class="built_in">console</span>.info(<span class="keyword">typeof</span> array[<span class="built_in">Symbol</span>.iterator]); <span class="comment">//function</span></span><br></pre></td></tr></table></figure>
+<p>可以看到，数组的<code>Symbol.ietrator</code>属性是一个函数。接下来，调用这个函数就可以得到数组的迭代器对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> array = [<span class="string">"AA"</span>, <span class="string">"BB"</span>];</span><br><span class="line"><span class="keyword">let</span> arrIterator = array[<span class="built_in">Symbol</span>.iterator]();</span><br><span class="line">arrIterator.next(); <span class="comment">// &#123; value: 'AA', done: false &#125;</span></span><br><span class="line">arrIterator.next(); <span class="comment">// &#123; value: 'BB', done: false &#125;</span></span><br><span class="line">arrIterator.next(); <span class="comment">// &#123; value: undefined, done: true &#125;</span></span><br></pre></td></tr></table></figure>
+<p>迭代器持续调用<code>next()</code>方法，就可以一直得到包含遍历值的对象，直到到达最后一个，<code>done</code>变为<code>true</code>，结束。结束后继续调用<code>next</code>,<code>done</code>依然是<code>true</code>,值为<code>undefined</code>。</p>
+<p>因为数组默认实现了<code>Symbol.iterator</code>，部署了迭代器的生成函数，所以是可以直接被<code>for...of</code>遍历的。<br>
+也就是说，<strong><code>for...of</code>迭代过程，实际上就是获取到目标数据结构的迭代器，持续调用<code>next()</code>方法得到遍历结果取出其中 value 值的过程。</strong></p>
+<h4><span id="对一个对象进行-forof-迭代">对一个对象进行 for…of 迭代</span></h4>
+<p>如果对象也有被遍历的需要，那我们也可以给对象或其原型对象添加上<code>Symbol.iterator</code>接口，部署一个迭代器生成函数。同时对对象各个属性的先后遍历顺序，也是需要自定义的。</p>
+<p>下面给一个对象添加<code>Symbol.iterator</code>接口使之可遍历：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  name: <span class="string">"xw"</span>,</span><br><span class="line">  gender: <span class="string">"man"</span>,</span><br><span class="line">  [<span class="built_in">Symbol</span>.iterator]: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> t = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">let</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      next: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> keys = <span class="built_in">Object</span>.keys(t);</span><br><span class="line">        <span class="keyword">if</span> (index &lt; keys.length) &#123;</span><br><span class="line">          <span class="keyword">return</span> &#123; <span class="attr">value</span>: t[keys[index++]], <span class="attr">done</span>: <span class="literal">false</span> &#125;;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">return</span> &#123; <span class="attr">value</span>: <span class="literal">undefined</span>, <span class="attr">done</span>: <span class="literal">true</span> &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>部署了<code>Symbol.iterator</code>接口并且该方法返回了一个带有<code>next</code>方法的对象，<code>next</code>方法根据对象的 keys 来遍历生成返回的值，遍历的顺序就是<code>Object.keys</code>生成的顺序。下面我们通过<code>for...of</code>来测试一下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> value <span class="keyword">of</span> obj) &#123;</span><br><span class="line">  <span class="built_in">console</span>.info(value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//得到</span></span><br><span class="line">xw;</span><br><span class="line">man;</span><br></pre></td></tr></table></figure>
+<p>这样一来，对象就是可以通过<code>for...of</code>遍历的数据了。</p>
+<h3><span id="iterator-使用场景">Iterator 使用场景</span></h3>
+<ol>
+<li>for…of 循环</li>
+</ol>
+<p>最直接的，<code>for...of</code>循环内部就是调用的数据结构的<code>Symbol.iterator</code>方法。因此数组，Set 和 Map 结构以及 Generator 对象，字符串和某些特定对象都是可以直接通过<code>for...of</code>循环进行迭代。</p>
+<ol start="2">
+<li>字符串的 Iterator 接口</li>
+</ol>
+<p>字符串默认实现了 Iterator，迭代的是字符串的每个字符。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">"hello"</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> byte <span class="keyword">of</span> str) &#123;</span><br><span class="line">  <span class="built_in">console</span>.info(byte);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//得到</span></span><br><span class="line">h;</span><br><span class="line">e;</span><br><span class="line">l;</span><br><span class="line">l;</span><br><span class="line">o;</span><br></pre></td></tr></table></figure>
+<p>当然，你可以对字符串添加<code>Symbol.iterator</code>方法，手动修改迭代行为。</p>
+<ol start="3">
+<li>数组和 Set 的解构赋值</li>
+</ol>
+<p>数组和 Set 的结构赋值是根据顺序位置来进行赋值的，为此需要对数组和 Set 结构进行循环取值再赋值。故使用了<code>for...of</code>循环。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> set1 = <span class="keyword">new</span> <span class="built_in">Set</span>().add(<span class="string">"x"</span>).add(<span class="string">"y"</span>).add(<span class="string">"z"</span>);</span><br><span class="line"><span class="keyword">let</span> [one, ...other] = set1;</span><br><span class="line"><span class="built_in">console</span>.info(<span class="string">"one"</span>, one);</span><br><span class="line"><span class="built_in">console</span>.info(<span class="string">"other"</span>, other);</span><br><span class="line"></span><br><span class="line"><span class="comment">//得到</span></span><br><span class="line">one x</span><br><span class="line">other [ <span class="string">'y'</span>, <span class="string">'z'</span> ]</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>扩展运算符</li>
+</ol>
+<p>对添加了<code>Symbol.iterator</code>接口的数据结构，是可以使用<code>...</code>扩展运算符将其展开的，同样包含数组，字符串，Set 结构等，这里也是调用的<code>Symbol.iterator</code>接口方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> set1 = <span class="keyword">new</span> <span class="built_in">Set</span>().add(<span class="string">"x"</span>).add(<span class="string">"y"</span>).add(<span class="string">"z"</span>);</span><br><span class="line"><span class="built_in">console</span>.info([...set1]);</span><br><span class="line"><span class="comment">//得到</span></span><br><span class="line">[<span class="string">"x"</span>, <span class="string">"y"</span>, <span class="string">"z"</span>];</span><br></pre></td></tr></table></figure>
+<p>注意的是<code>...</code>运算符对没有部署<code>Symbol.iterator</code>方法的对象仍然可用，作用则是浅拷贝对象的各个属性。可以具体参见扩展运算符。</p>
+<ol start="5">
+<li>yield*</li>
+</ol>
+<p><code>yield*</code>如果跟的是带有<code>Symbol.iterator</code>接口可遍历的结构，也是会调用该迭代器方法进行迭代展开的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> generator = <span class="function"><span class="keyword">function</span>* (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">yield</span> <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">yield</span>* [<span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> iterator = generator();</span><br><span class="line"><span class="built_in">console</span>.info(iterator.next()); <span class="comment">//&#123; value: 1, done: false &#125;</span></span><br><span class="line"><span class="built_in">console</span>.info(iterator.next()); <span class="comment">//&#123; value: 2, done: false &#125;</span></span><br><span class="line"><span class="built_in">console</span>.info(iterator.next()); <span class="comment">//&#123; value: 3, done: false &#125;</span></span><br><span class="line"><span class="built_in">console</span>.info(iterator.next()); <span class="comment">//&#123; value: undefined, done: true &#125;</span></span><br></pre></td></tr></table></figure>
+<p>其他接受数组作为参数的方法，基本上也都是调用了迭代方法。如<code>Array.from()</code>,<code>Map()</code>,<code>Set()</code>,<code>Promise.all()</code>等。</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2020/07/05/ES6-Maps数据结构/" data-toggle="tooltip" data-placement="top" title="ES6 Map 数据结构">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+ 
+<aside id="sidebar">
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+     <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Iterator 是什么</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">迭代过程</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">对一个对象进行 for…of 迭代</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Iterator 使用场景</span></a></li></ol> 
+  </div>
+</aside>
+ 
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#ES6 大作战" title="ES6 大作战">ES6 大作战</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">It Helps SEO</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "your-disqus-ID";
+    var disqus_identifier = "http://yoursite-url/2020/07/08/ES6-Iterator-和迭代协议/";
+    var disqus_url = "http://yoursite-url/2020/07/08/ES6-Iterator-和迭代协议/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center">
+               
+          <!-- 暂时不在底部显示GitHub -->
+          <!-- <li>
+            <a
+              target="_blank"
+              href="https://github.com/lexguy"
+            >
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li> -->
+           
+        </ul>
+        <p class="copyright text-muted">
+          <span style="text-decoration: underline;">
+            Copyright &copy; xuwei 2020
+          </span>
+          <!-- <span style="margin-left: 30px; font-style: italic;">
+            starkcoder@sina.com</span
+          > -->
+          <br />
+
+          <!-- Theme by <a href="http://huangxuan.me">Hux</a> -->
+          <!-- <span style="display: inline-block; margin: 0 5px;">
+            <i class="fa fa-heart"></i>
+          </span> -->
+          <!-- re-Ported by <a href="http://beantech.org">BeanTech</a> | -->
+          <!-- <iframe
+            style="margin-left: 2px; margin-bottom: -5px;"
+            frameborder="0"
+            scrolling="0"
+            width="91px"
+            height="20px"
+            src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true"
+          >
+          </iframe> -->
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+<!-- async load function -->
+<script>
+  function async(u, c) {
+    var d = document,
+      t = "script",
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+      o.addEventListener(
+        "load",
+        function (e) {
+          c(null, e);
+        },
+        false
+      );
+    }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+<!-- jquery.tagcloud.js -->
+<script>
+  // only load tagcloud.js in tag.html
+  if ($("#tag_cloud").length !== 0) {
+    async(
+      "http://yoursite-url/js/jquery.tagcloud.js",
+      function () {
+        $.fn.tagcloud.defaults = {
+          //size: {start: 1, end: 1, unit: 'em'},
+          color: { start: "#bbbbee", end: "#0085a1" },
+        };
+        $("#tag_cloud a").tagcloud();
+      }
+    );
+  }
+</script>
+
+<!--fastClick.js -->
+<script>
+  async(
+    "https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js",
+    function () {
+      var $nav = document.querySelector("nav");
+      if ($nav) FastClick.attach($nav);
+    }
+  );
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+  // dynamic User by Hux
+  var _gaId = "UA-XXXXXXXX-X";
+  var _gaDomain = "yoursite";
+
+  // Originial
+  (function (i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    (i[r] =
+      i[r] ||
+      function () {
+        (i[r].q = i[r].q || []).push(arguments);
+      }),
+      (i[r].l = 1 * new Date());
+    (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(
+    window,
+    document,
+    "script",
+    "//www.google-analytics.com/analytics.js",
+    "ga"
+  );
+
+  ga("create", _gaId, _gaDomain);
+  ga("send", "pageview");
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://yoursite-url/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
