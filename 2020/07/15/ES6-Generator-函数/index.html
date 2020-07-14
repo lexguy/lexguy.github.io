@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content>
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          ES6 Generator 函数和 yield 关键字 - Xuwei&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://yoursite-url/2020/07/15/ES6-Generator-函数/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!--
+ * @Author: xuwei
+ * @Date: 2020-05-07 00:57:50
+ * @LastEditTime: 2020-05-10 21:41:15
+ * @LastEditors: xuwei
+ * @Description: 
+ -->
+<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+  header.intro-header{
+      
+          background-image: url('null')
+          /*post*/
+      
+  }
+  
+</style>
+
+<header class="intro-header">
+  <!-- Signature -->
+  <div id="signature">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          
+          <div class="post-heading">
+            <div class="tags">
+              
+              <a
+                class="tag"
+                href="/tags/#ES6 大作战"
+                title="ES6 大作战"
+                >ES6 大作战</a
+              >
+              
+            </div>
+            <h1>ES6 Generator 函数和 yield 关键字</h1>
+            <h2 class="subheading"></h2>
+            <span class="meta">
+              Posted by xuwei on 2020-07-15
+            </span>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header page-scroll">
+      <button type="button" class="navbar-toggle">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <!-- 标题不再是点击回到主页，而是一个文本 -->
+      <span class="navbar-brand" href="/"
+        >Xuwei 的个人空间</span
+      >
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+    <div id="huxblog_navbar">
+      <div class="navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <!--            <a href="/">Home</a>-->
+            <a href="/">主页</a>
+          </li>
+
+             
+          <li>
+            <a
+              href="/archive/"
+              >时间轴
+            </a>
+          </li>
+            
+          <li>
+            <a
+              href="/about/"
+              >关于
+            </a>
+          </li>
+            
+          <li>
+            <a
+              href="/tags/"
+              >标签
+            </a>
+          </li>
+           
+        </ul>
+      </div>
+    </div>
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container -->
+</nav>
+<script>
+  // Drop Bootstarp low-performance Navbar
+  // Use customize navbar with high-quality material design animation
+  // in high-perf jank-free CSS3 implementation
+  var $body = document.body;
+  var $toggle = document.querySelector(".navbar-toggle");
+  var $navbar = document.querySelector("#huxblog_navbar");
+  var $collapse = document.querySelector(".navbar-collapse");
+
+  $toggle.addEventListener("click", handleMagic);
+  function handleMagic(e) {
+    if ($navbar.className.indexOf("in") > 0) {
+      // CLOSE
+      $navbar.className = " ";
+      // wait until animation end.
+      setTimeout(function () {
+        // prevent frequently toggle
+        if ($navbar.className.indexOf("in") < 0) {
+          $collapse.style.height = "0px";
+        }
+      }, 400);
+    } else {
+      // OPEN
+      $collapse.style.height = "auto";
+      $navbar.className += " in";
+    }
+  }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>Generator 函数</p>
+<h3><span id="初识-generator-函数">初识 Generator 函数</span></h3>
+<p>Generator 也是 ES6 提供的一个<strong>异步编程解决方案</strong>（译为生成器，可以理解为生成多个可迭代值的函数）。函数内部封装了多个状态，调用时可以得到一个迭代器对象，通过迭代器对象，就能遍历出 Generator 函数的每一个值。</p>
+<blockquote>
+<p>关于 Iterator 迭代器和迭代协议可以参见这篇：<a href>ES6  系列  Iterator</a></p>
+</blockquote>
+<p>看一个简单的例子 🌰：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">firGenerator</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">yield</span> <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">yield</span> <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> fir = firGenerator();</span><br><span class="line"><span class="built_in">console</span>.info(fir.next()); <span class="comment">//&#123; value: 1, done: false &#125;</span></span><br><span class="line"><span class="built_in">console</span>.info(fir.next()); <span class="comment">//&#123; value: 2, done: false &#125;</span></span><br></pre></td></tr></table></figure>
+<p>函数体内部使用<code>yield</code>语句（后面介绍<code>yield</code>语句）生成值，返回的迭代器对象是符合可迭代协议和迭代器协议的，所以可以持续调用<code>next</code>方法得到迭代值， return 函数并不需要我们显式指定。</p>
+<p>Generator 函数调用后并不立马执行，而是返回一个指针对象(迭代器对象)，指向的是内部状态。只有调用迭代器对象的<code>next</code>方法，指针才会移到下一个状态。第一次调用<code>next</code>方法，会从函数头部开始执行，直到遇到一个<code>yield</code>表达式、<code>return</code>语句或者<code>throw</code>语句，而再次调用的时候会从上次<code>yield</code>语句的地方开始执行。</p>
+<ul>
+<li>yield 。暂停 Generator 函数并返回得到生成器新值，下一次<code>next</code>调用会从上一次的<code>yield</code>表达式位置开始执行。</li>
+<li>throw 。可以从生成器中抛出异常，生成器会完全停止，需要在调用处捕获。</li>
+<li>return 语句。生成器的执行结束，将迭代结果返回给调用者，返回的<code>done</code>为<code>true</code>，视为迭代完成。</li>
+<li>到达 Generator 函数末尾，生成器正常执行技结束，得到<code>value</code>为<code>undefined</code>，且<code>done</code>为<code>true</code>。</li>
+</ul>
+<p>除了可以暂停和恢复执行，还需要注意 Generator 函数一些形式上特征：</p>
+<ul>
+<li>函数名上需要带星号 * (星号可以写在<code>function</code>关键字和函数名之间的任意位置，推荐是紧跟<code>function</code>关键字)</li>
+<li>函数体内部使用<code>yield</code>表达式生成值</li>
+</ul>
+<p>另外，因为 Generator 函数执行返回的是一个迭代器对象，那也就是可以作为对象的<code>[Symbol.iterator]</code>属性，使对象可迭代。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;&#125;;</span><br><span class="line">obj[<span class="built_in">Symbol</span>.iterator] = <span class="function"><span class="keyword">function</span>* (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">yield</span> <span class="number">1</span>, <span class="keyword">yield</span> <span class="number">2</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.info([...obj]); <span class="comment">// [ 1, 2 ]</span></span><br></pre></td></tr></table></figure>
+<p>如上对<code>obj</code>使用扩展运算符迭代得到的是<code>[ 1, 2 ]</code>，已经按照我们预设的方式进行了迭代。</p>
+<h3><span id="yield-表达式">yield 表达式</span></h3>
+<p><strong>可以认为，Generator 函数是可暂停执行的函数，<code>yield</code>语句可以用来暂停执行生成值，<code>next</code>方法可以恢复执行。且<code>yield</code>表达式只能用于 Generator 函数中。</strong><code>yield</code>表达式运行逻辑是这样的：</p>
+<ol>
+<li>
+<p>执行到<code>yield</code>，Generator 函数会暂停，并将后面的值作为迭代时的 value 值。</p>
+</li>
+<li>
+<p>只有调用<code>next</code>方法，Generator 函数才会继续执行，如果再遇到<code>yield</code>，则同样暂停并赋予新的迭代时的 value 值。如果没有<code>yield</code>表达式，则继续执行，后面也没有<code>return</code>语句的话，就会执行完成，此时的 value 为 undefined。有<code>return</code>语句的话，<code>return</code>后面的值会作为<code>value</code>值，且函数结束。</p>
+</li>
+</ol>
+<p>如果<code>yiled</code>后面跟的也是一个表达式，该表达式只有当通过调用<code>next</code>方法运行到<code>yield</code>语句时，才会执行。</p>
+<p><code>yield</code>表达式可以用在另一个表达式中，但必须放在圆括号中。<code>yield</code>表达式还可以用作函数参数，但只是在<code>yield</code>表达式执行完之后继续调用<code>next</code>该函数才会执行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">gen</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"Hi"</span> + (<span class="keyword">yield</span> <span class="number">1</span>));</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> g = gen();</span><br><span class="line"><span class="built_in">console</span>.info(g.next()); <span class="comment">// &#123; value: 1, done: false &#125;</span></span><br><span class="line"><span class="built_in">console</span>.info(g.next());</span><br><span class="line"><span class="comment">//Hiundefined</span></span><br><span class="line"><span class="comment">//&#123; value: undefined, done: true &#125;</span></span><br></pre></td></tr></table></figure>
+<p>第一次调用<code>next</code>的时候，只会得到<code>1</code>，第二次调用<code>next</code>的时候，才会输出<code>Hi</code>，此时函数执行完，value 是<code>undefined</code>。</p>
+<h4><span id="yield-表达式的返回值">yield 表达式的返回值</span></h4>
+<p><code>yield</code>表达式本身是没有返回值的(<code>undefined</code>)，而<code>next</code>方法在调用时如果带一个参数时，该参数就会被当作上一个<code>yield</code>表达式的返回值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">gen</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> a = <span class="keyword">yield</span> <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">yield</span> a * <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> g = gen();</span><br><span class="line"><span class="built_in">console</span>.info(g.next()); <span class="comment">// &#123; value: 2, done: false &#125;</span></span><br><span class="line"><span class="built_in">console</span>.info(g.next()); <span class="comment">// &#123; value: NaN, done: false &#125;</span></span><br></pre></td></tr></table></figure>
+<p>因为<code>yield</code>返回值是<code>undefined</code>，所以乘以 3 之后得到<code>NaN</code>。而如果把上面的后面两条输出语句换成如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.info(g.next()); <span class="comment">//&#123; value: 2, done: false &#125;</span></span><br><span class="line"><span class="built_in">console</span>.info(g.next(<span class="number">5</span>)); <span class="comment">//&#123; value: 15, done: false &#125;</span></span><br></pre></td></tr></table></figure>
+<p>后面的<code>next</code>方法传了值，使的前一个<code>yield</code>语句的返回值<code>a</code>为 5，再乘 3，故第二个<code>next</code>迭代出的值是 15。</p>
+<h4><span id="yield-表达式">yield* 表达式</span></h4>
+<p>如果在 Generator 函数中需要调用另一个 Generator 函数或者其他可迭代对象，就需要用到<code>yield*</code>表达式，<code>yield*</code>表达式可以产生迭代对象返回的的每个值，<code>yield*</code>本身的返回值是当迭代器结束时返回的值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">gen1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">yield</span> <span class="string">"a"</span>;</span><br><span class="line">  <span class="keyword">yield</span> <span class="string">"b"</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">"C"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">gen2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">yield</span> <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">const</span> result = <span class="keyword">yield</span>* gen1();</span><br><span class="line">  <span class="built_in">console</span>.info(<span class="string">"[result]"</span>, result);</span><br><span class="line">  <span class="keyword">yield</span>* <span class="string">"xy"</span>;</span><br><span class="line">  <span class="keyword">yield</span> <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> v <span class="keyword">of</span> gen2()) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(v);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 依次输出：</span></span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// a</span></span><br><span class="line"><span class="comment">// b</span></span><br><span class="line"><span class="comment">// [result] C</span></span><br><span class="line"><span class="comment">// x</span></span><br><span class="line"><span class="comment">// y</span></span><br><span class="line"><span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+<p>如上，<code>gen2</code>中包含了对<code>gen1()</code>和字符串<code>xy</code>，并对这两个数据使用了<code>yield*</code>命令，实际上相当于将他们依次迭代，并将迭代结果再使用<code>yield</code>，故对<code>gen2()</code>对象遍历，也得到了<code>gen1()</code>和字符串的迭代结果。另外，最后一次迭代的结果，会被作为<code>yield*</code>的返回值，如上的<code>[result] C</code>，如果将<code>gen1</code>中的<code>return &quot;C&quot;</code>替换成<code>yield &quot;C&quot;</code>，那么<code>resuilt</code>就是 <code>undefined</code>。</p>
+<h3><span id="generatorprototype-的-nextthrowreturn-方法">Generator.prototype 的 next,throw,return 方法</span></h3>
+<p>Generator 函数返回的迭代器对象，都有三个重要的方法，<code>next</code>,<code>throw</code>，<code>return</code>方法。<code>next</code>方法已经介绍过，可以恢复函数执行，并可以向<code>next</code>方法传值作为上一个<code>yield</code>语句的返回值。关于<code>throw</code>和<code>return</code>:</p>
+<ul>
+<li>throw 可以用于在函数体外抛出错误，并且在 Generator 函数体内捕获。<strong>这里的 throw 是通过调用 Generator 函数得到的迭代器调用的，需要区别于全局的 throw 命令。</strong></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> gen = <span class="function"><span class="keyword">function</span>* (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">yield</span>;</span><br><span class="line">  &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"内部捕获"</span>, e);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> g = gen();</span><br><span class="line">g.next();</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  i.throw(<span class="string">"a"</span>);</span><br><span class="line">  i.throw(<span class="string">"b"</span>);</span><br><span class="line">  i.throw(<span class="string">"c"</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"外部捕获"</span>, e);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//-----输出-----</span></span><br><span class="line"><span class="comment">//内部捕获 a</span></span><br><span class="line"><span class="comment">//外部捕获 b</span></span><br></pre></td></tr></table></figure>
+<p><code>next</code>使 Generator 函数执行到<code>yield</code>，a 错误被 Generator 函数内部捕获，Generator 函数执行完。下一个 b 错误就只能被外部的<code>try-catch</code>语句捕获，得到 b。而外部函数的<code>try-catch</code>中，抛出 b 错误且被自身的<code>catch</code>捕获到，后面的<code>throw(&quot;c&quot;)</code>不会被执行。</p>
+<p>如果 Generator 函数内部没有指定<code>try-catch</code>语句，则抛出的错误只能被外部的<code>try-catch</code>捕获，如果外部没有<code>try-catch</code>，那么函数会直接报错，中断执行。另外，如果迭代器对象没有调用过<code>next</code>方法，是不能执行<code>throw</code>方法的，因为<code>next</code>方法执行时，才真正执行 Generator 函数，此时的 <code>throw</code>方法会将错误直接抛出到函数外部。</p>
+<p>另外，如果 Generator 中<code>try-catch</code>语句后面还有<code>yield</code>，那么<code>throw</code>错误被 Generator 函数内捕获之后，还会附带执行一次<code>next</code>，触发<code>try-catch</code>后面的<code>yield</code>语句。如果 Generator 执行时抛出的错误没有被内部捕获，那么 Generator 函数就不会再执行下去。再执行<code>next</code>得到的是<code>{value:undefined,done:true}</code>。</p>
+<ul>
+<li>return 可以返回给定的参数值，将指定的参数作为<code>value</code>，如果不指定参数则<code>value</code>是<code>undefined</code>。但是<code>return</code>一旦执行，Generator 函数的迭代就算作终止了，<code>done</code>为<code>true</code>。</li>
+</ul>
+<p>如果 Generator 函数内还有<code>try-finally</code>语句块，且在执行<code>try</code>语句时调用了<code>return</code>,那么 Generator 函数会直接进入<code>finally</code>语句，<code>finally</code>语句执行完之后，才会通过<code>return</code>语句使 Generator 结束。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">gen</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">yield</span> <span class="string">"A"</span>;</span><br><span class="line">    <span class="keyword">yield</span> <span class="string">"B"</span>;</span><br><span class="line">  &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="keyword">yield</span> <span class="string">"C"</span>;</span><br><span class="line">    <span class="keyword">yield</span> <span class="string">"D"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> g = gen();</span><br><span class="line"><span class="built_in">console</span>.info(g.next()); <span class="comment">// &#123; value: 'A', done: false &#125;</span></span><br><span class="line"><span class="built_in">console</span>.info(g.return(<span class="string">"X"</span>)); <span class="comment">// &#123; value: 'C', done: false &#125;</span></span><br><span class="line"><span class="built_in">console</span>.info(g.next()); <span class="comment">// &#123; value: 'D', done: false &#125;</span></span><br><span class="line"><span class="built_in">console</span>.info(g.next()); <span class="comment">// &#123; value: 'X', done: true &#125;</span></span><br><span class="line"><span class="built_in">console</span>.info(g.next()); <span class="comment">// &#123; value: undefined, done: true &#125;</span></span><br></pre></td></tr></table></figure>
+<p>X 先于 C 和 D 被迭代，因为<code>return</code>导致<code>finally</code>执行。</p>
+<p><code>next</code>,<code>throw</code>,<code>return</code>三个方法都可以让 Generator 函数恢复执行。<code>next</code>方法可以传值并作为<code>yield</code>表达式的值，<code>throw</code>抛出错误，需要被<code>try-catch</code>在函数内部或外部捕获。<code>return</code>则终止 Generator 函数执行，可设定迭代<code>value</code>值。</p>
+<h3><span id="generator-函数实现异步">Generator 函数实现异步</span></h3>
+<p>到这里，Generator 函数的使用只是和<code>Iterator</code>迭代相关联，还没有真正进入他的核心使用方法**–异步编程**。在进入 Generator 函数的异步编程应用之前，需要简单了解一下<code>Thunk</code>函数。</p>
+<h4><span id="thunk-函数">Thunk 函数</span></h4>
+<blockquote>
+<p>解释：在对函数调用传参时，如果参数是一个计算结果，则将该计算过程封装到一个临时函数里面，再将临时函数传入到要调用的函数中。这个临时函数就是<code>Thunk</code>函数。</p>
+</blockquote>
+<p>在 JavaScript 中<code>Thunk</code>函数的含义略有不同，JavaScript 的<code>Thunk</code>函数则是<strong>将多参数函数替换成一个只接受回调函数</strong>的参数。</p>
+<p>如下函数，用<code>setTimeOut</code>模拟了一个异步过程，<code>asyncTask</code>接收两个参数，初始值和用于处理值的回调函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">asyncTask</span>(<span class="params">number, callBack</span>) </span>&#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> callBack(number + <span class="number">1</span>), <span class="number">2000</span>);</span><br><span class="line">&#125;</span><br><span class="line">getCount = <span class="function">(<span class="params">number</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.info(<span class="string">"[count]"</span>, number * <span class="number">10</span>);</span><br><span class="line">&#125;;</span><br><span class="line">asyncTask(<span class="number">3</span>, getCount);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 两秒后输出：</span></span><br><span class="line"><span class="comment">// [count] 40</span></span><br></pre></td></tr></table></figure>
+<p>将上面的流程改为<code>Thunk</code>函数执行，并用两个回调函数来处理：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">asyncThunk</span>(<span class="params">number</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">callBack</span>) </span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> callBack(number + <span class="number">1</span>), <span class="number">2000</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> thunk = asyncThunk(<span class="number">3</span>); <span class="comment">// thunk 就是一个 Thunk 函数，只接受一个函数参数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//定义两个回调函数</span></span><br><span class="line">getCount = <span class="function">(<span class="params">number</span>) =&gt;</span> <span class="built_in">console</span>.info(<span class="string">"[count]"</span>, number * <span class="number">10</span>);</span><br><span class="line">getMoreCount = <span class="function">(<span class="params">number</span>) =&gt;</span> <span class="built_in">console</span>.info(<span class="string">"[more,conut]"</span>, number * <span class="number">100</span>);</span><br><span class="line"><span class="comment">//执行 Thunk 函数，传入两个回调函数</span></span><br><span class="line">thunk(getCount);</span><br><span class="line">thunk(getMoreCount);</span><br><span class="line"></span><br><span class="line"><span class="comment">//两秒后一起输出：</span></span><br><span class="line"><span class="comment">//[count] 40</span></span><br><span class="line"><span class="comment">//[more,conut] 400</span></span><br></pre></td></tr></table></figure>
+<p>上面调用了两次<code>thunk</code>函数，但是结果是一起输出的，也就是说两个异步流程实际上是独立的。</p>
+<h4><span id="generator-函数通过-thunk-封装异步操作">Generator 函数通过 Thunk 封装异步操作</span></h4>
+<p>已经知道，<code>yield</code>可以暂停 Generator 函数执行，实际上是<strong>交出了程序的执行权，可以通过调用<code>next</code>方法使 Generator 函数再次获取执行权</strong>，而调用<code>next</code>方法可以放到回调中进行。 下面在用 Generator 函数实现两个异步任务，并且第二个异步任务使用第一个异步的结果来执行（等待第一个异步结束获取到结果再将其作为第二个异步任务的参数）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">asyncTask</span>(<span class="params">number</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">callBack</span>) </span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> callBack(number + <span class="number">1</span>), <span class="number">2000</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">gen</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> a1 = <span class="keyword">yield</span> asyncTask(<span class="number">3</span>);</span><br><span class="line">  <span class="built_in">console</span>.info(<span class="string">"a1"</span>, a1);</span><br><span class="line">  <span class="keyword">const</span> a2 = <span class="keyword">yield</span> asyncTask(a1);</span><br><span class="line">  <span class="built_in">console</span>.info(<span class="string">"a2"</span>, a2);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> g = gen();</span><br><span class="line"><span class="keyword">const</span> result1 = g.next();</span><br><span class="line">result1.value(<span class="function">(<span class="params">data1</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">//1</span></span><br><span class="line">  g.next(data1).value(<span class="function">(<span class="params">data2</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//2</span></span><br><span class="line">    g.next(data2);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//两秒后输出</span></span><br><span class="line"><span class="comment">// a1 4</span></span><br><span class="line"><span class="comment">//再过两秒后输出</span></span><br><span class="line"><span class="comment">// a2 5</span></span><br></pre></td></tr></table></figure>
+<p>传入的值是<code>3</code>，两秒后得到<code>4</code>，第一个异步流程执行完。而后第一个异步的结果<code>4</code>又被当做参数传到第二个异步任务中，所以得到<code>5</code>。这里异步就按照预期执行了。</p>
+<p>上面第一次调用<code>g.next()</code>的时候，程序执行权交给 Generator 函数，并执行到了<code>yield asyncTask(3)</code>，此时交出执行权。和上面的例子一样，<code>asyncTask(3)</code>的执行结果是一个 Thunk 函数，并需要接受一个回调函数作为参数。 而<code>yield</code>命令使该函数也是挂在返回的<code>{value:..,done:...}</code>对象的 value 属性上的，所以可以通过<code>result1</code>的 value 获取到该 Thunk 函数。</p>
+<p><code>result1.value</code>是一个 Thunk 函数，就需要传入一个回调函数，上面传入的是<code>(data1) =&gt; {g.next(data1)...</code>，回调函数中执行了<code>g.next</code>方法, Generator 函数再次获取了执行权。<code>data1</code>作为参数传入了<code>next</code>方法，故<code>a1</code>的值就是<code>data1</code>(yield 表达式的返回值)。同样，<code>g.next(data1).value</code>也是一个 Thunk 函数，继续为其添加回调就可以进行后面的操作，这里就已经通过 Generator 函数将两个异步过程<code>&quot;串联&quot;</code>了起来。</p>
+<blockquote>
+<p>关键点：通过将异步操作封装到 Thunk 中，在 Generator 中通过<code>yield</code>关键字，回调函数中执行<code>next</code>方法控制执行。</p>
+</blockquote>
+<h4><span id="generator-函数的自动执行">Generator 函数的自动执行</span></h4>
+<p>上面已经通过回调函数调用<code>next</code>，使 Generator 中的 Thunk 函数依次执行。但是需要每个 Thunk 函数都指定回调函数，而且这还只是没有处理错误异常的情况下。那么有没有一种方法，让多个处理策略相似的 Thunk 函数自动执行呢？</p>
+<p>肯定是有的，自定义可复用的回调函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">asyncThunk</span>(<span class="params">number</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">callBack</span>) </span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> callBack(number + <span class="number">1</span>), <span class="number">2000</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">gen</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> r1 = <span class="keyword">yield</span> asyncThunk(<span class="number">3</span>);</span><br><span class="line">  <span class="built_in">console</span>.info(<span class="string">"r1"</span>, r1);</span><br><span class="line">  <span class="keyword">const</span> r2 = <span class="keyword">yield</span> asyncThunk(r1);</span><br><span class="line">  <span class="built_in">console</span>.info(<span class="string">"r2"</span>, r2);</span><br><span class="line">  <span class="keyword">const</span> r3 = <span class="keyword">yield</span> asyncThunk(r2);</span><br><span class="line">  <span class="built_in">console</span>.info(<span class="string">"r3"</span>, r3);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> g = fn();</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">callBack</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> result = g.next(data);</span><br><span class="line">    <span class="keyword">if</span> (result.done) <span class="keyword">return</span>;</span><br><span class="line">    result.value(callBack);</span><br><span class="line">  &#125;</span><br><span class="line">  callBack();</span><br><span class="line">&#125;</span><br><span class="line">run(gen);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 每隔两秒依次输出</span></span><br><span class="line"><span class="comment">// r1 4</span></span><br><span class="line"><span class="comment">// r2 5</span></span><br><span class="line"><span class="comment">// r3 6</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>第一次 callBack 没有传入参数，调用<code>next</code>方法进入 Generator，传入 data，此时 data 虽然是 undefined，但<code>next</code>参数是<strong>上一个</strong><code>yield</code>表达式的结果，执行到的<code>yield</code>表达式本身就是第一条，所以并无影响，<code>result.value</code>这个 Thunk 函数接收 callBack 作为参数，callBack 再次执行时 data 的参数就是上次异步的结果<code>4</code>。后面的 Thunk 都是传入 callBack 函数，形如递归。</p>
+</blockquote>
+<p>定义 callBack 函数，在 callBack 函数中调用<code>next</code>,并且将上一次回调函数的参数（上一个异步操作的结果）传入下一次的<code>next</code>方法作为参数，指定回调函数也是自身 callBack，达到了上一次异步的结果用于下一次异步任务的目的，且没有指定多个回调函数，使 Generator 函数自动执行到结束。</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2020/07/08/ES6-Iterator-和迭代协议/" data-toggle="tooltip" data-placement="top" title="ES6 Iterator 和迭代协议">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+ 
+<aside id="sidebar">
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+     <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">初识 Generator 函数</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">yield 表达式</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">yield 表达式的返回值</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">yield* 表达式</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Generator.prototype 的 next,throw,return 方法</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Generator 函数实现异步</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">Thunk 函数</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">Generator 函数通过 Thunk 封装异步操作</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">4.3.</span> <span class="toc-nav-text">Generator 函数的自动执行</span></a></li></ol></li></ol> 
+  </div>
+</aside>
+ 
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#ES6 大作战" title="ES6 大作战">ES6 大作战</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">It Helps SEO</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "your-disqus-ID";
+    var disqus_identifier = "http://yoursite-url/2020/07/15/ES6-Generator-函数/";
+    var disqus_url = "http://yoursite-url/2020/07/15/ES6-Generator-函数/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center">
+               
+          <!-- 暂时不在底部显示GitHub -->
+          <!-- <li>
+            <a
+              target="_blank"
+              href="https://github.com/lexguy"
+            >
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li> -->
+           
+        </ul>
+        <p class="copyright text-muted">
+          <span style="text-decoration: underline;">
+            Copyright &copy; xuwei 2020
+          </span>
+          <!-- <span style="margin-left: 30px; font-style: italic;">
+            starkcoder@sina.com</span
+          > -->
+          <br />
+
+          <!-- Theme by <a href="http://huangxuan.me">Hux</a> -->
+          <!-- <span style="display: inline-block; margin: 0 5px;">
+            <i class="fa fa-heart"></i>
+          </span> -->
+          <!-- re-Ported by <a href="http://beantech.org">BeanTech</a> | -->
+          <!-- <iframe
+            style="margin-left: 2px; margin-bottom: -5px;"
+            frameborder="0"
+            scrolling="0"
+            width="91px"
+            height="20px"
+            src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true"
+          >
+          </iframe> -->
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+<!-- async load function -->
+<script>
+  function async(u, c) {
+    var d = document,
+      t = "script",
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+      o.addEventListener(
+        "load",
+        function (e) {
+          c(null, e);
+        },
+        false
+      );
+    }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+<!-- jquery.tagcloud.js -->
+<script>
+  // only load tagcloud.js in tag.html
+  if ($("#tag_cloud").length !== 0) {
+    async(
+      "http://yoursite-url/js/jquery.tagcloud.js",
+      function () {
+        $.fn.tagcloud.defaults = {
+          //size: {start: 1, end: 1, unit: 'em'},
+          color: { start: "#bbbbee", end: "#0085a1" },
+        };
+        $("#tag_cloud a").tagcloud();
+      }
+    );
+  }
+</script>
+
+<!--fastClick.js -->
+<script>
+  async(
+    "https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js",
+    function () {
+      var $nav = document.querySelector("nav");
+      if ($nav) FastClick.attach($nav);
+    }
+  );
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+  // dynamic User by Hux
+  var _gaId = "UA-XXXXXXXX-X";
+  var _gaDomain = "yoursite";
+
+  // Originial
+  (function (i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    (i[r] =
+      i[r] ||
+      function () {
+        (i[r].q = i[r].q || []).push(arguments);
+      }),
+      (i[r].l = 1 * new Date());
+    (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(
+    window,
+    document,
+    "script",
+    "//www.google-analytics.com/analytics.js",
+    "ga"
+  );
+
+  ga("create", _gaId, _gaDomain);
+  ga("send", "pageview");
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://yoursite-url/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
