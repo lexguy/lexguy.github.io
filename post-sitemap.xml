@@ -8,6 +8,14 @@
     </url>
 
     <url>
+        <loc>http://yoursite-url/2020/08/11/%E4%B8%80%E7%82%B9%E6%84%9F%E6%85%A8/</loc>
+        <lastmod>2020-08-11T15:06:34.480Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://yoursite-url/2020/07/15/ES6-Generator-%E5%87%BD%E6%95%B0/</loc>
         <lastmod>2020-07-14T16:27:07.573Z</lastmod>
         <changefreq>weekly</changefreq>

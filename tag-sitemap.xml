@@ -3,6 +3,13 @@
 
 
     <url>
+        <loc>http://yoursite-url/tags/%E6%9D%82%E8%AE%B0/</loc>
+        <lastmod>2020-08-11T15:06:34.480Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://yoursite-url/tags/ES6-%E5%A4%A7%E4%BD%9C%E6%88%98/</loc>
         <lastmod>2020-07-14T16:27:07.573Z</lastmod>
         <changefreq>weekly</changefreq>
