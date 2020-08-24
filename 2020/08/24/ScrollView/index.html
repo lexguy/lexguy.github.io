@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          关于 - Xuwei&#39;s blog
+          ScrollView 中嵌套 FlatList 导致 onEndReached 事件频繁触发问题的探究 - Xuwei&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="http://yoursite-url/about/">
+    <link rel="canonical" href="http://yoursite-url/2020/08/24/ScrollView/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -76,8 +76,8 @@
 <style type="text/css">
   header.intro-header{
       
-          background-image: url('/img/header_img/Iron-Man-3.jpg')
-          /*page*/
+          background-image: url('null')
+          /*post*/
       
   }
   
@@ -90,10 +90,22 @@
       <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
           
-          <div class="site-heading">
-            <!--                       <h1>关于</h1>-->
-            <!--<hr class="small">-->
-            <!--                        <span class="subheading">Wish for the Best, Prepare for the Worst</span>-->
+          <div class="post-heading">
+            <div class="tags">
+              
+              <a
+                class="tag"
+                href="/tags/#React Native"
+                title="React Native"
+                >React Native</a
+              >
+              
+            </div>
+            <h1>ScrollView 中嵌套 FlatList 导致 onEndReached 事件频繁触发问题的探究</h1>
+            <h2 class="subheading"></h2>
+            <span class="meta">
+              Posted by xuwei on 2020-08-24
+            </span>
           </div>
           
         </div>
@@ -194,210 +206,186 @@
 
 
     <!-- Main Content -->
-    <!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
+    <!-- Modify by Yu-Hsuan Yen -->
 
-<!-- USE SIDEBAR -->
-    <!-- Post Container -->
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-            
-                <blockquote>
-<p>时间很短<br>
-我只是不想下次回顾的时候，像今天忆起过往一样难过</p>
-</blockquote>
-<p>你好，我是 Xuwei。</p>
-<p>一个普通的前端开发者，目前是 React &amp;&amp; React Native 方向。想不出什么其他闪光点，或许这正是当下的我。</p>
-<!-- 也只是当下的我。 -->
-<h4><span id="关于-xuweiplus"><em>关于 xuwei.plus</em></span></h4>
-<p>偶尔会写些东西，在本地有道云笔记，或者发在 CSDN，掘金。虽然更新频率不高，但有时产生写作冲动时，总觉得要有个更加自由的平台才舒服，毕竟想写也不总是技术相关。这个想法之后，再往其他平台上面写东西就越来越觉得有建立自由领地的必要。有了想法之后就得行动，无奈在选择技术和方案的时候，一直犹豫，再加上本来不足的时间偶尔被挥霍，就拖到了现在。最后还是毫无技术地在 hexo 上选了个主题开工。时间果真是耗不起的，现在就开始，做起来，比什么都强。</p>
-<h4><span id="记录-or-分享"><em>记录 or 分享</em></span></h4>
-<p>有时候写博客会犯难，以一种什么样的出发点和角度来发布。 通常对于个人笔记来说，更重要的是记录，结合实例场景描述一切从简，但是在可读性上更多倾向面对自己，其他人可能很难读懂具体场景和内容是什么，又或者读懂了也获得不了多大价值。而区别于个人笔记，博客应该更多的是分享，要面对更广的受众而非自己。所以要是一些具有普遍价值，带有分享性质的内容，才应该置于博客平台。所以，这里除开碎碎闲谈，技术上的内容，力求分享和引申出其他价值。</p>
-<h4><span id="闲谈网站其他"><em>闲谈网站其他</em></span></h4>
-<p>网站的首页，顶部图是早年的新浪博客的一个主题图。新浪博客是我的第一个博客，当时读初三，年少的自己喜欢许嵩，多少受一些影响。本来中二时期就喜欢装 13，还是关于抒情文艺的那种，就跟着用上了这个名为 [雾林] 的主题，还喜欢写一些或世俗或愤青的文字在上面。</p>
-<p>建立 xuwei.plus 的时候想起来那个新浪博客，试了下居然还能登上去，虽然有满满的羞耻，但是立马截取了这个主题大图，换做现在博客的大图，虽然不全是“当年”的感觉，但感受到一种完整和得以延续的踏实，也算是中二时期留下的一份礼物吧。</p>
-<p>在自己的领地写东西，会有一种不一样的自由。区别于私有的有道云笔记的本地写作，也区别于各个带有明显内容倾向的博客平台。可以写技术上的需要记录的重点，新内容的阶段性的成果，也可以写日常生活，所想所得。这里写东西，自己一面闲暇记录的同时，也试着输出一些引人注目的干货。</p>
-<p>像个街角唱台的艺人，无人叫好的时候，得更用心的唱。</p>
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
+                <p>ScrollView 中嵌套 FlatList 导致 onEndReached 事件频繁触发问题的探究</p>
+<p>问题场景：</p>
+<p>对于如下的页面，<code>ScrollView</code>中包含一个蓝色区域<code>View</code>和一个<code>FlatList</code>，蓝色区域可以与<code>FlatList</code>一起滑动。<code>FlstList</code>可以上拉加载更多，也就是做了分页处理的。其加载更多的请求，写在触底事件<code>onEndReached</code>方法中，这时问题就产生了：</p>
+<p><code>onEndReached</code>会频繁触发，即便是没有滑动，甚至是在这个<code>View</code>执行<code>render</code>方法渲染的时候就会触发，而且是连续多次。</p>
+<p><img src="https://pic.downk.cc/item/5f43cf5b160a154a67466d05.jpg" width="400"></p>
+<p>原因分析：</p>
+<p><code>FlatList</code> 的触底事件需要获取外层显示区域的高度，在外层加上一个弹性布局的<code>ScrollView</code>，导致外层视图高度是动态的，影响到内层<code>FlatList</code>触底事件的判断。</p>
+<p>而当采用这种写法的时候，<code>RN</code>本身也是给出<code>ScrollView</code>嵌套同向的<code>FlatList</code>的警告，表示这个做法不被推荐的。</p>
+<p>解决方案查找：</p>
+<p>可直接查看第三步，为目前最合适的解决方案。</p>
+<ol>
+<li>对于这些问题，第一时间肯定是到<code>github</code>的官方<code>react-native</code>库的<code>issues</code>中查看。这里找到相对有价值了一条 <a href="https://github.com/facebook/react-native/issues/23060" target="_blank" rel="noopener">isuuse : onEndReached called many many times</a></li>
+</ol>
+<p>该问题已经被关闭，却并没有给出合适的解决方案。虽然有推荐将加载更多的请求写在<code>onMomentumScrollEnd</code>中，但是经过测试，触发时机依然不尽人意。</p>
+<ol start="2">
+<li>是不是可以从滑动和触发时机上解决呢？<code>FlatList</code>继承了<code>ScrollView</code>的全部属性，那么我们就可以通过<code>onScroll</code>事件，获取到<code>FlatList</code>和<code>ScrollView</code>的内容高度和滑动距离，然后通过计算，滑动到底部的距离小于某值或其他自定义关系满足的时候，触发请求。（<a href="https://reactnative.cn/docs/scrollview#onscroll" target="_blank" rel="noopener">参考 onScroll  方法</a>）</li>
+</ol>
+<p>将事件由外层<code>ScrollView</code>滑动时判断触发，虽然拆解和计算相对要复杂，但是总归是可行的方案。</p>
+<ol start="3">
+<li>其实可以将这些都考虑一些，回到问题的原点，我们要做的只是将蓝色区域放在滑动区域内部，跟随<code>FlatList</code>一起滑动。那么可以将蓝色部分和<code>FlatList</code>作为一个整体：<strong>利用 FlatList 的<code>ListHeaderComponent</code>属性。</strong></li>
+</ol>
+<p>也就是说，将蓝色区域的整个<code>View</code>，作为一个组件传入到<code>ListHeaderComponent</code>属性上。这样一来，<code>ScrollView</code>也没有存在的必要了，问题得以解决。</p>
+<p>有一点投机取巧的意味，但也是目前能考虑到最好方案了，还有其他方案，欢迎指教！</p>
+<p>Q：275542283</p>
 
-                <!-- 如果开启评论功能 -->
                 
-                    <hr>
 
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
                     
+                    
+                        <li class="next">
+                            <a href="/2020/08/11/一点感慨/" data-toggle="tooltip" data-placement="top" title="一点感慨">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
 
-                    
-                    <!-- disqus 评论框 start -->
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
                     <div class="comment">
                         <div id="disqus_thread" class="disqus-thread"></div>
                     </div>
-                    <!-- disqus 评论框 end -->
-                    
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+ 
+<aside id="sidebar">
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+    <ol class="nav">
+      none
+    </ol>
+    
+  </div>
+</aside>
+ 
 
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
 
-                    
-
-                    
-                    <!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
-                    <script type="text/javascript">
-                        /* * * CONFIGURATION VARIABLES * * */
-                        var disqus_shortname = "your-disqus-ID";
-                        var disqus_identifier = "http://yoursite-url/about/index.html";
-                        var disqus_url = "http://yoursite-url/about/index.html";
-
-                        (function() {
-                            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                        })();
-
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#React Native" title="React Native">React Native</a>
                         
-                    </script>
-                    <!-- disqus 公共JS代码 end -->
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
                     
+                        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">It Helps SEO</a></li>
+                    
+                </ul>
                 
             </div>
-
-          <!-- Sidebar Container -->
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-        <!-- Short About -->
-<section class="visible-md visible-lg">
-<!--    <h5><a href="/about/">ABOUT ME</a></h5>-->
-    <h5><a href="/about/">关于我</a></h5>
-    <div class="short-about">
-
-        
-
-        
-            <p>Hi, 我是 Xuwei, 一个专注于 React，React Native 的前端开发者</p>
-        
-
-        <!-- SNS Link -->
-        <ul class="list-inline">
-            
-            
-            
-
-            
-
-            
-
-            
-                <li>
-                    <a target="_blank"  href="https://github.com/lexguy">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            
-
-
-            
-        </ul>
+        </div>
     </div>
-</section>
-
-        <hr>
-    
-        <!-- Featured Tags -->
-
-<section>
-    <!-- no hr -->
-<!--    <h5><a href="/tags/">FEATURED TAGS</a></h5>-->
-    <h5><a href="/tags/">标签</a></h5>
-
-    <div class="tags" id='tag_cloud'>
-        
-            <a href="/tags/#ES6 大作战" title="ES6 大作战" rel="6">ES6 大作战</a>
-        
-            <a href="/tags/#React Native" title="React Native" rel="6">React Native</a>
-        
-            <a href="/tags/#动画" title="动画" rel="2">动画</a>
-        
-            <a href="/tags/#React" title="React" rel="2">React</a>
-        
-            <a href="/tags/#应用" title="应用" rel="1">应用</a>
-        
-            <a href="/tags/#杂记" title="杂记" rel="1">杂记</a>
-        
-    </div>
-
-<!--    <div id='tag_cloud' class="tags">-->
-<!--        -->
-<!--            <a href="#ES6 大作战" title="ES6 大作战" rel="6">ES6 大作战</a>-->
-<!--        -->
-<!--            <a href="#React Native" title="React Native" rel="6">React Native</a>-->
-<!--        -->
-<!--            <a href="#动画" title="动画" rel="2">动画</a>-->
-<!--        -->
-<!--            <a href="#React" title="React" rel="2">React</a>-->
-<!--        -->
-<!--            <a href="#应用" title="应用" rel="1">应用</a>-->
-<!--        -->
-<!--            <a href="#杂记" title="杂记" rel="1">杂记</a>-->
-<!--        -->
-<!--    </div>-->
-    
-
-</section>
+</article>
 
 
-        <hr>
-    
-        
-<!--  <h5>RECENT POSTS最近发布</h5>-->
-  <h5>最近发布</h5>
-
-  <div class="widget">
-    <ul>
-      
-        <li>
-          <a href="/2020/08/24/ScrollView/">ScrollView 中嵌套 FlatList 导致 onEndReached 事件频繁触发问题的探究</a>
-        </li>
-      
-        <li>
-          <a href="/2020/08/11/一点感慨/">一点感慨</a>
-        </li>
-      
-        <li>
-          <a href="/2020/07/15/ES6-Generator-函数/">ES6 Generator 函数和 yield 关键字</a>
-        </li>
-      
-        <li>
-          <a href="/2020/07/08/ES6-Iterator-和迭代协议/">ES6 Iterator 和迭代协议</a>
-        </li>
-      
-        <li>
-          <a href="/2020/07/05/ES6-Maps数据结构/">ES6 Map 数据结构</a>
-        </li>
-      
-    </ul>
-  </div>
 
 
-        <hr>
-    
-</div>
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "your-disqus-ID";
+    var disqus_identifier = "http://yoursite-url/2020/08/24/ScrollView/";
+    var disqus_url = "http://yoursite-url/2020/08/24/ScrollView/";
 
-        
-    </div>
-</div>
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
 
 
     <!-- Footer -->

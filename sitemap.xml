@@ -4,7 +4,7 @@
 
     <sitemap>
         <loc>http://yoursite-url/post-sitemap.xml</loc>
-        <lastmod>2020-08-11T15:06:34.480Z</lastmod>
+        <lastmod>2020-08-24T15:22:03.296Z</lastmod>
     </sitemap>
 
     <sitemap>
@@ -14,7 +14,7 @@
 
     <sitemap>
         <loc>http://yoursite-url/tag-sitemap.xml</loc>
-        <lastmod>2020-08-11T15:06:34.480Z</lastmod>
+        <lastmod>2020-08-24T15:22:03.296Z</lastmod>
     </sitemap>
 
 </sitemapindex>
