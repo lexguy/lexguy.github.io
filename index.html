@@ -137,13 +137,6 @@
              
           <li>
             <a
-              href="/about/"
-              >关于
-            </a>
-          </li>
-            
-          <li>
-            <a
               href="/archive/"
               >时间轴
             </a>
@@ -153,6 +146,13 @@
             <a
               href="/tags/"
               >标签
+            </a>
+          </li>
+            
+          <li>
+            <a
+              href="/about/"
+              >关于
             </a>
           </li>
            
@@ -216,16 +216,16 @@
 <div class="post-preview">
   <a href="/2020/08/24/ScrollView/">
     <h2 class="post-title">
-      ScrollView 中嵌套 FlatList 导致 onEndReached 事件频繁触发问题的探究
+      ScrollView 中嵌套 FlatList 导致 onEndReached 事件频繁触发的问题
     </h2>
     <h3 class="post-subtitle">
       
     </h3>
     <div class="post-content-preview">
-      ScrollView 中嵌套 FlatList 导致 onEndReached 事件频繁触发问题的探究
+      ScrollView 中嵌套 FlatList 导致 onEndReached 事件频繁触发的问题
 问题场景：
 对于如下的页面，ScrollView中包含一个蓝色区域View和一个FlatList，蓝色区域可以与FlatList一起滑动。FlstList可以上拉加载更多，也就是做了分页处理的。其加载更多的请求，写在触底事件onEndReached方法中，这时问题就产生了：
-onEndRe......
+onEndReac......
     </div>
   </a>
   
@@ -245,30 +245,27 @@ onEndRe......
 <hr />
 
 <div class="post-preview">
-  <a href="/2020/08/11/一点感慨/">
+  <a href="/2020/07/22/ES6-async-await/">
     <h2 class="post-title">
-      一点感慨
+      ES6 async/await
     </h2>
     <h3 class="post-subtitle">
       
     </h3>
     <div class="post-content-preview">
-      一点感慨。
-不知不觉已经是 2020 年的八月中了，毕业再到工作已经两年，时间真是在不经意间就会很快流逝。
-可能偶尔一回头发现已经走了这么远，曾经要做到的东西并没有多少真正落地，这逝去的时间里做了些什么已经记不太清，又更觉得虚度了年岁，不由得一阵喟叹。可是在这喟叹之后，又剩下什么？依然被湮没在庸常的忙碌和浮躁的欲望中，渣也不剩下。
-而每一次的回望，带来一阵思考，也带来一阵的清醒，我能做的，就......
+      
+预备知识：异步操作，回调函数，Promise。
+
+由上一章Generator 函数知Generator函数和Thunk函数（或回调函数，Promise）配合使用就可以使Generator函数在自动执行的时候支持异步函数，Generator函数执行以来执行器，封装异步操作虽然可行但是无疑是比较复杂的，无论是代码上还是原理上。为此，ES1027 引入了async函数，大大精简异步操作写法。
+a......
     </div>
   </a>
   
   <p class="post-meta" style="margin: 10px 0;">
 <!--    Posted by xuwei on-->
-    2020-08-11
+    2020-07-22
   </p>
   <div class="tags">
-    
-    <a href="/tags/#杂记" title="杂记"
-      >杂记</a
-    >
     
   </div>
   
@@ -609,11 +606,9 @@ React Native 的 JavaScript 层都是 React 的语法，故父子组件的传值
         
             <a href="/tags/#动画" title="动画" rel="2">动画</a>
         
-            <a href="/tags/#React" title="React" rel="2">React</a>
-        
             <a href="/tags/#应用" title="应用" rel="1">应用</a>
         
-            <a href="/tags/#杂记" title="杂记" rel="1">杂记</a>
+            <a href="/tags/#React" title="React" rel="2">React</a>
         
     </div>
 
@@ -625,11 +620,9 @@ React Native 的 JavaScript 层都是 React 的语法，故父子组件的传值
 <!--        -->
 <!--            <a href="#动画" title="动画" rel="2">动画</a>-->
 <!--        -->
-<!--            <a href="#React" title="React" rel="2">React</a>-->
-<!--        -->
 <!--            <a href="#应用" title="应用" rel="1">应用</a>-->
 <!--        -->
-<!--            <a href="#杂记" title="杂记" rel="1">杂记</a>-->
+<!--            <a href="#React" title="React" rel="2">React</a>-->
 <!--        -->
 <!--    </div>-->
     
@@ -647,11 +640,11 @@ React Native 的 JavaScript 层都是 React 的语法，故父子组件的传值
     <ul>
       
         <li>
-          <a href="/2020/08/24/ScrollView/">ScrollView 中嵌套 FlatList 导致 onEndReached 事件频繁触发问题的探究</a>
+          <a href="/2020/08/24/ScrollView/">ScrollView 中嵌套 FlatList 导致 onEndReached 事件频繁触发的问题</a>
         </li>
       
         <li>
-          <a href="/2020/08/11/一点感慨/">一点感慨</a>
+          <a href="/2020/07/22/ES6-async-await/">ES6 async/await</a>
         </li>
       
         <li>

@@ -14,7 +14,7 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          ScrollView 中嵌套 FlatList 导致 onEndReached 事件频繁触发问题的探究 - Xuwei&#39;s blog
+          ScrollView 中嵌套 FlatList 导致 onEndReached 事件频繁触发的问题 - Xuwei&#39;s blog
         
     </title>
 
@@ -101,7 +101,7 @@
               >
               
             </div>
-            <h1>ScrollView 中嵌套 FlatList 导致 onEndReached 事件频繁触发问题的探究</h1>
+            <h1>ScrollView 中嵌套 FlatList 导致 onEndReached 事件频繁触发的问题</h1>
             <h2 class="subheading"></h2>
             <span class="meta">
               Posted by xuwei on 2020-08-24
@@ -149,13 +149,6 @@
              
           <li>
             <a
-              href="/about/"
-              >关于
-            </a>
-          </li>
-            
-          <li>
-            <a
               href="/archive/"
               >时间轴
             </a>
@@ -165,6 +158,13 @@
             <a
               href="/tags/"
               >标签
+            </a>
+          </li>
+            
+          <li>
+            <a
+              href="/about/"
+              >关于
             </a>
           </li>
            
@@ -219,7 +219,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>ScrollView 中嵌套 FlatList 导致 onEndReached 事件频繁触发问题的探究</p>
+                <p>ScrollView 中嵌套 FlatList 导致 onEndReached 事件频繁触发的问题</p>
 <p>问题场景：</p>
 <p>对于如下的页面，<code>ScrollView</code>中包含一个蓝色区域<code>View</code>和一个<code>FlatList</code>，蓝色区域可以与<code>FlatList</code>一起滑动。<code>FlstList</code>可以上拉加载更多，也就是做了分页处理的。其加载更多的请求，写在触底事件<code>onEndReached</code>方法中，这时问题就产生了：</p>
 <p><code>onEndReached</code>会频繁触发，即便是没有滑动，甚至是在这个<code>View</code>执行<code>render</code>方法渲染的时候就会触发，而且是连续多次。</p>
@@ -252,7 +252,7 @@
                     
                     
                         <li class="next">
-                            <a href="/2020/08/11/一点感慨/" data-toggle="tooltip" data-placement="top" title="一点感慨">Next Post &rarr;</a>
+                            <a href="/2020/07/22/ES6-async-await/" data-toggle="tooltip" data-placement="top" title="ES6 async/await">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
