@@ -1,183 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  
-  <url>
-    <loc>http://yoursite-url/baidu_verify_code-FTjFydPGGl.html</loc>
-    
-    <lastmod>2020-11-01</lastmod>
-    
-  </url>
-  
   <url>
     <loc>http://yoursite-url/2020/08/24/ScrollView/</loc>
-    
     <lastmod>2020-10-21</lastmod>
-    
   </url>
-  
   <url>
     <loc>http://yoursite-url/2020/07/22/ES6-async-await/</loc>
-    
     <lastmod>2020-10-21</lastmod>
-    
   </url>
-  
-  <url>
-    <loc>http://yoursite-url/archive/index.html</loc>
-    
-    <lastmod>2020-08-24</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite-url/about/index.html</loc>
-    
-    <lastmod>2020-08-24</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite-url/tags/index.html</loc>
-    
-    <lastmod>2020-08-24</lastmod>
-    
-  </url>
-  
   <url>
     <loc>http://yoursite-url/2020/07/15/ES6-Generator-%E5%87%BD%E6%95%B0/</loc>
-    
     <lastmod>2020-07-14</lastmod>
-    
   </url>
-  
   <url>
     <loc>http://yoursite-url/2020/07/08/ES6-Iterator-%E5%92%8C%E8%BF%AD%E4%BB%A3%E5%8D%8F%E8%AE%AE/</loc>
-    
     <lastmod>2020-07-08</lastmod>
-    
   </url>
-  
   <url>
     <loc>http://yoursite-url/2020/07/05/ES6-Maps%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
-    
     <lastmod>2020-07-05</lastmod>
-    
   </url>
-  
   <url>
     <loc>http://yoursite-url/2020/05/28/ES6-Symbol-%E8%AE%A4%E8%AF%86%E5%92%8C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</loc>
-    
     <lastmod>2020-06-30</lastmod>
-    
   </url>
-  
   <url>
     <loc>http://yoursite-url/2020/06/16/ES6-Set-%E6%95%B0%E6%8D%AE/</loc>
-    
     <lastmod>2020-06-16</lastmod>
-    
   </url>
-  
   <url>
     <loc>http://yoursite-url/2020/06/08/ES6-Promise/</loc>
-    
     <lastmod>2020-06-13</lastmod>
-    
   </url>
-  
   <url>
     <loc>http://yoursite-url/2020/05/08/React-Native-%E5%AE%9A%E4%BD%8D%E8%8E%B7%E5%8F%96%E4%BD%8D%E7%BD%AE%E4%BF%A1%E6%81%AF/</loc>
-    
     <lastmod>2020-06-04</lastmod>
-    
   </url>
-  
   <url>
     <loc>http://yoursite-url/2020/06/02/React-memo-%E4%BC%98%E5%8C%96%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BB%84%E4%BB%B6%E6%B8%B2%E6%9F%93/</loc>
-    
     <lastmod>2020-06-03</lastmod>
-    
   </url>
-  
   <url>
     <loc>http://yoursite-url/2020/05/27/proptypes%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%9F%A5/</loc>
-    
     <lastmod>2020-05-27</lastmod>
-    
   </url>
-  
   <url>
     <loc>http://yoursite-url/2020/05/24/React%20Native%20%E6%9E%84%E5%BB%BA%E7%9A%84%E4%BB%BF%E8%B1%86%E7%93%A3%E5%BA%94%E7%94%A8/</loc>
-    
     <lastmod>2020-05-24</lastmod>
-    
   </url>
-  
   <url>
     <loc>http://yoursite-url/2020/05/23/LayoutAnimation_setNativeProps/</loc>
-    
     <lastmod>2020-05-23</lastmod>
-    
   </url>
-  
   <url>
     <loc>http://yoursite-url/2020/05/13/React-Native-Animated/</loc>
-    
     <lastmod>2020-05-12</lastmod>
-    
   </url>
-  
-  <url>
-    <loc>http://yoursite-url/404.html</loc>
-    
-    <lastmod>2020-05-06</lastmod>
-    
-  </url>
-  
-
-  <url>
-    <loc>http://yoursite-url/</loc>
-    <lastmod>2020-11-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-  </url>
-
-  
-  <url>
-    <loc>http://yoursite-url/tags/ES6-%E5%A4%A7%E4%BD%9C%E6%88%98/</loc>
-    <lastmod>2020-11-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite-url/tags/React-Native/</loc>
-    <lastmod>2020-11-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite-url/tags/%E5%8A%A8%E7%94%BB/</loc>
-    <lastmod>2020-11-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite-url/tags/%E5%BA%94%E7%94%A8/</loc>
-    <lastmod>2020-11-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite-url/tags/React/</loc>
-    <lastmod>2020-11-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-
-  
-</urlset>
+</urlset> 
