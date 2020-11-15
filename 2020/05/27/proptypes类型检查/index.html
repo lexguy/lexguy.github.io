@@ -65,13 +65,7 @@
 
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="">
-	<!--
- * @Author: xuwei
- * @Date: 2020-05-07 00:57:50
- * @LastEditTime: 2020-05-10 21:41:15
- * @LastEditors: xuwei
- * @Description: 
- -->
+	
 <!-- Modified by Yu-Hsuan Yen -->
 <!-- Post Header -->
 <style type="text/css">
@@ -236,7 +230,7 @@
 <p>或者在组件外部定义：</p>
 <figure class="highlight roboconf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">MyButton.propTypes= &#123;</span><br><span class="line">  <span class="attribute">text</span>: PropTypes<span class="variable">.string</span>,</span><br><span class="line">  onButtonPress: PropTypes<span class="variable">.func</span><span class="variable">.isRequired</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在指定的类型后面加上 .isRequired 表示该属性是必须传入值的，当没有传入的时候会出现报错。如果你的编辑器配置了 JSX 语法，自动检测也会提示出来，避免出现未传值导致的错误。</p>
-<h3><span id="proptypes-类型验证">PropTypes 类型验证</span></h3>
+<h3 id="proptypes-类型验证">PropTypes 类型验证</h3>
 <p>支持的可选的 prop 的类型有很多，基本类型的验证都是支持的：</p>
 <ul>
 <li><strong>array</strong></li>
@@ -268,7 +262,7 @@
 <p>除了这些已经提供的可选项，你还可以自定义匹配的规则，当不满足的时候返回一个错误（这里验证函数中不能使用 console.warn(), 只能是 return new Error(…)）：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> propTypes = &#123;</span><br><span class="line">  extraData: <span class="function"><span class="keyword">function</span> (<span class="params">props, propName, componentName</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (props[propName] !== <span class="string">'...?(自定义规则)'</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'...错误信息'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这样一来，当传入 prop 值不满足你定义的条件的时候，便可以获得错误，便于 debug。</p>
-<h3><span id="默认-prop-值">默认 prop 值</span></h3>
+<h3 id="默认-prop-值">默认 prop 值</h3>
 <p>上面已经提到，在组件必须传入某个 prop 值的时候，可以加上 .isRequired 标记成必须传值的 prop。但是有时候可能组件的该 prop 在使用时多半是固定值，只有个别情况需要传入不同值，那么就应该设定一个默认值，对个别情况再传值，避免大量相同的传值代码。此时就应该使用 defaultPorps 来设定默认值。</p>
 <figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> defaultProps = &#123;</span><br><span class="line">  <span class="built_in">text</span>:<span class="string">'确认'</span>,</span><br><span class="line">  style: &#123;</span><br><span class="line">    <span class="built_in">width</span>: <span class="number">70</span>,</span><br><span class="line">    <span class="built_in">height</span>: <span class="number">50</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>比如上面的 MyButton，指定 text 这个 prop 的默认值就是 ‘确认’。那么就算它是 isRequired 的，我们不传值也不会出现错误，因为 propTypes 类型检查发生在 defaultProps 赋值之后，有了默认值，就不再报错。所以对于很多地方需要 text 都是 ‘确认’ 的情况，我们便省去了逐个传值的操作。而对于 text 不是 ‘确认’ 的地方，我们再传值，就可以覆盖掉默认值，使组件传值正常使用。</p>
@@ -313,7 +307,7 @@
 <aside id="sidebar">
   <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
-     <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">PropTypes 类型验证</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">默认 prop 值</span></a></li></ol> 
+     <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#proptypes-类型验证"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">PropTypes 类型验证</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#默认-prop-值"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">默认 prop 值</span></a></li></ol> 
   </div>
 </aside>
  

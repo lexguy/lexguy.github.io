@@ -65,13 +65,7 @@
 
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="">
-	<!--
- * @Author: xuwei
- * @Date: 2020-05-07 00:57:50
- * @LastEditTime: 2020-05-10 21:41:15
- * @LastEditors: xuwei
- * @Description: 
- -->
+	
 <!-- Modified by Yu-Hsuan Yen -->
 <!-- Post Header -->
 <style type="text/css">
@@ -223,7 +217,7 @@
                 <p>ES6 Iterator 和迭代协议</p>
 <p>JavaScript 中表示数据集合的结构有四种 : <code>Array</code>，<code>Object</code>，以及 ES6 的<code>Set</code>和<code>Map</code>。而且对于数据集合，经常会有遍历的需要，但是并不是这四种数据结构都可以直接被遍历，当他们数据结构层级复杂（比如<code>Set</code>中包含 Object…）时，就更难被遍历了。为了实现数据集合的统一访问，ES6 引入了<code>Iterator</code>迭代器和<code>迭代协议</code>，主要用于<code>for...of</code>迭代。</p>
 <p>为什么数组能被<code>for...of</code>循环得到每个值？本篇内容将从<code>for...of</code>迭代循环入手探寻迭代机制以及该原理机制的应用。</p>
-<h3><span id="iterator-是什么">Iterator 是什么</span></h3>
+<h3 id="iterator-是什么">Iterator 是什么</h3>
 <p>Iterator 迭代器是实现对数据集合统一访问的，使之可遍历的机制。任一数据结构只要实现了 Iterator 接口，就可以对该数据进行遍历操作。</p>
 <p>如何实现？</p>
 <p>当一个对象需要迭代的时候，对象要实现对应的 iterator 方法，也就是该对象或者其原型对象上必须有一个键为<code>[Symbol.iterator]</code>的属性，值是一个函数，返回一个 Iterator 迭代器对象，用于定义对象的迭代行为。</p>
@@ -243,7 +237,7 @@
 <blockquote>
 <p>通过定义符合语义的<code>next()</code>函数使一个对象成为迭代器,进而定义了产生一系列值的标准方式。这个规则就是<strong>迭代器协议</strong>。</p>
 </blockquote>
-<h3><span id="迭代过程">迭代过程</span></h3>
+<h3 id="迭代过程">迭代过程</h3>
 <p>迭代器本身是一个指针对象。指向数据结构初始位置。</p>
 <ol>
 <li>获取到一个数据结构的迭代器，实际上的是得到一个指针对象。</li>
@@ -257,14 +251,14 @@
 <p>迭代器持续调用<code>next()</code>方法，就可以一直得到包含遍历值的对象，直到到达最后一个，<code>done</code>变为<code>true</code>，结束。结束后继续调用<code>next</code>,<code>done</code>依然是<code>true</code>,值为<code>undefined</code>。</p>
 <p>因为数组默认实现了<code>Symbol.iterator</code>，部署了迭代器的生成函数，所以是可以直接被<code>for...of</code>遍历的。<br>
 也就是说，<strong><code>for...of</code>迭代过程，实际上就是获取到目标数据结构的迭代器，持续调用<code>next()</code>方法得到遍历结果取出其中 value 值的过程。</strong></p>
-<h4><span id="对一个对象进行-forof-迭代">对一个对象进行 for…of 迭代</span></h4>
+<h4 id="对一个对象进行-forof-迭代">对一个对象进行 for…of 迭代</h4>
 <p>如果对象也有被遍历的需要，那我们也可以给对象或其原型对象添加上<code>Symbol.iterator</code>接口，部署一个迭代器生成函数。同时对对象各个属性的先后遍历顺序，也是需要自定义的。</p>
 <p>下面给一个对象添加<code>Symbol.iterator</code>接口使之可遍历：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  name: <span class="string">"xw"</span>,</span><br><span class="line">  gender: <span class="string">"man"</span>,</span><br><span class="line">  [<span class="built_in">Symbol</span>.iterator]: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> t = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">let</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      next: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> keys = <span class="built_in">Object</span>.keys(t);</span><br><span class="line">        <span class="keyword">if</span> (index &lt; keys.length) &#123;</span><br><span class="line">          <span class="keyword">return</span> &#123; <span class="attr">value</span>: t[keys[index++]], <span class="attr">done</span>: <span class="literal">false</span> &#125;;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">return</span> &#123; <span class="attr">value</span>: <span class="literal">undefined</span>, <span class="attr">done</span>: <span class="literal">true</span> &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>部署了<code>Symbol.iterator</code>接口并且该方法返回了一个带有<code>next</code>方法的对象，<code>next</code>方法根据对象的 keys 来遍历生成返回的值，遍历的顺序就是<code>Object.keys</code>生成的顺序。下面我们通过<code>for...of</code>来测试一下：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> value <span class="keyword">of</span> obj) &#123;</span><br><span class="line">  <span class="built_in">console</span>.info(value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//得到</span></span><br><span class="line">xw;</span><br><span class="line">man;</span><br></pre></td></tr></table></figure>
 <p>这样一来，对象就是可以通过<code>for...of</code>遍历的数据了。</p>
-<h3><span id="iterator-使用场景">Iterator 使用场景</span></h3>
+<h3 id="iterator-使用场景">Iterator 使用场景</h3>
 <ol>
 <li>for…of 循环</li>
 </ol>
@@ -333,7 +327,7 @@
 <aside id="sidebar">
   <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
-     <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Iterator 是什么</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">迭代过程</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">对一个对象进行 for…of 迭代</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Iterator 使用场景</span></a></li></ol> 
+     <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#iterator-是什么"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Iterator 是什么</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#迭代过程"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">迭代过程</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#对一个对象进行-forof-迭代"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">对一个对象进行 for…of 迭代</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#iterator-使用场景"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Iterator 使用场景</span></a></li></ol> 
   </div>
 </aside>
  

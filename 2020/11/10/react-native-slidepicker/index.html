@@ -65,13 +65,7 @@
 
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="">
-	<!--
- * @Author: xuwei
- * @Date: 2020-05-07 00:57:50
- * @LastEditTime: 2020-05-10 21:41:15
- * @LastEditors: xuwei
- * @Description: 
- -->
+	
 <!-- Modified by Yu-Hsuan Yen -->
 <!-- Post Header -->
 <style type="text/css">
@@ -229,20 +223,20 @@
 
                 <p>react-native-slidepicker</p>
 <p>一个纯 JavaScript 实现的的 React Native 组件，用于如地址，时间等分类数据选择的场景。</p>
-<h4><span id="效果">效果</span></h4>
+<h4 id="效果">效果</h4>
 <p>三轮选择，选择级联地址数据：</p>
 <p>（可自定义条目高，选中和非选中条目的背景色，字体颜色和大小）</p>
 <p><img src="https://pic.downk.cc/item/5faa9e621cd1bbb86bc7ab4c.jpg" width="400"></p>
-<h4><span id="起因">起因</span></h4>
+<h4 id="起因">起因</h4>
 <p>当前使用的<a href="https://github.com/beefe/react-native-picker" target="_blank" rel="noopener"> react-native-picker</a> 组件，虽然并没有什么功能上的硬伤，但是在样式可调性上稍差，而且鉴于该库的更新都是几年前了，issue 清理速度慢，所以还是需要备好替代方案。</p>
-<h4><span id="实现">实现</span></h4>
+<h4 id="实现">实现</h4>
 <p>具体的实现方案，首先考虑到的方案就是 ScrollView 滑动，然后在滑动离开的时候再定位到邻近的选择 Item 上面。</p>
 <p><img src="https://pic.downk.cc/item/5faa995e1cd1bbb86bc67305.jpg" width="600"></p>
 <p>在使用 ScrollView 作单个选择的滑动效果时，发现在上面添加了透明背景色之后，ScrollView 获取不到滑动事件，上层的 View 确实会拦截掉手势效果，就算不处理手势，ScrollView 也不会滑动。</p>
 <p>那就只能换一种方式了，那就换手势实现。</p>
 <p>选择列表根据手势的滑动做整体 transform ，根据手势上下偏移，手势释放的时候定位到最近的根据 Item 高度取整的位置。选择列表和透明背景层都处理手势，也操作该 tranform 动画值，就不会有手势滑动区域小的问题了。</p>
 <p>在每次手势停止的时候计算所处的位置，得到在数值列表中的索引，再通过 props 回调函数传回结果。如果是级联列表，需要重置下一选择轮的数据到初始值。</p>
-<h4><span id="结果">结果</span></h4>
+<h4 id="结果">结果</h4>
 <p>经过调试，终于得到结果，已经放在 <a href="https://github.com/lexguy/react-native-slidepicker" target="_blank" rel="noopener">Github  上  react-native-slidepicker </a>（包含使用详情和源码）</p>
 <p>也上传到 npm 库，可以直接安装：</p>
 <figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">npm</span> install react-<span class="keyword">native</span>-slidepicker</span><br></pre></td></tr></table></figure>
@@ -284,7 +278,7 @@
 <aside id="sidebar">
   <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
-     <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">效果</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">起因</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">实现</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">结果</span></a></li></ol> 
+     <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#效果"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">效果</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#起因"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">起因</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#实现"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">实现</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#结果"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">结果</span></a></li></ol> 
   </div>
 </aside>
  

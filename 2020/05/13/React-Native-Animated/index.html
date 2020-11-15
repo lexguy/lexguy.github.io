@@ -65,13 +65,7 @@
 
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="">
-	<!--
- * @Author: xuwei
- * @Date: 2020-05-07 00:57:50
- * @LastEditTime: 2020-05-10 21:41:15
- * @LastEditors: xuwei
- * @Description: 
- -->
+	
 <!-- Modified by Yu-Hsuan Yen -->
 <!-- Post Header -->
 <style type="text/css">
@@ -228,7 +222,7 @@
                 post-container">
 
                 <p>如果要在一个 React Native 应用中添加动画效果，首先考虑的就是官方提供的 Animated 。通过定义输入和输出的动画状态值，调用 start/stop 方法就可以执行起来，使用上可以说是非常友好方便。</p>
-<h4><span id="animated-动画组件"><em>Animated 动画组件</em></span></h4>
+<h4 id="animated-动画组件"><em>Animated 动画组件</em></h4>
 <p>如果让某个界面元素拥有动画效果，那它应该使用如下的动画组件：</p>
 <ul>
 <li>Animated.View</li>
@@ -238,7 +232,7 @@
 <li>Animated.FlatList</li>
 <li>Animated.SectionList</li>
 </ul>
-<h4><span id="动画类型"><em>动画类型</em></span></h4>
+<h4 id="动画类型"><em>动画类型</em></h4>
 <p>Animated 　可以创建三种动画类型，直接调用就能创建一个动画对象，如 Animated.timing(…) ，动画对象可以调用 start() 启动。</p>
 <ul>
 <li>timing 　先加速至全速，再逐渐减速渐停 (使用最多)</li>
@@ -249,7 +243,7 @@
 <pre><code>// 创建并启动一个 spring 类型的动画
 Aimated.spring(this.state.value,{...动画配置}).start();
 </code></pre>
-<h4><span id="动画值"><em>动画值</em></span></h4>
+<h4 id="动画值"><em>动画值</em></h4>
 <p>动画执行过程中的变量不是普通的变量，只能是动画值，有两种类型：</p>
 <ul>
 <li>Animated.Value()　表示单个值</li>
@@ -262,7 +256,7 @@ Aimated.spring(this.state.value,{...动画配置}).start();
 
 this.state.dynamicHeight.setValue(10);  //重新设定动画值
 </code></pre>
-<h4><span id="计算动画值"><em>计算动画值</em></span></h4>
+<h4 id="计算动画值"><em>计算动画值</em></h4>
 <p>一些时候所用的动画值并不是可以直接设定的，或者多个动画值存在一定关系，转换后使用更加方便，也就是在使用之前需要进行计算，这时就需要用到一些常用计算方法。</p>
 <p>例如: 一个长宽比为 3：2 的图片，要实现放大动画，为保持变化过程中的长宽比不变，这时就可以用一个公因数， 则 宽度 = 公因数 乘以 2 ，长度 = 公因数 乘以 3 ，在 state 中变化的动画值就是这个公因数，实际使用的动画值就是通过乘法 Animated.multiply() 得到的动画值。</p>
 <pre><code>// - 宽度计算 -
@@ -277,7 +271,7 @@ const realAnimatedWidth = Animated.multiply(this.state.factor,new Animated.Value
 <li>Animated.divide()　除</li>
 <li>Animated.modulo()　模（取余）</li>
 </ul>
-<h4><span id="组合类型"><em>组合类型</em></span></h4>
+<h4 id="组合类型"><em>组合类型</em></h4>
 <p>当多个动画需要需要以一定规律进行（多个动画值变动）的时候，就需要用到组合动画，Animated 提供了几种方法将动画按照一定方式组合：</p>
 <ul>
 <li>Animated.delay(time) 　按照给定延迟后执行动画</li>
@@ -293,7 +287,7 @@ Animated.parallel([
 	Animated.spring(...)
 ]).start()
 </code></pre>
-<h4><span id="插值"><em>插值</em></span></h4>
+<h4 id="插值"><em>插值</em></h4>
 <p>根据一个动画值的变化范围，获取另一个动画值的范围，需要使用插值。 插值函数 interpolate 可以将输入范围映射到输出范围，一般是使用线性插值，但也可以指定 easing 函数 [<a href="https://reactnative.cn/docs/animations/" title="Easing 介绍" target="_blank" rel="noopener">查看 Easing 介绍</a>]。</p>
 <p>对于一些属性值是字符串的变量，比如 rotate ，从 ‘0deg’ 到 ‘180deg’ ，也应该使用插值来获取变化范围。</p>
 <ul>
@@ -313,7 +307,7 @@ Animated.parallel([
     	}}
 </code></pre>
 <br>
-<h4><span id="一个完整的简单动画的实现"><em>一个完整的简单动画的实现</em></span></h4>
+<h4 id="一个完整的简单动画的实现"><em>一个完整的简单动画的实现</em></h4>
 <br>
 <p>一个完整的简单动画可以分如下几步实现</p>
 <ol>
@@ -331,7 +325,7 @@ Animated.parallel([
 </li>
 </ol>
 <p>对应于下面的例子来看，会更容易理解上述每一步。</p>
-<h5><span id="案例1">案例1</span></h5>
+<h5 id="案例1">案例1</h5>
 <p><strong>[ 动画 1 -动画值控制高度]</strong> 点击展开视图的动画，效果如下：</p>
 <p><img src="https://user-gold-cdn.xitu.io/2019/11/8/16e4a94286ce0ddf?w=350&amp;h=216&amp;f=gif&amp;s=74437" alt="点击展开-动画效果"></p>
 <p>通过将 Animated.View 的高度设置成动画值实现。 以上三步均在代码中标出</p>
@@ -381,7 +375,7 @@ Animated.parallel([
   }
 }
 </code></pre>
-<h5><span id="案例2">案例2</span></h5>
+<h5 id="案例2">案例2</h5>
 <p><strong>[ 动画 2 - 动画值插值转换]</strong> 点击跳动的心形图：</p>
 <p><img src="https://user-gold-cdn.xitu.io/2019/11/8/16e4a94287034a61?w=286&amp;h=115&amp;f=gif&amp;s=49714" alt="跳动效果"></p>
 <p>动画值 imageSize 从 0 到 1，映射成对应的实际图片大小，再设置到 Animated.Image 的宽高样式上。</p>
@@ -473,7 +467,7 @@ Animated.parallel([
 <aside id="sidebar">
   <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
-     <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Animated 动画组件</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">动画类型</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">动画值</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">计算动画值</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">组合类型</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">插值</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">一个完整的简单动画的实现</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">7.1.</span> <span class="toc-nav-text">案例1</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">7.2.</span> <span class="toc-nav-text">案例2</span></a></li></ol></li></ol> 
+     <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#animated-动画组件"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Animated 动画组件</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#动画类型"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">动画类型</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#动画值"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">动画值</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#计算动画值"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">计算动画值</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#组合类型"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">组合类型</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#插值"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">插值</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#一个完整的简单动画的实现"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">一个完整的简单动画的实现</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#案例1"><span class="toc-nav-number">7.1.</span> <span class="toc-nav-text">案例1</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#案例2"><span class="toc-nav-number">7.2.</span> <span class="toc-nav-text">案例2</span></a></li></ol></li></ol> 
   </div>
 </aside>
  

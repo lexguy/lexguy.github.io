@@ -65,13 +65,7 @@
 
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="">
-	<!--
- * @Author: xuwei
- * @Date: 2020-05-07 00:57:50
- * @LastEditTime: 2020-05-10 21:41:15
- * @LastEditors: xuwei
- * @Description: 
- -->
+	
 <!-- Modified by Yu-Hsuan Yen -->
 <!-- Post Header -->
 <style type="text/css">
@@ -227,10 +221,10 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h3><span id="layoutanimation"><em>LayoutAnimation</em></span></h3>
+                <h3 id="layoutanimation"><em>LayoutAnimation</em></h3>
 <p>对于一些既定的界面元素，图片、文字、滚动视图等动画效果，我们会优先选择 Animated 来进行处理。但是如果你的动画效果需要改变布局，涉及到其他的 View 或者节点元素。那么就应该优先考虑 LayoutAnimation 来实现了。</p>
 <p>较之于 Animated，LayoutAnimation 的使用要更简单。 如果你用 state 记录并改变过某一 View 的高度，那么在此基础上只需要调用一下 LayoutAnimation 的动画函数，并保证父节点是 flex 布局的，就可以实现这一高度变化的动画。</p>
-<h4><span id="动画类型"><em>动画类型:</em></span></h4>
+<h4 id="动画类型"><em>动画类型:</em></h4>
 <ul>
 <li>easeInEaseOut()　先加速至全速，再逐渐减速渐停</li>
 <li>linear()　线性动画，保持均速</li>
@@ -244,7 +238,7 @@
 <p>实现：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">  UIManager.setLayoutAnimationEnabledExperimental &amp;&amp; UIManager.setLayoutAnimationEnabledExperimental(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">LayoutAnimated</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  state = &#123;</span><br><span class="line">    moreHeight: <span class="number">0</span>,					<span class="comment">//动态高度</span></span><br><span class="line">  &#125;;</span><br><span class="line">  _onPress = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    LayoutAnimation.spring();   	<span class="comment">//调用 LayoutAnimation 动画</span></span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;<span class="attr">moreHeight</span>: <span class="keyword">this</span>.state.moreHeight === <span class="number">0</span> ? <span class="number">100</span> : <span class="number">0</span>&#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;View style=&#123;&#123;<span class="attr">flex</span>: <span class="number">1</span>, <span class="attr">paddingHorizontal</span>: <span class="number">20</span>&#125;&#125;&gt;</span><br><span class="line">        &lt;View style=&#123;styles.card_view&#125;&gt;</span><br><span class="line">          &lt;TouchableOpacity onPress=&#123;<span class="keyword">this</span>._onPress&#125;&gt;	<span class="comment">// 为看到点击效果，不在 Text中实现 onPress</span></span><br><span class="line">            &lt;Text style=&#123;styles.more_text&#125;&gt;查看更多&lt;<span class="regexp">/Text&gt;</span></span><br><span class="line"><span class="regexp">          &lt;/</span>TouchableOpacity&gt;</span><br><span class="line">          &lt;View style=&#123;&#123;<span class="attr">height</span>: <span class="keyword">this</span>.state.moreHeight&#125;&#125;/&gt;  <span class="comment">//变量直接设定给 View</span></span><br><span class="line">        &lt;<span class="regexp">/View&gt;</span></span><br><span class="line"><span class="regexp">        &lt;View style=&#123;&#123;backgroundColor: '#e29fae', height: 100&#125;&#125;/</span>&gt;</span><br><span class="line">      &lt;<span class="regexp">/View&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">const styles = StyleSheet.create(&#123;</span></span><br><span class="line"><span class="regexp">  card_view: &#123;backgroundColor: '#ebde5d', marginTop: 20&#125;,</span></span><br><span class="line"><span class="regexp">  more_text: &#123;textAlign: 'right', paddingVertical: 8, borderBottomColor: '#ccc', borderBottomWidth: 1&#125;,</span></span><br><span class="line"><span class="regexp">&#125;);</span></span><br></pre></td></tr></table></figure>
 <p>可见，外部布局是弹性布局的时候，在 setState 的基础上调用一次 LayoutAnimation.spring() ，就可以实现布局改变的动画。</p>
-<h3><span id="setnativeprops"><em>setNativeProps</em></span></h3>
+<h3 id="setnativeprops"><em>setNativeProps</em></h3>
 <p>如果使用的动画，需要频繁地刷新，进行 setState，就必定会影响到性能。 此时可以尝试使用 setNativeProps 来进行修改 ，该方法直接修改基于原生视图的组件的属性来达到效果。</p>
 <blockquote>
 <p>这种直接操作组件的操作并不是应该经常使用的工具。 一般只是用来创建连续的动画，同时避免渲染组件结构和同步太多视图变化所带来的大量开销。 setNativeProps 是一个“简单粗暴”的方法，它直接在底层（DOM、UIView 等）而不是 Rea<br>

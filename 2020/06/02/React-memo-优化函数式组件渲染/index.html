@@ -65,13 +65,7 @@
 
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="">
-	<!--
- * @Author: xuwei
- * @Date: 2020-05-07 00:57:50
- * @LastEditTime: 2020-05-10 21:41:15
- * @LastEditors: xuwei
- * @Description: 
- -->
+	
 <!-- Modified by Yu-Hsuan Yen -->
 <!-- Post Header -->
 <style type="text/css">
@@ -221,19 +215,19 @@
                 post-container">
 
                 <p>记录一个由 setState 导致动画“抖动”，引发的对函数式组件重新渲染的思考和处理。</p>
-<h4><span id="setstate-引发的动画抖动">setState 引发的动画“抖动”</span></h4>
+<h4 id="setstate-引发的动画抖动">setState 引发的动画“抖动”</h4>
 <p>今天写一个不规则跳动的动画组件用于录入音频时展示。写完测试的时候，本来动画表现正常，但是当点击一个其他按钮的时候，动画却很不自然的抖动了一下，每次点击都会产生抖动，如下：</p>
 <p><img src="https://pic.downk.cc/item/5ed5cf71c2a9a83be52c0a84.gif" width="300"></p>
 <p>多次测试发现，抖动之后的动画都是只在点击按钮的时候发生，而且是带有 setState 操作的时候才会出现。因为每次渲染都生成了新的动画值，通过在动画组件内部打印每次生成动画初始值，可以判定，动画不连续，是由 setState 引发重新渲染导致的。</p>
 <p>但是这里动画组件是独立的，且没有手动传入任何 props， 这个时候我们应该是不能让他重新渲染的，也就是说，不能随外部 setState 重置渲染自身。</p>
 <p>在父级的组件 setState 引起渲染的时候，包含的所有子组件都会重新比对再渲染，如果需要控制刷新渲染，class 组件可以通过 <code>PureComponent</code> 或者 <code>shouldComponentUpdate</code> 这些操作来实现，但是如果子组件是 function 组件的话呢， 又该怎么控制重新渲染？</p>
-<h4><span id="reactmemo-避免相同-props-时重新渲染">React.memo 避免相同 props 时重新渲染</span></h4>
+<h4 id="reactmemo-避免相同-props-时重新渲染">React.memo 避免相同 props 时重新渲染</h4>
 <p>类似于 class 组件的 PureComponent , React.memo 可以使函数式组件在相同 props 下渲染相同的结果。具体就是通过暂存记忆上次渲染结果，并在下次父组件刷新时直接跳过渲染并复用。因为可以避免不必要的更新，这无疑也是一种性能优化策略。</p>
 <blockquote>
 <p>要注意的是，如果组件中使用了 useState, useContext 这些 hook , 当 context 发生改变时，组件仍然会重新渲染。context ，state 发生改变时，视作组件数据已经改变，React.memo 不起效，重新渲染显然是合理的。</p>
 </blockquote>
 <p>那么，原理如此，React.memo 该应该如何使用呢？</p>
-<h5><span id="reactmemo-使用">React.memo 使用</span></h5>
+<h5 id="reactmemo-使用">React.memo 使用</h5>
 <p>很简单，如果你的组件原本是这样:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">MyFunComponent</span>(<span class="params"></span>)</span>&#123;....<span class="comment">//函数式组件&#125;</span></span><br></pre></td></tr></table></figure>
 <p>那么你只需要用 React.memo 包裹一下，就得到一个新的组件， 该组件具备上述可以避免不必要渲染的特性。如下：</p>
@@ -241,7 +235,7 @@
 <p>如果你有起名困难症，写成匿名函数也 OK：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> React.memo(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;...<span class="comment">//函数式组件 &#125;);</span></span><br></pre></td></tr></table></figure>
 <p>如果你对高阶组件比较熟悉，那应该对上面的做法不会陌生，React.memo 也是一个高阶组件，通过一层包装得到一个新组件。参考 <a href="https://zh-hans.reactjs.org/docs/higher-order-components.html" target="_blank" rel="noopener"> 「高阶组件」</a></p>
-<h5><span id="自定义对比规则">自定义对比规则</span></h5>
+<h5 id="自定义对比规则">自定义对比规则</h5>
 <p>如果只能在相同 props 下避免重新渲染，这个 API 是不是太固定了些，如果需要自定义对比规则，是否有像 <code>shouldComponentUpdate</code> 这样的方法呢？</p>
 <p>React.memo 也是可以满足的，可以向 React.memo 提供第二个参数，传入一个函数，该函数可以接受两个参数 preProps 和 nextProps ，分别代表前一次的 props 和后一次的 props，如果你用过 <code>shouldComponentUpdate</code> 那肯定已经熟悉这种对比了。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyFunComponent</span>(<span class="params">props</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//Porps 渲染组件</span></span><br><span class="line">  <span class="comment">//retun(...)</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">areEqual</span>(<span class="params">prevProps, nextProps</span>) </span>&#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">	// 例子   id 相同时不重新渲染</span></span><br><span class="line"><span class="comment">  if(prevProps.id===nextProps.id)&#123;</span></span><br><span class="line"><span class="comment">  	return true;</span></span><br><span class="line"><span class="comment">  &#125;</span></span><br><span class="line"><span class="comment">  return false;</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> React.memo(MyComponent, areEqual);</span><br></pre></td></tr></table></figure>
@@ -287,7 +281,7 @@
 <aside id="sidebar">
   <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
-     <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">setState 引发的动画“抖动”</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">React.memo 避免相同 props 时重新渲染</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">React.memo 使用</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">自定义对比规则</span></a></li></ol></li></ol> 
+     <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#setstate-引发的动画抖动"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">setState 引发的动画“抖动”</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#reactmemo-避免相同-props-时重新渲染"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">React.memo 避免相同 props 时重新渲染</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#reactmemo-使用"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">React.memo 使用</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#自定义对比规则"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">自定义对比规则</span></a></li></ol></li></ol> 
   </div>
 </aside>
  

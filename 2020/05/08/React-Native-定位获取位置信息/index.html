@@ -65,13 +65,7 @@
 
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="">
-	<!--
- * @Author: xuwei
- * @Date: 2020-05-07 00:57:50
- * @LastEditTime: 2020-05-10 21:41:15
- * @LastEditors: xuwei
- * @Description: 
- -->
+	
 <!-- Modified by Yu-Hsuan Yen -->
 <!-- Post Header -->
 <style type="text/css">
@@ -221,11 +215,11 @@
                 post-container">
 
                 <p>RN 文档上的定位功能需要谷歌框架支持，无疑带来了一些麻烦。github 上也有一些开源库，react-native-geolocation-service 等。但是这里还有一个更简便的位置获取 API。</p>
-<h3><span id="使用内置对象-navigator">使用内置对象 navigator:</span></h3>
+<h3 id="使用内置对象-navigator">使用内置对象 navigator:</h3>
 <figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">navigator</span><span class="selector-class">.geolocation</span><span class="selector-class">.getCurrentPosition</span>(</span><br><span class="line">    res =&gt; &#123;</span><br><span class="line">      <span class="comment">// console.log(res)</span></span><br><span class="line">      <span class="selector-tag">this</span><span class="selector-class">.setState</span>(&#123;</span><br><span class="line">        <span class="attribute">location</span>: res.coords</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;, err =&gt; &#123;</span><br><span class="line">    &#125;, &#123;&#125;)</span><br></pre></td></tr></table></figure>
 <p>第一个参数是成功回调，第二是失败回调，第三个是参数 options，可传空对象。</p>
 <p>成功回调中 res.coords 具有经纬度信息。对经纬度信息处理成地理位置，行政区域信息还需要用到第三方 api 。</p>
-<h3><span id="使用逆地址解析服务将经纬度解析成地址信息">使用逆地址解析服务将经纬度解析成地址信息</span></h3>
+<h3 id="使用逆地址解析服务将经纬度解析成地址信息">使用逆地址解析服务将经纬度解析成地址信息</h3>
 <br>
 这里可以通过[百度地图](http://lbsyun.baidu.com/apiconsole/key)或者[腾讯位置服务](http://lbs.qq.com/webservice_v1/guide-gcoder.html)的逆地址解析服务来完成，流程如下：
 <ol>
@@ -245,7 +239,7 @@
 <p>getLongitudeAndLatitude 就是上面的获取经纬度的方法，this.getNetData 是一个 fetch 请求的封装。拼接请求 Url，fetch 请求，此时 resolve 的数据就是 Postman 解析的 json 数据了。</p>
 <figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span>获取网络数据</span><br><span class="line">  getNetData(url) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Promise(<span class="function"><span class="params">(resolve, reject)</span> =&gt;</span> &#123;</span><br><span class="line">      fetch(url).<span class="keyword">then</span>(<span class="function"><span class="params">(response)</span> =&gt;</span> response.json())</span><br><span class="line">        .<span class="keyword">then</span>(<span class="function"><span class="params">(responseData)</span> =&gt;</span> &#123;</span><br><span class="line">          resolve(responseData);</span><br><span class="line">        &#125;)</span><br><span class="line">        .<span class="keyword">catch</span>(<span class="function"><span class="params">(error)</span> =&gt;</span> &#123;</span><br><span class="line">          reject(ErrorDeal.getError(NetWork_Error))</span><br><span class="line">        &#125;)</span><br><span class="line">        .done()</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <br>
-<h4><span id="对已获取信息处理">对已获取信息处理</span></h4>
+<h4 id="对已获取信息处理">对已获取信息处理</h4>
 <p>上面 getCityLocation 返回的 Promise 中 resolve 传递的 data 就是 json 数据了，就已经可以因自身需求进行数据处理显示的操作了。</p>
 <figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.getCityLocation()</span><br><span class="line">   .<span class="keyword">then</span>(<span class="function"><span class="params">(data)</span> =&gt;</span> &#123;</span><br><span class="line">     <span class="regexp">//</span> Alert.alert(<span class="string">"位置？"</span>, <span class="string">""</span> + JSON.stringify(data));</span><br><span class="line">     <span class="keyword">this</span>._confirmCity(data);</span><br><span class="line">   &#125;)</span><br><span class="line">   .<span class="keyword">catch</span>(<span class="function"><span class="params">(error)</span> =&gt;</span> &#123;</span><br><span class="line">     //ToastAndroid.show(<span class="string">"失败"</span> + JSON.stringify(error), ToastAndroid.SHORT);</span><br><span class="line">   &#125;);</span><br></pre></td></tr></table></figure>
 <p>调用 getCityLocation，再 then 方法处理处理 data ，此时的 data 是一个 json 对象。</p>
@@ -292,7 +286,7 @@
 <aside id="sidebar">
   <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
-     <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">使用内置对象 navigator:</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">使用逆地址解析服务将经纬度解析成地址信息</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">对已获取信息处理</span></a></li></ol></li></ol> 
+     <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#使用内置对象-navigator"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">使用内置对象 navigator:</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#使用逆地址解析服务将经纬度解析成地址信息"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">使用逆地址解析服务将经纬度解析成地址信息</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#对已获取信息处理"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">对已获取信息处理</span></a></li></ol></li></ol> 
   </div>
 </aside>
  
