@@ -8,6 +8,13 @@
     </url>
     
     <url>
+        <loc>http://yoursite-url/about/</loc>
+        <lastmod>2020-11-15T16:54:58.278Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
         <loc>http://yoursite-url/baidu_verify_code-FTjFydPGGl.html</loc>
         <lastmod>2020-11-01T06:23:27.930Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -17,13 +24,6 @@
     <url>
         <loc>http://yoursite-url/archive/</loc>
         <lastmod>2020-08-24T16:10:47.179Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>http://yoursite-url/about/</loc>
-        <lastmod>2020-08-24T16:02:14.905Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>

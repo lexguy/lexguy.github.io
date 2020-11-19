@@ -15,11 +15,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          react-native-slidepicker - Xuwei&#39;s blog
+          关于发布一个 npm 包 - Xuwei&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="http://yoursite-url/2020/11/10/react-native-slidepicker/">
+    <link rel="canonical" href="http://yoursite-url/2020/11/19/发布一个npm包/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -90,23 +90,16 @@
               
               <a
                 class="tag"
-                href="/tags/#React Native"
-                title="React Native"
-                >React Native</a
-              >
-              
-              <a
-                class="tag"
-                href="/tags/#自定义组件"
-                title="自定义组件"
-                >自定义组件</a
+                href="/tags/#前端大杂烩"
+                title="前端大杂烩"
+                >前端大杂烩</a
               >
               
             </div>
-            <h1>react-native-slidepicker</h1>
+            <h1>关于发布一个 npm 包</h1>
             <h2 class="subheading"></h2>
             <span class="meta">
-              Posted by xuwei on 2020-11-10
+              Posted by xuwei on 2020-11-19
             </span>
           </div>
           
@@ -221,26 +214,66 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>react-native-slidepicker</p>
-<p>一个纯 JavaScript 实现的的 React Native 组件，用于如地址，时间等分类数据选择的场景。</p>
-<h4 id="效果">效果</h4>
-<p>三轮选择，选择级联地址数据：</p>
-<p>（可自定义条目高，选中和非选中条目的背景色，字体颜色和大小）</p>
-<p><img src="https://pic.downk.cc/item/5faa9e621cd1bbb86bc7ab4c.jpg" width="400"></p>
-<h4 id="起因">起因</h4>
-<p>当前使用的<a href="https://github.com/beefe/react-native-picker" target="_blank" rel="noopener"> react-native-picker</a> 组件，虽然并没有什么功能上的硬伤，但是在样式可调性上稍差，而且鉴于该库的更新都是几年前了，issue 清理速度慢，所以还是需要备好替代方案。</p>
-<h4 id="实现">实现</h4>
-<p>具体的实现方案，首先考虑到的方案就是 ScrollView 滑动，然后在滑动离开的时候再定位到邻近的选择 Item 上面。</p>
-<p><img src="https://pic.downk.cc/item/5faa995e1cd1bbb86bc67305.jpg" width="600"></p>
-<p>在使用 ScrollView 作单个选择的滑动效果时，发现在上面添加了透明背景色之后，ScrollView 获取不到滑动事件，上层的 View 确实会拦截掉手势效果，就算不处理手势，ScrollView 也不会滑动。</p>
-<p>那就只能换一种方式了，那就换手势实现。</p>
-<p>选择列表根据手势的滑动做整体 transform ，根据手势上下偏移，手势释放的时候定位到最近的根据 Item 高度取整的位置。选择列表和透明背景层都处理手势，也操作该 tranform 动画值，就不会有手势滑动区域小的问题了。</p>
-<p>在每次手势停止的时候计算所处的位置，得到在数值列表中的索引，再通过 props 回调函数传回结果。如果是级联列表，需要重置下一选择轮的数据到初始值。</p>
-<h4 id="结果">结果</h4>
-<p>经过调试，终于得到结果，已经放在 <a href="https://github.com/lexguy/react-native-slidepicker" target="_blank" rel="noopener">Github  上  react-native-slidepicker </a>（包含使用详情和源码）</p>
-<p>也上传到 npm 库，可以直接安装：</p>
-<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">npm</span> install react-<span class="keyword">native</span>-slidepicker</span><br></pre></td></tr></table></figure>
-<p>详情参考上面 github 地址。</p>
+                <p>关于发布一个 npm 包</p>
+<p>最近在 RN 项目中，对于选择器方案的选择一直没有合适满意的方案，于是自己动手终于封装出一个满足基本要求，支持的数据类型和样式定制程度达到使用要求的组件出来。为了后面的使用便利，也为了分享后可以参考其他意见更好地修正和完善，就做成了一个 npm 包，发布出去。</p>
+<p>目前已发布完并更新修复一些小问题，整理一下发包和更新步骤：</p>
+<h4 id="注册-npm-账户">注册 npm 账户</h4>
+<p>进入<a href="https://www.npmjs.com/" target="_blank" rel="noopener">npm 官网</a>，然后注册用户，填写必要信息并备份账号信息。</p>
+<h4 id="准备本地文件">准备本地文件</h4>
+<p>在要发布的文件所处的位置下，执行 <code>npm init</code>命令，会要求填入项目名称，版本号，描述，关键词，开源协议等信息。<a href="https://www.npmjs.com/policies" target="_blank" rel="noopener">npm 详细规则和要求</a> 还是挺多的，所以也尽量填写规范详细些。</p>
+<p>项目名和不能和<code>npm</code>中已有的项目名一样，必须唯一，我也和其他 RN 库一样，以 react-native-xx 开头。其中版本号需要遵循<code>MAJOR.MINOR.PATCH</code>的规范，即主版本号，迭代小版本，和小调整 bug 修复版本。所以首次法发包就用了 <code>1.0.0</code>。</p>
+<p>填写完之后就在当前位置生成了<code>package.json</code>文件，此时当前位置还应该包含要发布的所有文件或目录(文件夹)。</p>
+<h4 id="本地登入-npm-账户">本地登入 npm 账户</h4>
+<p>继第一步已经创建了<code>npm</code>账户，现在就要在本地<code>npm</code>登入，在此之前确认<code>npm</code>源地址 :</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config <span class="keyword">get</span> registry</span><br></pre></td></tr></table></figure>
+<p>需要是如下的原本的 npm 源地址，则直接到登入步骤。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="comment">//registry.npmjs.org/</span></span><br></pre></td></tr></table></figure>
+<p>如果之前换过其他源，比如国内的淘宝源，则需要手动换回 npm 源地址:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config <span class="keyword">set</span> registry https://registry.npmjs.org/</span><br></pre></td></tr></table></figure>
+<p><strong>现在登入</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm login</span><br></pre></td></tr></table></figure>
+<p>需要输入之前的账户信息，用户名密码这些：</p>
+<p><img src="https://pic.downk.cc/item/5fb685eeb18d627113b95b18.jpg" width="400"></p>
+<p>一路输入确认之后，再通过</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm whoami</span><br></pre></td></tr></table></figure>
+<p>命令，确认已经成功登录。如果输出自己的用户名则表示已经成功登录。注意 npm 登录后只在</p>
+<h4 id="添加文件及发布">添加文件及发布</h4>
+<p>如果该位置下的所有文件全部都要发布，且<code>package.json</code>各配置正确，则已经可以直接通过</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm publish</span><br></pre></td></tr></table></figure>
+<p>命令发布。</p>
+<p>如果该位置下仍然有部分文件不想用于发布，则需要过滤掉这些文件。</p>
+<p>可以使用如下方式：</p>
+<h5 id="方法一添加gitignore或npmignore文件">方法一：添加<code>.gitignore</code>或<code>.npmignore</code>文件。</h5>
+<p>这两个文件都会将满足条件的文件的发布的时候忽略掉，同时使用的话只有 .npmignore 规则生效。</p>
+<h5 id="方法二在packagejson文件中指定files">方法二：在<code>package.json</code>文件中指定<code>files</code></h5>
+<p>此种方式则直接了当得多，忽略文件相当于反选，而<code>package.json</code>文件的<code>files</code>字段则是直接指定的，语法和<code>.git ignore</code>相似，满足条件的文件和目录才会被发布。</p>
+<p>并且，在<code>files</code>中指定的文件，就算被配置到了.npmignore 中，它依然会被发布。也就是说<code>package.json</code>的<code>files</code>字段的优先级试最高的。</p>
+<blockquote>
+<p>详细查看 <a href="https://www.npmjs.cn/files/package.json/" target="_blank" rel="noopener">npm 官方的 package.json 细则</a></p>
+</blockquote>
+<p>确定好规则后，再通过<code>npm publish</code>发布，就可以发布指定的文件了。</p>
+<p>发布成功后，会有 log 信息 <a href="#pic2">点击查看成功截图</a> ，包就在 npm 网站上，可以在个人的 Packages 里查看。</p>
+<h4 id="版本更新">版本更新</h4>
+<p>一个 npm 包肯定要不停完善的，我们更新文件之后，需要变动版本号再发布：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm version patch</span><br></pre></td></tr></table></figure>
+<p>这是升级小版本，即 1.0.X , 修改第三位版本哈号+1。或者</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm version minor</span><br></pre></td></tr></table></figure>
+<p>这是升级迭代版本，即修改 1.X.0 修改第二位版本号+1。</p>
+<blockquote>
+<p>详细查看 <a href="https://www.npmjs.cn/cli/version/" target="_blank" rel="noopener"> npm 官网的 version 细则 </a></p>
+</blockquote>
+<p>当然有更简单的方法，<strong>直接修改<code>package.json</code>文件中的版本号</strong>。</p>
+<p>不管是命令修改版本号还是手动改 package.json 文件。最后依然要执行：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm publish</span><br></pre></td></tr></table></figure>
+<p>新版本才更新发布成功。</p>
+<p>然后才真正开始了需要一直持续的的维护～</p>
+<hr>
+<p>npm 账号注册后一定要到邮箱中进行确认，第一次发包的时候，报了如下的错：</p>
+<p><img src="https://pic.downk.cc/item/5fb69054b18d627113bc389b.png" width="700"></p>
+<p>看起来是安全性不通过，一直未找到更具体的原因，到邮箱中确认后，就发布成功了。。。。</p>
+<p><span id="pic2"></span></p>
+<p>发布成功截图：</p>
+<p><img src="https://pic.downk.cc/item/5fb68cc3b18d627113bb3f01.png" width="700"></p>
 
                 
 
@@ -248,13 +281,9 @@
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2020/11/19/发布一个npm包/" data-toggle="tooltip" data-placement="top" title="关于发布一个 npm 包">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2020/08/24/ScrollView/" data-toggle="tooltip" data-placement="top" title="ScrollView 中嵌套 FlatList 导致 onEndReached 事件频繁触发的问题">Next Post &rarr;</a>
+                            <a href="/2020/11/10/react-native-slidepicker/" data-toggle="tooltip" data-placement="top" title="react-native-slidepicker">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -282,7 +311,7 @@
 <aside id="sidebar">
   <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
-     <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#效果"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">效果</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#起因"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">起因</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#实现"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">实现</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#结果"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">结果</span></a></li></ol> 
+     <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#注册-npm-账户"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">注册 npm 账户</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#准备本地文件"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">准备本地文件</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#本地登入-npm-账户"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">本地登入 npm 账户</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#添加文件及发布"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">添加文件及发布</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#方法一添加gitignore或npmignore文件"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">方法一：添加.gitignore或.npmignore文件。</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#方法二在packagejson文件中指定files"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">方法二：在package.json文件中指定files</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#版本更新"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">版本更新</span></a></li></ol> 
   </div>
 </aside>
  
@@ -301,9 +330,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#React Native" title="React Native">React Native</a>
-                        
-                          <a class="tag" href="/tags/#自定义组件" title="自定义组件">自定义组件</a>
+                          <a class="tag" href="/tags/#前端大杂烩" title="前端大杂烩">前端大杂烩</a>
                         
                     </div>
                 </section>
@@ -338,8 +365,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "your-disqus-ID";
-    var disqus_identifier = "http://yoursite-url/2020/11/10/react-native-slidepicker/";
-    var disqus_url = "http://yoursite-url/2020/11/10/react-native-slidepicker/";
+    var disqus_identifier = "http://yoursite-url/2020/11/19/发布一个npm包/";
+    var disqus_url = "http://yoursite-url/2020/11/19/发布一个npm包/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
