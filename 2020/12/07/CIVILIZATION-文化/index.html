@@ -15,11 +15,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          关于发布一个 npm 包 - Xuwei&#39;s blog
+          CIVILIZATION 种田和文化胜利 - Xuwei&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="http://yoursite-url/2020/11/19/发布一个npm包/">
+    <link rel="canonical" href="http://yoursite-url/2020/12/07/CIVILIZATION-文化/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -90,16 +90,16 @@
               
               <a
                 class="tag"
-                href="/tags/#前端大杂烩"
-                title="前端大杂烩"
-                >前端大杂烩</a
+                href="/tags/#CIVILIZATION"
+                title="CIVILIZATION"
+                >CIVILIZATION</a
               >
               
             </div>
-            <h1>关于发布一个 npm 包</h1>
+            <h1>CIVILIZATION 种田和文化胜利</h1>
             <h2 class="subheading"></h2>
             <span class="meta">
-              Posted by xuwei on 2020-11-19
+              Posted by xuwei on 2020-12-07
             </span>
           </div>
           
@@ -214,66 +214,62 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>关于发布一个 npm 包</p>
-<p>最近在 RN 项目中，对于选择器方案的选择一直没有合适满意的方案，于是自己动手终于封装出一个满足基本要求，支持的数据类型和样式定制程度达到使用要求的组件出来。为了后面的使用便利，也为了分享后可以参考其他意见更好地修正和完善，就做成了一个 npm 包，发布出去。</p>
-<p>目前已发布完并更新修复一些小问题，整理一下发包和更新步骤：</p>
-<h4 id="注册-npm-账户">注册 npm 账户</h4>
-<p>进入<a href="https://www.npmjs.com/" target="_blank" rel="noopener">npm 官网</a>，然后注册用户，填写必要信息并备份账号信息。</p>
-<h4 id="准备本地文件">准备本地文件</h4>
-<p>在要发布的文件所处的位置下，执行 <code>npm init</code>命令，会要求填入项目名称，版本号，描述，关键词，开源协议等信息。<a href="https://www.npmjs.com/policies" target="_blank" rel="noopener">npm 详细规则和要求</a> 还是挺多的，所以也尽量填写规范详细些。</p>
-<p>项目名和不能和<code>npm</code>中已有的项目名一样，必须唯一，我也和其他 RN 库一样，以 react-native-xx 开头。其中版本号需要遵循<code>MAJOR.MINOR.PATCH</code>的规范，即主版本号，迭代小版本，和小调整 bug 修复版本。所以首次法发包就用了 <code>1.0.0</code>。</p>
-<p>填写完之后就在当前位置生成了<code>package.json</code>文件，此时当前位置还应该包含要发布的所有文件或目录(文件夹)。</p>
-<h4 id="本地登入-npm-账户">本地登入 npm 账户</h4>
-<p>继第一步已经创建了<code>npm</code>账户，现在就要在本地<code>npm</code>登入，在此之前确认<code>npm</code>源地址 :</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config <span class="keyword">get</span> registry</span><br></pre></td></tr></table></figure>
-<p>需要是如下的原本的 npm 源地址，则直接到登入步骤。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="comment">//registry.npmjs.org/</span></span><br></pre></td></tr></table></figure>
-<p>如果之前换过其他源，比如国内的淘宝源，则需要手动换回 npm 源地址:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config <span class="keyword">set</span> registry https://registry.npmjs.org/</span><br></pre></td></tr></table></figure>
-<p><strong>现在登入</strong>：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm login</span><br></pre></td></tr></table></figure>
-<p>需要输入之前的账户信息，用户名密码这些：</p>
-<p><img src="https://pic.downk.cc/item/5fb685eeb18d627113b95b18.jpg" width="400"></p>
-<p>一路输入确认之后，再通过</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm whoami</span><br></pre></td></tr></table></figure>
-<p>命令，确认已经成功登录。如果输出自己的用户名则表示已经成功登录。注意 npm 登录后只在</p>
-<h4 id="添加文件及发布">添加文件及发布</h4>
-<p>如果该位置下的所有文件全部都要发布，且<code>package.json</code>各配置正确，则已经可以直接通过</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm publish</span><br></pre></td></tr></table></figure>
-<p>命令发布。</p>
-<p>如果该位置下仍然有部分文件不想用于发布，则需要过滤掉这些文件。</p>
-<p>可以使用如下方式：</p>
-<h5 id="方法一添加gitignore或npmignore文件">方法一：添加<code>.gitignore</code>或<code>.npmignore</code>文件。</h5>
-<p>这两个文件都会将满足条件的文件的发布的时候忽略掉，同时使用的话只有 .npmignore 规则生效。</p>
-<h5 id="方法二在packagejson文件中指定files">方法二：在<code>package.json</code>文件中指定<code>files</code></h5>
-<p>此种方式则直接了当得多，忽略文件相当于反选，而<code>package.json</code>文件的<code>files</code>字段则是直接指定的，语法和<code>.git ignore</code>相似，满足条件的文件和目录才会被发布。</p>
-<p>并且，在<code>files</code>中指定的文件，就算被配置到了.npmignore 中，它依然会被发布。也就是说<code>package.json</code>的<code>files</code>字段的优先级试最高的。</p>
+                <p>CIVILIZATION <strong>VI</strong> 文化胜利</p>
+<h2 id="种田阶段">种田阶段</h2>
 <blockquote>
-<p>详细查看 <a href="https://www.npmjs.cn/files/package.json/" target="_blank" rel="noopener">npm 官方的 package.json 细则</a></p>
+<p>文明 6 的发展路线其实只有两种，一种是征服，一种是种田 。征服本质就是烧杀掳掠，而种田的本质就是发展，这是现实中勇武文明和农耕文明之间的差异。 他们都能带领国家走向未来，但也都会经历无数艰难险阻 。</p>
+<p>作为现代人的我们知道，征服只是穷兵黩武，总有其极限。而发展才是硬道理，是解决一切问题前进的基础。</p>
+<p>而中国玩家对种田玩法的青睐更是几乎刻在 DNA 里面的…</p>
+<p>文案来自 <a href="https://www.bilibili.com/video/BV1kx411Z7c3" target="_blank" rel="noopener"> bilibili  舞红铃·文化胜利</a></p>
 </blockquote>
-<p>确定好规则后，再通过<code>npm publish</code>发布，就可以发布指定的文件了。</p>
-<p>发布成功后，会有 log 信息 <a href="#pic2">点击查看成功截图</a> ，包就在 npm 网站上，可以在个人的 Packages 里查看。</p>
-<h4 id="版本更新">版本更新</h4>
-<p>一个 npm 包肯定要不停完善的，我们更新文件之后，需要变动版本号再发布：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm version patch</span><br></pre></td></tr></table></figure>
-<p>这是升级小版本，即 1.0.X , 修改第三位版本哈号+1。或者</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm version minor</span><br></pre></td></tr></table></figure>
-<p>这是升级迭代版本，即修改 1.X.0 修改第二位版本号+1。</p>
-<blockquote>
-<p>详细查看 <a href="https://www.npmjs.cn/cli/version/" target="_blank" rel="noopener"> npm 官网的 version 细则 </a></p>
-</blockquote>
-<p>当然有更简单的方法，<strong>直接修改<code>package.json</code>文件中的版本号</strong>。</p>
-<p>不管是命令修改版本号还是手动改 package.json 文件。最后依然要执行：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm publish</span><br></pre></td></tr></table></figure>
-<p>新版本才更新发布成功。</p>
-<p>然后才真正开始了需要一直持续的的维护～</p>
+<p>种田的本质是发展，发展是为了更好的竞争。各国之间的竞争点大致有五种：</p>
+<ul>
+<li>领土资源
+<ul>
+<li>加成资源（增加地块产出，可以收获获得一次性加 成）</li>
+<li>战略资源（军事，兵种要求）</li>
+<li>奢侈资源（地块加成，可以售卖，可以增加宜居度）</li>
+<li>自然奇观（一般是周围地块加成）</li>
+<li>历史古迹（需要通过考古学家发掘）</li>
+</ul>
+</li>
+<li>人造奇观</li>
+<li>时代伟人（九种伟人）</li>
+<li>宗教信条</li>
+<li>国际外交（城邦，议会(DLC)等）</li>
+</ul>
+<p>对领土资源的把控，需要建造更多的城市，圈更大的地，然后需要大量的工人，进行改良。</p>
+<p>人造奇观，独一无二的，一方造完之后其他未完成的直接归零，返回部分生产力。抢抢抢就完事了。</p>
+<p>伟人可以直接用钱和信仰直接购买，推进游戏进程， 总共<strong>九种</strong>伟人。还可以通过对应的伟人点数获取，可以计算通过伟人点数获取伟人需要的回合数，再据此决定是否直接用钱和信仰购买。</p>
+<p>伟人点数则是通过建造区域获得，每种对应的区域则是获得对应的伟人点数加成。<em>神谕奇观对所在城市的区域伟人点数有加成</em>。（区域：圣地，学院，军营， 港口，商业中心，剧院广场[大作家，大艺术家，大音乐家]，工业区）</p>
+<p>宗教信条就是获取一些 buff，每条信条跟人造奇观一样也是世界唯一的，一旦被其他宗教使用自己则不能再有。</p>
+<p>万神殿需要 25 信仰值，然后通过大预言家伟人创建宗教，根据对应的打法选择具体信条。</p>
+<p>城邦宗主国，成为宗主国获得对应的加成 buff。城邦的宗主国也是唯一的，战争状态也会跟随对应的宗主国。 政体对应越高，影响力获得和使者的速度越快，建造一些奇观，完成城邦任务也可以额外获得使者。（DLC 中可以派遣总督阿玛妮）</p>
+<p>世界议会需要外交点数，获得或者直接购买。</p>
+<p>种田阶段的关键点无外乎，处开拓者，出建造者，涨人口建造区域，抢伟人，抢奇观。</p>
 <hr>
-<p>npm 账号注册后一定要到邮箱中进行确认，第一次发包的时候，报了如下的错：</p>
-<p><img src="https://pic.downk.cc/item/5fb69054b18d627113bc389b.png" width="700"></p>
-<p>看起来是安全性不通过，一直未找到更具体的原因，到邮箱中确认后，就发布成功了。。。。</p>
-<p><span id="pic2"></span></p>
-<p>发布成功截图：</p>
-<p><img src="https://pic.downk.cc/item/5fb68cc3b18d627113bb3f01.png" width="700"></p>
+<h2 id="文化胜利">文化胜利</h2>
+<p>每个国家的游客分为国内游客和国外游客，当本国的国外游客数量超过任何其他国家的国内游客数量时，达成文化胜利。</p>
+<p>对应的，本国的国内游客越多，其他国家越难达成文化胜利。所以，文化胜利的角度，发展的方向就是增多自己国家的国内游客，阻碍其他国家文化胜利，提升国外游客数量，促成自己文化胜利。</p>
+<p>标准速度下，每积累一百点文化值获得一名国内游客，国际游客和旅游业绩相关，每积累 1600 旅游业绩获的一名国际游客。</p>
+<ul>
+<li>提升文化值：铺更多的城市，建剧院广场，改良文化地块，宗主文化城邦（部分文化城邦会给予特色改良能力）</li>
+<li>提升旅游业绩：<strong>巨作 （文学，艺术，音乐）</strong>，奇观，<strong>遗物</strong>（需要圣地二级建筑寺庙存放），<strong>文物</strong>，海滨度假区，国家公园。
+<ul>
+<li>通过相同政体，贸易路线，开放边界获得旅游业绩增益。（宣战状态则无增益…）</li>
+<li>科技中的<strong>印刷术</strong>，著作巨作的旅游业绩翻倍。<strong>飞行</strong>科技可以使产出文化值的改良设施产出等量的旅游业绩，长城，城堡。<strong>电脑</strong>科技可以直接使旅游业绩翻倍（DLC 为 25%）。</li>
+</ul>
+</li>
+</ul>
+<p>所以科技中首先冲的科技是<strong>印刷术</strong>，对应的科技树应该是先走下线，同时下线的箭术，机械，都能预防被宣战。。快速的文化胜利到印刷术就差不多了，等不到飞行和电脑科技。</p>
+<p>市政树，<strong>戏剧和诗歌</strong>解锁剧院广场，<strong>神学</strong>解锁寺庙建筑 ，文艺复兴时期的<strong>人文主义</strong>解锁艺术博物馆和考古博物馆。 然后是工业时代的<strong>自然历史</strong>，解锁考古学家。现代的<strong>保护地球</strong>解锁国家公园。原子能时代的<strong>冷战</strong>，可以出摇滚乐队(DLC)。</p>
+<p>为了走科技树，需要三个左右学院，然后需要商业中心拉商路获取 buff。</p>
+<blockquote>
+<p>布局上 8-10 个城市，核心区域剧院广场和圣地，弥补科技需要两三个学院 ，需要六七个商业中心和市场，建立每个国家的商路获取 buff 。</p>
+</blockquote>
+<p>关键奇观，大金字塔，神谕，阿帕达纳宫，大图书馆，圣米歇尔山（获得殉葬遗物），圣瓦西里主教堂，基尔瓦基斯瓦尼（DLC）。</p>
+<p>一级政体主要是<strong>古典共和</strong>，二级政体优先选<strong>神权政体</strong>，信仰值购买单位和伟人。</p>
+<p>政策卡，农奴制，哥特式建筑，美学，伟人点数卡。</p>
 
                 
 
@@ -281,13 +277,9 @@
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2020/12/07/CIVILIZATION-文化/" data-toggle="tooltip" data-placement="top" title="CIVILIZATION 种田和文化胜利">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2020/11/10/react-native-slidepicker/" data-toggle="tooltip" data-placement="top" title="react-native-slidepicker">Next Post &rarr;</a>
+                            <a href="/2020/11/19/发布一个npm包/" data-toggle="tooltip" data-placement="top" title="关于发布一个 npm 包">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -315,7 +307,7 @@
 <aside id="sidebar">
   <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
-     <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#注册-npm-账户"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">注册 npm 账户</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#准备本地文件"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">准备本地文件</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#本地登入-npm-账户"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">本地登入 npm 账户</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#添加文件及发布"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">添加文件及发布</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#方法一添加gitignore或npmignore文件"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">方法一：添加.gitignore或.npmignore文件。</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#方法二在packagejson文件中指定files"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">方法二：在package.json文件中指定files</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#版本更新"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">版本更新</span></a></li></ol> 
+     <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#种田阶段"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">种田阶段</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#文化胜利"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">文化胜利</span></a></li></ol> 
   </div>
 </aside>
  
@@ -334,7 +326,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#前端大杂烩" title="前端大杂烩">前端大杂烩</a>
+                          <a class="tag" href="/tags/#CIVILIZATION" title="CIVILIZATION">CIVILIZATION</a>
                         
                     </div>
                 </section>
@@ -369,8 +361,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "your-disqus-ID";
-    var disqus_identifier = "http://yoursite-url/2020/11/19/发布一个npm包/";
-    var disqus_url = "http://yoursite-url/2020/11/19/发布一个npm包/";
+    var disqus_identifier = "http://yoursite-url/2020/12/07/CIVILIZATION-文化/";
+    var disqus_url = "http://yoursite-url/2020/12/07/CIVILIZATION-文化/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
