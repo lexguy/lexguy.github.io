@@ -15,11 +15,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          CIVILIZATION VI - Xuwei&#39;s blog
+          函数式组件 ref 解决方案 - Xuwei&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="http://yoursite-url/2020/12/07/CIVILIZATION-文化/">
+    <link rel="canonical" href="http://yoursite-url/2021/01/20/函数式组件-ref-解决方案/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -90,16 +90,16 @@
               
               <a
                 class="tag"
-                href="/tags/#CIVILIZATION"
-                title="CIVILIZATION"
-                >CIVILIZATION</a
+                href="/tags/#React"
+                title="React"
+                >React</a
               >
               
             </div>
-            <h1>CIVILIZATION VI</h1>
+            <h1>函数式组件 ref 解决方案</h1>
             <h2 class="subheading"></h2>
             <span class="meta">
-              Posted by xuwei on 2020-12-07
+              Posted by xuwei on 2021-01-20
             </span>
           </div>
           
@@ -214,82 +214,39 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2 id="时代开幕词">时代开幕词</h2>
-<hr>
-<h3 id="远古">远古</h3>
-<p>从水下第一个生命的萌芽开始……到石器时代的巨型野兽……再到人类第一次直立行走，你已经历许多。现在，开启你最伟大的探索吧：从早期文明的摇篮到浩瀚星宇。</p>
-<h3 id="古典">古典</h3>
-<p>从卑微的最初，你就展示出了非凡的成长力。从青铜到钢铁，用马匹和刀剑来统治吧。天空开始揭示出自己的秘密，宇宙让我们为之兴奋，星空指引我们来到异国海岸。</p>
-<h3 id="中世纪">中世纪</h3>
-<p>你用石头建造了很多城市，见证了早期帝国的崛起与衰落。不久你将站在城堡高耸的尖塔下，旁边是你勇敢的骑士。关于你国民的故事将从这里写起。如同年轻学徒学习握剑一样，你会逐渐了解自己在这个世界上位置。</p>
-<h3 id="文艺复兴">文艺复兴</h3>
-<p>从步枪的枪管到天空中的花火，新的动力不断产生。甚至新印刷的书刊里安安静静的文字也蕴含着巨大变化。这个世界曾经又大又神秘，如今已变得越来越小，越来越熟悉。然而，总有问题有待解决，总有信仰需要经受考验，总有民族认同需要形成。</p>
-<h3 id="工业">工业</h3>
-<p>机器嗡嗡响个不停、烟味刺鼻、灰烬和煤烟遮挡住视线——这是时代变迁的标志。科学和文化进步的诱惑是推动你的王国不断向前发展的动力。现在，你面临的挑战是维持地球和人类、和平与战争之间微妙的平衡。</p>
-<h3 id="现代">现代</h3>
-<p>最先，有很多关于飞人的传说。如今，你位于这些传说成为现实的临界点。通过飞行和新的通讯方式，你能创造出一个又小又亲密的世界。但代价是什么呢?对于如何统治、如何生存的问题，不同理解造成了全球冲突。在这种越来越吵闹不休的思想辩论中，你必须选择自己要走的路。</p>
-<h3 id="原子能">原子能</h3>
-<p>新发现的领域扩宽了我们的认知，从微小的原子到壮阔的外太空。我们比历史上任何时候都更接近真相，远远超过我们的理解范围。你需要选择如何使用这些知识，来击退前所未有的黑暗。</p>
-<h3 id="信息">信息</h3>
-<p>信息世界在你手掌之中，即时通信网络遍布全球。然而，还未有对未来的统一看法。我们在科技、文化和政治上不断竞争。我们拥有的致命武器可以摧毁我们整个星球。带领我们小心而大胆地前行，建立面向未来的全球社区。</p>
-<h3 id="未来-dlc">未来 （DLC）</h3>
-<p>这个世界所蕴含奇迹之多绝非缘故先知的梦境所能构想，所拥有的灾祸之恐怖也非天启所能描绘。世界不但有拥有自我意识的机器，更有编织梦幻仙境的全新事物。长久以前做出的选择将在这个时代产生重大结果，而它们需要坚定不移的答案。前进吧，实现您文明未来的美好愿景。</p>
-<p>文化胜利</p>
-<h2 id="种田阶段">种田阶段</h2>
+                <p>对于 React 中需要强制修改子组件的情况，React 提供了 Refs 这种解决办法，使得我们可以操作底层 DOM 元素或者自定的 class 组件实例。除此之外，文档（v17.0.1）对函数式组件另有描述:</p>
+<p><code>不能在函数式组件上使用ref属性，因为他们没有实例</code>。</p>
+<p>在函数式组件和 Hooks 大面积普及的现在，这个特性没有完全对标 class 组件，令人难以置信。经过一阵探索，发现确实是有对应的解决方案的：</p>
+<p><strong><code>useImperativeHandle</code></strong></p>
+<p>结合 React.forward ， <a href="https://zh-hans.reactjs.org/docs/hooks-reference.html#useimperativehandle" target="_blank" rel="noopener">useImperativeHandle 文档  </a>应该就能明白是如何使用的。</p>
+<p>简而言之就是可以在函数式组件上使用 ref，通过<code>useImperativeHandle</code>这个<code>hook</code>可以指定暴露给父组件的值和函数。</p>
+<p>案例：</p>
+<p>修改子组件<code>Counter</code>中的值， 达到重置<code>count</code>的目的：</p>
+<img src="https://img.imgdb.cn/item/6007946f3ffa7d37b335f942.gif" width="300">
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;button&gt;reset&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">      &lt;Counter /</span>&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">/</span>** -------------------------------------- *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">function Counter() &#123;</span></span><br><span class="line"><span class="regexp">  const [count, setCount] = useState(0);</span></span><br><span class="line"><span class="regexp">  function increment() &#123;</span></span><br><span class="line"><span class="regexp">    setCount(count + 1);</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">  return (</span></span><br><span class="line"><span class="regexp">    &lt;div&gt;</span></span><br><span class="line"><span class="regexp">      &lt;hr /</span>&gt;</span><br><span class="line">      &lt;span&gt;&#123;count&#125;&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">      &lt;button onClick=&#123;increment&#125;&gt;+1&lt;/</span>button&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>文明 6 的发展路线其实只有两种，一种是征服，一种是种田 。征服本质就是烧杀掳掠，而种田的本质就是发展，这是现实中勇武文明和农耕文明之间的差异。 他们都能带领国家走向未来，但也都会经历无数艰难险阻 。</p>
-<p>作为现代人的我们知道，征服只是穷兵黩武，总有其极限。而发展才是硬道理，是解决一切问题前进的基础。</p>
-<p>而中国玩家对种田玩法的青睐更是几乎刻在 DNA 里面的…</p>
-<p>文案来自 <a href="https://www.bilibili.com/video/BV1kx411Z7c3" target="_blank" rel="noopener"> bilibili  舞红铃·文化胜利</a></p>
+<p>对于这个案例，将<code>count</code>这个 state 往上提一层到 App 组件中是比较合适的，但是在这里重点讨论<strong>操作子组件</strong>。</p>
 </blockquote>
-<p>种田的本质是发展，发展是为了更好的竞争。各国之间的竞争点大致有五种：</p>
-<ul>
-<li>领土资源
-<ul>
-<li>加成资源（增加地块产出，可以收获获得一次性加 成）</li>
-<li>战略资源（军事，兵种要求）</li>
-<li>奢侈资源（地块加成，可以售卖，可以增加宜居度）</li>
-<li>自然奇观（一般是周围地块加成）</li>
-<li>历史古迹（需要通过考古学家发掘）</li>
-</ul>
-</li>
-<li>人造奇观</li>
-<li>时代伟人（九种伟人）</li>
-<li>宗教信条</li>
-<li>国际外交（城邦，议会(DLC)等）</li>
-</ul>
-<p>对领土资源的把控，需要建造更多的城市，圈更大的地，然后需要大量的工人，进行改良。</p>
-<p>人造奇观，独一无二的，一方造完之后其他未完成的直接归零，返回部分生产力。抢抢抢就完事了。</p>
-<p>伟人可以直接用钱和信仰直接购买，推进游戏进程， 总共<strong>九种</strong>伟人。还可以通过对应的伟人点数获取，可以计算通过伟人点数获取伟人需要的回合数，再据此决定是否直接用钱和信仰购买。</p>
-<p>伟人点数则是通过建造区域获得，每种对应的区域则是获得对应的伟人点数加成。<em>神谕奇观对所在城市的区域伟人点数有加成</em>。（区域：圣地，学院，军营， 港口，商业中心，剧院广场[大作家，大艺术家，大音乐家]，工业区）</p>
-<p>宗教信条就是获取一些 buff，每条信条跟人造奇观一样也是世界唯一的，一旦被其他宗教使用自己则不能再有。</p>
-<p>万神殿需要 25 信仰值，然后通过大预言家伟人创建宗教，根据对应的打法选择具体信条。</p>
-<p>城邦宗主国，成为宗主国获得对应的加成 buff。城邦的宗主国也是唯一的，战争状态也会跟随对应的宗主国。 政体对应越高，影响力获得和使者的速度越快，建造一些奇观，完成城邦任务也可以额外获得使者。（DLC 中可以派遣总督阿玛妮）</p>
-<p>世界议会需要外交点数，获得或者直接购买。</p>
-<p>种田阶段的关键点无外乎，处开拓者，出建造者，涨人口建造区域，抢伟人，抢奇观。</p>
-<hr>
-<h2 id="文化胜利">文化胜利</h2>
-<p>每个国家的游客分为国内游客和国外游客，当本国的国外游客数量超过任何其他国家的国内游客数量时，达成文化胜利。</p>
-<p>对应的，本国的国内游客越多，其他国家越难达成文化胜利。所以，文化胜利的角度，发展的方向就是增多自己国家的国内游客，阻碍其他国家文化胜利，提升国外游客数量，促成自己文化胜利。</p>
-<p>标准速度下，每积累一百点文化值获得一名国内游客，国际游客和旅游业绩相关，每积累 1600 旅游业绩获的一名国际游客。</p>
-<ul>
-<li>提升文化值：铺更多的城市，建剧院广场，改良文化地块，宗主文化城邦（部分文化城邦会给予特色改良能力）</li>
-<li>提升旅游业绩：<strong>巨作 （文学，艺术，音乐）</strong>，奇观，<strong>遗物</strong>（需要圣地二级建筑寺庙存放），<strong>文物</strong>，海滨度假区，国家公园。
-<ul>
-<li>通过相同政体，贸易路线，开放边界获得旅游业绩增益。（宣战状态则无增益…）</li>
-<li>科技中的<strong>印刷术</strong>，著作巨作的旅游业绩翻倍。<strong>飞行</strong>科技可以使产出文化值的改良设施产出等量的旅游业绩，长城，城堡。<strong>电脑</strong>科技可以直接使旅游业绩翻倍（DLC 为 25%）。</li>
-</ul>
-</li>
-</ul>
-<p>所以科技中首先冲的科技是<strong>印刷术</strong>，对应的科技树应该是先走下线，同时下线的箭术，机械，都能预防被宣战。。快速的文化胜利到印刷术就差不多了，等不到飞行和电脑科技。</p>
-<p>市政树，<strong>戏剧和诗歌</strong>解锁剧院广场，<strong>神学</strong>解锁寺庙建筑 ，文艺复兴时期的<strong>人文主义</strong>解锁艺术博物馆和考古博物馆。 然后是工业时代的<strong>自然历史</strong>，解锁考古学家。现代的<strong>保护地球</strong>解锁国家公园。原子能时代的<strong>冷战</strong>，可以出摇滚乐队(DLC)。</p>
-<p>为了走科技树，需要三个左右学院，然后需要商业中心拉商路获取 buff。</p>
+<p>使用<code>useImperativeHandle</code>，修改代码：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> counterRef = useRef();</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">reset</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    counterRef.current?.resetCount();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div style=&#123;&#123; <span class="attr">padding</span>: <span class="number">10</span> &#125;&#125;&gt;</span><br><span class="line">      &lt;button onClick=&#123;reset&#125;&gt;reset&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">      &lt;MyCounter ref=&#123;counterRef&#125; /</span>&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">/</span>** -------------------------------------- *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">function Counter(props, ref) &#123;</span></span><br><span class="line"><span class="regexp">  const [count, setCount] = useState(0);</span></span><br><span class="line"><span class="regexp">  useImperativeHandle(ref, () =&gt; (&#123;</span></span><br><span class="line"><span class="regexp">    resetCount: resetCount,</span></span><br><span class="line"><span class="regexp">  &#125;));</span></span><br><span class="line"><span class="regexp">  function resetCount() &#123;</span></span><br><span class="line"><span class="regexp">    setCount(0);</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">  function increment() &#123;</span></span><br><span class="line"><span class="regexp">    setCount(count + 1);</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">  return (</span></span><br><span class="line"><span class="regexp">    &lt;div&gt;</span></span><br><span class="line"><span class="regexp">      &lt;hr /</span>&gt;</span><br><span class="line">      &lt;span&gt;&#123;count&#125;&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">      &lt;button onClick=&#123;increment&#125;&gt;+1&lt;/</span>button&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">const MyCounter = React.forwardRef(Counter);</span></span><br></pre></td></tr></table></figure>
+<p>重点是<code>useImperativeHandle</code>中定义了<code>resetCount</code>，以及使用<code>React.forward</code>获取 ref，在<code>App</code>组件中为<code>MyCounter</code>中定义<code>ref</code>属性，然后就可以在外部父组件中使用通过<code>ref</code>调用子组件的<code>resetCount</code>方法。</p>
+<img src="https://img.imgdb.cn/item/600799b23ffa7d37b3388dc4.gif" width="300/">
+<p>到这里，实际上已经达到了和<code>class</code>中<code>ref</code>对等的效果。</p>
+<h3 id="函数式组件的-ref-是什么">函数式组件的 Ref 是什么</h3>
+<p>将 ref 设置到 HTMl 元素上，获取的是对应的 DOM 元素，如 span:</p>
+<img src="https://img.imgdb.cn/item/6007a2d13ffa7d37b33d3d83.jpg" width="300/">
+<p>设置到 class 组件上，获取的是 class 组件实例：</p>
+<img src="https://img.imgdb.cn/item/6007a34b3ffa7d37b33d75e3.jpg" width="600/">
+<p>设置到函数式组件上的时候，获取的是一个包含可变值或函数的对象，如上例的 Counter 组件：</p>
+<img src="https://img.imgdb.cn/item/6007a4c23ffa7d37b33e5e7c.jpg" width="300/">
+<p><code>React.createRef</code> 和 <code>useRef</code>都是创建了一个包含<code>current</code>属性的对象，绑定<code>ref</code>时，对应的属性和函数都在<code>current</code>对应的对象中。</p>
+<p>查看对应的<code>TypeScript</code>类型，<code>React.createRef</code>创建的是<code>React.RefObject</code>类型，是<strong>只读</strong>的。</p>
+<img src="https://img.imgdb.cn/item/6007a6fc3ffa7d37b33f41de.jpg" width="400/">
+<p>而<code>useRef</code>创建的是<code>React.MutableRefObject</code>，是<strong>可读写</strong>的。可以保存任何可变的值，使用方式类似于<code>class</code>组件的<code>this</code>实例变量。（又是和<code>class</code>组件对标的一个点）</p>
 <blockquote>
-<p>布局上 8-10 个城市，核心区域剧院广场和圣地，弥补科技需要两三个学院 ，需要六七个商业中心和市场，建立每个国家的商路获取 buff 。</p>
+<p><a href="https://zh-hans.reactjs.org/docs/hooks-reference.html#useref" target="_blank" rel="noopener">文档</a>描述 useRef 为可以在其<code>.current</code>属性中保存一个可变值的“盒子”。</p>
 </blockquote>
-<p>关键奇观，大金字塔，神谕，阿帕达纳宫，大图书馆，圣米歇尔山（获得殉葬遗物），圣瓦西里主教堂，基尔瓦基斯瓦尼（DLC）。</p>
-<p>一级政体主要是<strong>古典共和</strong>，二级政体优先选<strong>神权政体</strong>，信仰值购买单位和伟人。</p>
-<p>政策卡，农奴制，哥特式建筑，美学，伟人点数卡。</p>
+<img src="https://img.imgdb.cn/item/6007a75c3ffa7d37b33f8c60.jpg" width="600/">
 
                 
 
@@ -297,13 +254,9 @@
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2021/01/20/函数式组件-ref-解决方案/" data-toggle="tooltip" data-placement="top" title="函数式组件 ref 解决方案">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2020/11/19/发布一个npm包/" data-toggle="tooltip" data-placement="top" title="关于发布一个 npm 包">Next Post &rarr;</a>
+                            <a href="/2020/12/07/CIVILIZATION-文化/" data-toggle="tooltip" data-placement="top" title="CIVILIZATION VI">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -331,7 +284,7 @@
 <aside id="sidebar">
   <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
-     <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#时代开幕词"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">时代开幕词</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#远古"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">远古</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#古典"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">古典</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#中世纪"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">中世纪</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#文艺复兴"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">文艺复兴</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#工业"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">工业</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#现代"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text">现代</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#原子能"><span class="toc-nav-number">1.7.</span> <span class="toc-nav-text">原子能</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#信息"><span class="toc-nav-number">1.8.</span> <span class="toc-nav-text">信息</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#未来-dlc"><span class="toc-nav-number">1.9.</span> <span class="toc-nav-text">未来 （DLC）</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#种田阶段"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">种田阶段</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#文化胜利"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">文化胜利</span></a></li></ol> 
+     <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#函数式组件的-ref-是什么"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">函数式组件的 Ref 是什么</span></a></li></ol> 
   </div>
 </aside>
  
@@ -350,7 +303,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#CIVILIZATION" title="CIVILIZATION">CIVILIZATION</a>
+                          <a class="tag" href="/tags/#React" title="React">React</a>
                         
                     </div>
                 </section>
@@ -385,8 +338,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "your-disqus-ID";
-    var disqus_identifier = "http://yoursite-url/2020/12/07/CIVILIZATION-文化/";
-    var disqus_url = "http://yoursite-url/2020/12/07/CIVILIZATION-文化/";
+    var disqus_identifier = "http://yoursite-url/2021/01/20/函数式组件-ref-解决方案/";
+    var disqus_url = "http://yoursite-url/2021/01/20/函数式组件-ref-解决方案/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

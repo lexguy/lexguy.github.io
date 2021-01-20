@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite-url/2021/01/20/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BB%84%E4%BB%B6-ref-%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</loc>
+    
+    <lastmod>2021-01-20</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite-url/2020/12/07/CIVILIZATION-%E6%96%87%E5%8C%96/</loc>
     
-    <lastmod>2020-12-06</lastmod>
+    <lastmod>2021-01-17</lastmod>
     
   </url>
   
@@ -158,64 +165,64 @@
 
   <url>
     <loc>http://yoursite-url/</loc>
-    <lastmod>2020-12-06</lastmod>
+    <lastmod>2021-01-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
-    <loc>http://yoursite-url/tags/ES6-%E5%A4%A7%E4%BD%9C%E6%88%98/</loc>
-    <lastmod>2020-12-06</lastmod>
+    <loc>http://yoursite-url/tags/CIVILIZATION/</loc>
+    <lastmod>2021-01-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://yoursite-url/tags/CIVILIZATION/</loc>
-    <lastmod>2020-12-06</lastmod>
+    <loc>http://yoursite-url/tags/ES6-%E5%A4%A7%E4%BD%9C%E6%88%98/</loc>
+    <lastmod>2021-01-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite-url/tags/React-Native/</loc>
-    <lastmod>2020-12-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite-url/tags/%E5%8A%A8%E7%94%BB/</loc>
-    <lastmod>2020-12-06</lastmod>
+    <lastmod>2021-01-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite-url/tags/%E5%BA%94%E7%94%A8/</loc>
-    <lastmod>2020-12-06</lastmod>
+    <lastmod>2021-01-20</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite-url/tags/%E5%8A%A8%E7%94%BB/</loc>
+    <lastmod>2021-01-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite-url/tags/React/</loc>
-    <lastmod>2020-12-06</lastmod>
+    <lastmod>2021-01-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite-url/tags/%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6/</loc>
-    <lastmod>2020-12-06</lastmod>
+    <lastmod>2021-01-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite-url/tags/%E5%89%8D%E7%AB%AF%E5%A4%A7%E6%9D%82%E7%83%A9/</loc>
-    <lastmod>2020-12-06</lastmod>
+    <lastmod>2021-01-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>

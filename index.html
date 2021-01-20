@@ -209,20 +209,52 @@
 
 
 <div class="post-preview">
-  <a href="/2020/12/07/CIVILIZATION-文化/">
+  <a href="/2021/01/20/函数式组件-ref-解决方案/">
     <h2 class="post-title">
-      CIVILIZATION 种田和文化胜利
+      函数式组件 ref 解决方案
     </h2>
     <h3 class="post-subtitle">
       
     </h3>
     <div class="post-content-preview">
-      CIVILIZATION VI 文化胜利
-种田阶段
+      对于 React 中需要强制修改子组件的情况，React 提供了 Refs 这种解决办法，使得我们可以操作底层 DOM 元素或者自定的 class 组件实例。除此之外，文档（v17.0.1）对函数式组件另有描述:
+不能在函数式组件上使用ref属性，因为他们没有实例。
+在函数式组件和 Hooks 大面积普及的现在，这个特性没有完全对标 class 组件，令人难以置信。经过一阵探索，发现确实是有......
+    </div>
+  </a>
+  
+  <p class="post-meta" style="margin: 10px 0;">
+<!--    Posted by xuwei on-->
+    2021-01-20
+  </p>
+  <div class="tags">
+    
+    <a href="/tags/#React" title="React"
+      >React</a
+    >
+    
+  </div>
+  
+</div>
+<hr />
 
-文明 6 的发展路线其实只有两种，一种是征服，一种是种田 。征服本质就是烧杀掳掠，而种田的本质就是发展，这是现实中勇武文明和农耕文明之间的差异。 他们都能带领国家走向未来，但也都会经历无数艰难险阻 。
-作为现代人的我们知道，征服只是穷兵黩武，总有其极限。而发展才是硬道理，是解决一切问题前进的基础。
-而中国玩家对种田玩法的青睐更是几乎刻在 ......
+<div class="post-preview">
+  <a href="/2020/12/07/CIVILIZATION-文化/">
+    <h2 class="post-title">
+      CIVILIZATION VI
+    </h2>
+    <h3 class="post-subtitle">
+      
+    </h3>
+    <div class="post-content-preview">
+      时代开幕词
+
+远古
+从水下第一个生命的萌芽开始……到石器时代的巨型野兽……再到人类第一次直立行走，你已经历许多。现在，开启你最伟大的探索吧：从早期文明的摇篮到浩瀚星宇。
+古典
+从卑微的最初，你就展示出了非凡的成长力。从青铜到钢铁，用马匹和刀剑来统治吧。天空开始揭示出自己的秘密，宇宙让我们为之兴奋，星空指引我们来到异国海岸。
+中世纪
+你用石头建造了很多城市，见证了早期帝国的崛起与衰落。不久你将......
     </div>
   </a>
   
@@ -497,46 +529,14 @@ JavaScript 中表示数据集合的结构有四种 : Array，Object，以及 ES6
 </div>
 <hr />
 
-<div class="post-preview">
-  <a href="/2020/06/08/ES6-Promise/">
-    <h2 class="post-title">
-      ES6 Promise 认识和使用
-    </h2>
-    <h3 class="post-subtitle">
-      
-    </h3>
-    <div class="post-content-preview">
-      
-这里仅分享 ES6 中的 Promise 的特性和用法，只浅显回答是什么和怎么用的问题。 如果需要深入了解原理，请参考另外一篇。
-
-Promise 是什么
-以前，对于 JavaScript 中传统的异步编程，一般会有两种解决方案：回调函数，发送事件。如果流程和数据传递比较复杂，回调可以说是相当冗长繁复了。而 Promise ，就是为了解决异步编程的问题，较之于以前的方案更加强大优雅。
-本质......
-    </div>
-  </a>
-  
-  <p class="post-meta" style="margin: 10px 0;">
-<!--    Posted by xuwei on-->
-    2020-06-08
-  </p>
-  <div class="tags">
-    
-    <a href="/tags/#ES6 大作战" title="ES6 大作战"
-      >ES6 大作战</a
-    >
-    
-  </div>
-  
-</div>
-<hr />
-
 
 <!-- Pager -->
 
 <ul class="pager">
    
   <li class="next">
-    <a href="/archives/2/">Older Posts &rarr;</a>
+    <!-- <a href="/archives/2/">Older Posts &rarr;</a> -->
+    <a href="/archives/2/">前一页 &rarr;</a>
   </li>
   
 </ul>
@@ -605,17 +605,17 @@ Promise 是什么
 
     <div class="tags" id='tag_cloud'>
         
-            <a href="/tags/#ES6 大作战" title="ES6 大作战" rel="6">ES6 大作战</a>
-        
             <a href="/tags/#CIVILIZATION" title="CIVILIZATION" rel="1">CIVILIZATION</a>
+        
+            <a href="/tags/#ES6 大作战" title="ES6 大作战" rel="6">ES6 大作战</a>
         
             <a href="/tags/#React Native" title="React Native" rel="7">React Native</a>
         
-            <a href="/tags/#动画" title="动画" rel="2">动画</a>
-        
             <a href="/tags/#应用" title="应用" rel="1">应用</a>
         
-            <a href="/tags/#React" title="React" rel="2">React</a>
+            <a href="/tags/#动画" title="动画" rel="2">动画</a>
+        
+            <a href="/tags/#React" title="React" rel="3">React</a>
         
             <a href="/tags/#自定义组件" title="自定义组件" rel="1">自定义组件</a>
         
@@ -625,17 +625,17 @@ Promise 是什么
 
 <!--    <div id='tag_cloud' class="tags">-->
 <!--        -->
-<!--            <a href="#ES6 大作战" title="ES6 大作战" rel="6">ES6 大作战</a>-->
-<!--        -->
 <!--            <a href="#CIVILIZATION" title="CIVILIZATION" rel="1">CIVILIZATION</a>-->
+<!--        -->
+<!--            <a href="#ES6 大作战" title="ES6 大作战" rel="6">ES6 大作战</a>-->
 <!--        -->
 <!--            <a href="#React Native" title="React Native" rel="7">React Native</a>-->
 <!--        -->
-<!--            <a href="#动画" title="动画" rel="2">动画</a>-->
-<!--        -->
 <!--            <a href="#应用" title="应用" rel="1">应用</a>-->
 <!--        -->
-<!--            <a href="#React" title="React" rel="2">React</a>-->
+<!--            <a href="#动画" title="动画" rel="2">动画</a>-->
+<!--        -->
+<!--            <a href="#React" title="React" rel="3">React</a>-->
 <!--        -->
 <!--            <a href="#自定义组件" title="自定义组件" rel="1">自定义组件</a>-->
 <!--        -->
@@ -657,7 +657,11 @@ Promise 是什么
     <ul>
       
         <li>
-          <a href="/2020/12/07/CIVILIZATION-文化/">CIVILIZATION 种田和文化胜利</a>
+          <a href="/2021/01/20/函数式组件-ref-解决方案/">函数式组件 ref 解决方案</a>
+        </li>
+      
+        <li>
+          <a href="/2020/12/07/CIVILIZATION-文化/">CIVILIZATION VI</a>
         </li>
       
         <li>
@@ -670,10 +674,6 @@ Promise 是什么
       
         <li>
           <a href="/2020/08/24/ScrollView/">ScrollView 中嵌套 FlatList 导致 onEndReached 事件频繁触发的问题</a>
-        </li>
-      
-        <li>
-          <a href="/2020/07/22/ES6-async-await/">ES6 async/await</a>
         </li>
       
     </ul>
@@ -713,7 +713,7 @@ Promise 是什么
         </ul>
         <p class="copyright text-muted">
           <span style="text-decoration: underline;">
-            Copyright &copy; xuwei 2020
+            Copyright &copy; xuwei 2021
           </span>
           <!-- <span style="margin-left: 30px; font-style: italic;">
             starkcoder@sina.com</span
